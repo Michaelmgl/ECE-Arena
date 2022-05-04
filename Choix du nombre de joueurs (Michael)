@@ -1,0 +1,6 @@
+int choixNbrJoueurs(int nbrJoueurs)
+{
+    printf("Combien de joueurs ?\n");
+    scanf("%d", &nbrJoueurs);
+    return nbrJoueurs;
+}
