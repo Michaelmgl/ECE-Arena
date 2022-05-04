@@ -12,6 +12,36 @@ typedef struct cases{
 
 }t_case;
 
+void init()
+{
+    //BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
+    float valeur_x=0,valeur_y=68
+    t_case plateau[12][8];
+    for (int i=0; i<12; i++) //longueur
+    {
+        plateau[i][j].x=valeur_x;
+        valeur_x+=66.5;
+        for (int j=0; j<8; j++) //largeur
+        {
+            plateau[i][j].y=valeur_y;
+            valeur_y+=66.67;
+            
+        }
+    }
+    plateau[6][0].libre=1;
+    plateau[7][0].libre=1;
+    plateau[3][2].libre=1;
+    plateau[3][3].libre=1;
+    plateau[11][3].libre=1;
+    plateau[0][5].libre=1;
+    plateau[2][7].libre=1;
+    plateau[7][7].libre=1;
+    plateau[8][7].libre=1;
+    plateau[11][7].libre=1;
+  
+    
+}
+
 
 int main()
 {
