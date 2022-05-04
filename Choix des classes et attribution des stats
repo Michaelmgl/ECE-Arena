@@ -1,0 +1,75 @@
+void choixDesClasses(t_perso tablo[NBR_MAX_DE_JOUEURS], int nbrjoueurs)
+{
+    int i = 0;
+    while(i < nbrjoueurs)
+    {
+        printf("Joueur %d , veuillez choisir une classe\n", i+1);
+        scanf("%d", &tablo[i].element);
+        while(tablo[i].element > 3 || tablo[i].element < 0)
+        {
+            printf("Veuillez choisir un nombre correspondant à une classe\n");
+            scanf("%d", &tablo[i].element);
+        }
+        if (tablo[i].element == 0)
+        {
+            printf("Vous avez choisi le soldat de terre\n");
+            tablo[i].ptsvie = 2300;
+            tablo[i].ptsatt = 380;
+            tablo[i].ptsdef = 250;
+            tablo[i].ptsmagie = 450;
+            tablo[i].ptsact = 3;
+            tablo[i].ptsmouv = 3;
+            tablo[i].attultime = 700;
+            tablo[i].recharge = 0;
+            tablo[i].boostdef = 0;
+            tablo[i].boostatt = 0;
+            tablo[i].jaugemagie = 800;
+        }
+        else if(tablo[i].element == 1)
+        {
+            printf("Vous avez choisi la brute de l'eau\n");
+            tablo[i].ptsvie = 2500;
+            tablo[i].ptsatt = 400;
+            tablo[i].ptsdef = 220;
+            tablo[i].ptsmagie = 430;
+            tablo[i].ptsact = 2;
+            tablo[i].ptsmouv = 3;
+            tablo[i].attultime = 750;
+            tablo[i].recharge = 0;
+            tablo[i].boostdef = 0;
+            tablo[i].boostatt = 0;
+            tablo[i].jaugemagie = 800;
+        }
+        else if(tablo[i].element == 2)
+        {
+            printf("Vous avez choisi le mage de feu\n");
+            tablo[i].ptsvie = 2200;
+            tablo[i].ptsatt = 290;
+            tablo[i].ptsdef = 300;
+            tablo[i].ptsmagie = 500;
+            tablo[i].ptsact = 3;
+            tablo[i].ptsmouv = 3;
+            tablo[i].attultime = 800;
+            tablo[i].recharge = 0;
+            tablo[i].boostdef = 0;
+            tablo[i].boostatt = 0;
+            tablo[i].jaugemagie = 1300;
+        }
+        else if (tablo[i].element == 3)
+        {
+            printf("Vous avez choisi la danseuse de l'air\n");
+            tablo[i].ptsvie = 2000;
+            tablo[i].ptsatt = 350;
+            tablo[i].ptsdef = 290;
+            tablo[i].ptsmagie = 480;
+            tablo[i].ptsact = 4;
+            tablo[i].ptsmouv = 3;
+            tablo[i].attultime = 820;
+            tablo[i].recharge = 0;
+            tablo[i].boostdef = 0;
+            tablo[i].boostatt =0;
+            tablo[i].jaugemagie = 1200;
+        }
+        i= i+1;
+    }
+}
