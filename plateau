@@ -1,0 +1,30 @@
+typedef struct cases{
+
+    //coordonnees de la case
+    int x;
+    int y;
+
+    //1 si occupe et 0 si libre
+    int libre;
+
+    //pour ce qui se trouve sur la case
+    BITMAP * image;
+
+}t_case;
+
+
+int main()
+{
+    BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
+
+    t_case plateau[12][8];
+    for (int i=0; i<12; i++) //longueur
+    {
+        for (int j=0; j<8; j++) //largeur
+        {
+            blit(plateau[i][j].image,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
+        }
+    }
+return 0;
+
+}
