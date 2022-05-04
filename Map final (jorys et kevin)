@@ -2,6 +2,17 @@
 #include <stdlib.h>
 #include <allegro.h>
 
+////Matrice de la Map = 8Ligne pour 12 Colonnes 
+////Case Inutilisable; 
+////Ligne 1, Colonne 7 et 8
+////Ligne 2, rien
+////Ligne 3, Colonne 4 net 12 
+////Ligne 4, Colonne 4 et 12
+////Ligne 5, rien
+////Ligne 6, Colonne 1 et 8
+////Ligne 7 Rien
+////Ligne 8, Colonne 3 et 5 et 6 
+
 void initialisationAllegro()
 {
     allegro_init();
