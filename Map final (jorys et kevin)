@@ -13,6 +13,9 @@
 ////Ligne 7 Rien
 ////Ligne 8, Colonne 3 et 5 et 6 
 
+///Position X d'une case on ajoute 66,5
+///Position Y d'une case on ajoute 66,6
+
 void initialisationAllegro()
 {
     allegro_init();
