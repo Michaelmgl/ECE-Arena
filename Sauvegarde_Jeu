@@ -1,0 +1,26 @@
+#include "header.h"
+
+///Base Ne sauvegarde actuellement pas
+
+void sauvegarder_partie(jeu partie_a_sauvegarder)
+{
+    FILE * sauvegarde = fopen("save.txt","w"); //creer une save
+
+    if(!sauvegarde)
+    {
+        allegro_message("Erreur de creation de la sauvegarde!");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+
+    ///TOUT SAUVEGARDER DANS LORDRE DE LA PARTIE
+
+    //
+
+
+
+
+    //fermer la sauvegarde
+    fclose(sauvegarde);
+    allegro_message("Partie sauvegardee!");
+}
