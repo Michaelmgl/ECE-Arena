@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <allegro.h>
+
+void initialisationAllegro()
+{
+    allegro_init();
+    set_color_depth(desktop_color_depth());
+    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,800,600,0,0))!=0)
+     {
+        allegro_message("Pb de mode graphique");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+     }
+}
+
+int main()
+{
+    //declaration de variables
+    BITMAP * Terrain;
+    BITMAP * DoubleB;
+    //initialisation allegro mis dans un sous-programme
+    initialisationAllegro();
+    install_keyboard();
+    install_mouse();
+    //chargemenr de l'image
+    Terrain = load_bitmap("Terrain.bmp",NULL);
+    DoubleB = create_bitmap(SCREEN_W, SCREEN_H);// ne plus Ã©crire 800 et 600
+
+    while(!key[KEY_ESC])
+    {
+    clear_bitmap(DoubleB);
+    //clear_bitmap(DoubleB);
+    blit(Terrain,DoubleB,0,0,0,0,Terrain->w,Terrain->h);
+    blit(DoubleB,screen,0,0,0,68,DoubleB->w,DoubleB->h);
+
+    }
+    printf("FIN!\n");
+    return 0;
+}END_OF_MAIN();
