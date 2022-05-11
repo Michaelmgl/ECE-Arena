@@ -1,0 +1,32 @@
+
+void initialistionAllegro()
+{
+    allegro_init();
+    set_color_depth(desktop_color_depth());
+    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,800,600,0,0))!=0)
+    {
+        allegro_message("Pb de mode graphique");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+    install_keyboard();
+    install_mouse();
+}
+
+int main()
+{
+    initialistionAllegro();
+    BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
+    BITMAP * sprite=load_bitmap("k.bmp",NULL);
+
+    while(!key[KEY_ESC])
+    {
+        clear_bitmap(buffer);
+        masked_blit(sprite,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
+        blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
+    }
+
+    return 0;
+
+}END_OF_MAIN()
