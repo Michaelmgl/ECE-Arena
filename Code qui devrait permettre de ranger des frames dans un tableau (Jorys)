@@ -1,0 +1,169 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <allegro.h>
+
+void initialistionAllegro()
+{
+    allegro_init();
+    set_color_depth(desktop_color_depth());
+    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,800,600,0,0))!=0)
+    {
+        allegro_message("Pb de mode graphique");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+    install_keyboard();
+    install_mouse();
+}
+
+
+int main()
+{
+    ///Initialisation Allegro
+    initialistionAllegro();
+    ///Initialisation du Tableau de Frames
+    BITMAP * Mouvement[13];
+    ///Creation Buffer
+    BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
+
+    //Exmple cours ici inutilisé
+    //BITMAP * img[13];
+    ///Variable qui aide a rangé
+    int i = 0;
+
+    ///Code A la dure ou on recupère chaque frame (changer si vous pouvez)
+    BITMAP * frame1=load_bitmap("1.bmp",NULL);
+
+    BITMAP * frame2=load_bitmap("2.bmp",NULL);
+
+    BITMAP * frame3=load_bitmap("3.bmp",NULL);
+
+    BITMAP * frame4=load_bitmap("4.bmp",NULL);
+
+    BITMAP * frame5=load_bitmap("5.bmp",NULL);
+
+    BITMAP * frame6=load_bitmap("6.bmp",NULL);
+
+    BITMAP * frame7=load_bitmap("7.bmp",NULL);
+
+    BITMAP * frame8=load_bitmap("8.bmp",NULL);
+
+    BITMAP * frame9=load_bitmap("9.bmp",NULL);
+
+    BITMAP * frame10=load_bitmap("10.bmp",NULL);
+
+    BITMAP * frame11=load_bitmap("11.bmp",NULL);
+
+    BITMAP * frame12=load_bitmap("12.bmp",NULL);
+
+    BITMAP * frame13=load_bitmap("13.bmp",NULL);
+
+    BITMAP * frame14=load_bitmap("14.bmp",NULL);
+
+    ///Code a la dure ou on mets chaque frame ou elle doivent allé dans le tableau, je ne sais pas si une etape est inutile ou pas mais j'ai pas
+    ///reussi autrement a vous d'essayer
+    Mouvement[0]= frame1;
+
+    Mouvement[1]= frame2;
+
+    Mouvement[2]= frame3;
+
+    Mouvement[3]= frame4;
+
+    Mouvement[4]= frame5;
+
+    Mouvement[5]= frame6;
+
+    Mouvement[6]= frame7;
+
+    Mouvement[7]= frame8;
+
+    Mouvement[8]= frame9;
+
+    Mouvement[9]= frame10;
+
+    Mouvement[10]= frame11;
+
+    Mouvement[11]= frame12;
+
+    Mouvement[12]= frame13;
+
+    Mouvement[13]= frame14;
+
+    ///Exemple du cours avec sprintf mais personnellement je n'ai pas reussi a cvous de voir
+    /*
+
+    char Frames = 'Frames';
+
+    for (i = 0; i < 14; i++)
+
+    {
+
+    sprintf(Frames, "Documents\Project CodeBlocks\Workspace_Allegro_Code\Allegro_ProjetDofusArena\Allegro_ProjectDofusArena_Animation_Bam/%d.bmp", i );
+    // sprintf permet de faire un printf dans une chaine
+
+    img[i] = load_bitmap( Frames, NULL );
+
+    if ( ! img[i] )
+        {
+
+        allegro_message( "pas pu trouver %s", nomfichier );
+
+        exit( EXIT_FAILURE );
+
+        }
+
+    }
+    */
+    ///Verification
+    for (i = 0;i<14;i++)
+    {
+     if ( ! Mouvement[i] ){
+    allegro_message( "Probleme pas d'image %d",i);
+    exit( EXIT_FAILURE );}
+    }
+    /// Variable du cours reutilisé,voir exemple cours 4
+    ///cptimg est pour le 'la vitesse'
+    /// tmpinmg c'est pour le nombre d'image
+    /// imgcourante c pour parcourire le tableau
+    int cptimg=0, tmpimg=14, imgcourante=0;
+
+    int j = 0;
+    printf("test");
+
+    while(!key[KEY_ESC])
+    {
+        clear_bitmap(buffer);
+        // gestion enchainement des images
+        // incrémenter imgcourante une fois sur tmpimg
+        cptimg++;
+    ///Condition permettant de gerer 'la vitesse' en multipliant 'tmpimg'
+    if (cptimg>=tmpimg*3){
+    cptimg=0;
+    imgcourante++;}
+    // quand l'indice de l'image courante arrive à NIMAGE
+    // on recommence la séquence à partir de 0
+    if ( imgcourante >= 14 )
+    {
+    imgcourante=0;
+    }
+    ///Boruillon
+        //while(j<1)
+        //{
+
+        //draw_sprite(buffer,img[j],400,300);
+    ///
+    draw_sprite(buffer,Mouvement[imgcourante],400,300);
+    blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+    ///
+    /*j++;
+    if(j==1)
+    {
+        j = 0;
+    }
+        //}*/
+    }
+    ///
+    return 0;
+}END_OF_MAIN();
+///Mini Probleme Toujours du magenta
