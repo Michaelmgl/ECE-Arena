@@ -26,8 +26,8 @@ int main()
         {
             clear_bitmap(DoubleB);
             danseuse = load_bitmap("marche0.bmp", NULL);
-            masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h); //enfin on utilisera toujours masked_blit() pour les sprites de nos personnages, seul le buffer
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisé avec blit(), masked_blit() étant la fonction qui enlève le magenta
             rest(150);
             danseuse = load_bitmap("marche1.bmp", NULL);
             clear_bitmap(DoubleB);
