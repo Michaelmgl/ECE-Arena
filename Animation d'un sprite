@@ -1,0 +1,46 @@
+int main()
+{
+    //declaration de variables
+    BITMAP * danseuse;
+    BITMAP * DoubleB;
+    int i = 0;
+    int cpt = 0;
+    //initialisation allegro mis dans un sous-programme
+    initialisationAllegro();
+    install_keyboard();
+    install_mouse();
+    //chargemenr de l'image
+    danseuse = load_bitmap("posturebase.bmp",NULL); //"posturebase" c'est juste le nom de mon sprite de base
+    DoubleB = create_bitmap(SCREEN_W, SCREEN_H);// ne plus écrire 800 et 600
+    masked_blit(danseuse, DoubleB, 0,0,0,0, danseuse->w, danseuse->h); //pour pouvoir déplacer le sprite en même temps que l'animation il va falloir jouer avec les 0
+    blit(DoubleB, screen, 0,0,0,0, DoubleB->w, DoubleB->h);            //présents dans ces deux lignes de codes à chaque fois, je suppose qu'il faudra alors les remplacer
+    rest(2000);                                                        //par les coordonnées de chaque perso, d'où la nécessité de d'abord mettre à jour les coordonnées 
+    while(!key[KEY_ESC])                                               // avant de commencer à animer
+    {
+    clear_bitmap(DoubleB);
+    //clear_bitmap(DoubleB);
+    blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+    blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+    clear_bitmap(DoubleB);
+        while (i<100) //la condtion de cette boucle est arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+        {
+            clear_bitmap(DoubleB);
+            danseuse = load_bitmap("marche0.bmp", NULL);
+            masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(150);
+            danseuse = load_bitmap("marche1.bmp", NULL);
+            clear_bitmap(DoubleB);
+            masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(150);
+            danseuse = load_bitmap("marche2.bmp", NULL);
+            clear_bitmap(DoubleB);
+            masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            i = i+1;
+        }
+    }
+    printf("FIN!\n");
+    return 0;
+}END_OF_MAIN();
