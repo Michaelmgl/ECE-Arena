@@ -44,3 +44,7 @@ int main()
     printf("FIN!\n");
     return 0;
 }END_OF_MAIN();
+/*à noter que ce code permet d'animer un sprite à condition que toutes les images nécessaires soient présentes dans le dossier séparément et 
+ qu'elles soit affiches également avec des masked_blit() séparés. Y'en a qui disent qu'on pourrait utiliser une sprite sheet qu'on peut diviser automatiquement
+ pour pas s'embêter avec  plein de masked_blit() mais je sais vraiment pas comment m'y prendre, je me dis qu'autant faire des masked_blit() et même si 
+ ça prend du temps bah une fois qu'ils seront fait y'aura plus qu'à copier-coller...*/
