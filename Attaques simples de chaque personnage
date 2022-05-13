@@ -1,0 +1,64 @@
+//Blast aka le soldat de l'eau 💦 //
+int AxeBlow(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    damage = tab[attaquant].ptsatt;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        tab[cible].ptsvie = tab[cible].ptsvie - damage;
+    }
+    else{
+        damage = 0;
+    }
+    return damage;
+}
+//Attaque simple de Yorou aka le soldat de la terre 🌏 //
+int RockyPunch(t_perso tab[NBR_MAX_DE_JOUEURS], int jatt, int cible, int damage)
+{
+    damage = tab[jatt].ptsatt;
+    damage = verifElement(tab, jatt, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        tab[cible].ptsvie = tab[cible].ptsvie - damage;
+    }
+    else
+    {
+        damage = 0;
+    }
+    return damage;
+}
+//Attaque simple de Amerigo aka le mage de feu 🔥 //
+int StaffHit(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    damage = tab[attaquant].ptsatt;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        tab[cible].ptsvie = tab[cible].ptsvie - damage;
+    }
+    else
+    {
+        damage = 0;
+    }
+    return 0;
+}
+//Dhvani aka la danseuse de l'air💃// 
+int FanSlap(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    damage = tab[attaquant].ptsatt;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        tab[cible].ptsvie = tab[cible].ptsvie - damage;
+    }
+    else
+    {
+        damage = 0;
+    }
+    return damage;
+}
+
