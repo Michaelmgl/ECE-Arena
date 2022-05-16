@@ -1,0 +1,124 @@
+
+void initialistionAllegro()
+{
+    allegro_init();
+    set_color_depth(desktop_color_depth());
+    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,800,600,0,0))!=0)
+    {
+        allegro_message("Pb de mode graphique");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+    install_keyboard();
+    install_mouse();
+}
+
+void rect(BITMAP *bmp, int x1, int y1, int x2, int y2, int color);
+void rectfill(BITMAP *bmp, int x1, int y1, int x2, int y2, int color);
+
+
+typedef struct cases{
+
+    //coordonnees de la case
+    float x;
+    float y;
+
+    //Tailles d'une case
+    int longueur;
+    int largeur;
+
+    //1 si occupe/obstacle et 0 si libre
+    int libre;
+
+    //pour ce qui se trouve sur la case utile ?
+    BITMAP * image;
+
+}t_case;
+
+void initPlateau(t_case plateau[12][8])//)
+{
+    ///plateau = (t_case*) malloc(sizeof(t_case));
+    //BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
+    int i = 0;
+    int j = 0;
+    float valeur_x=0,valeur_y=66.67;
+    //t_case * plateau[12][8];
+
+    for (i=0; i<12; i++) //longueur
+    {
+        //plateau[i][j].x = plateau[i][j].x;
+        for (j=0; j<8; j++) //largeur
+        {
+            plateau[i][j].x = plateau[i][j].x + valeur_x;
+            plateau[i][j].longueur = 5;
+        }
+        valeur_x= valeur_x + 66.5;
+        for (j=0; j<8; j++) //largeur
+        {
+            plateau[i][j].y = valeur_y;
+            valeur_y = valeur_y + 66.67;
+            plateau[i][j].libre = 0;
+            plateau[i][j].largeur = 5;
+        }
+        valeur_y=66.67;
+
+
+    }
+    ///Blindage du a un bug
+    plateau[3][7].x = 199.5;
+    plateau[0][2].x = 0;
+    plateau[2][6].x = 133;
+    plateau[3][0].x = 199.5;
+    plateau[4][0].x = 266;
+    //plateau[0][0].x = 66.5;
+    plateau[0][0].x = 0;
+
+    ///Initialisation des Cases remplis
+    plateau[6][0].libre=1;
+    plateau[7][0].libre=1;
+    plateau[3][2].libre=1;
+    plateau[3][3].libre=1;
+    plateau[11][3].libre=1;
+    plateau[0][5].libre=1;
+    plateau[2][7].libre=1;
+    plateau[7][7].libre=1;
+    plateau[8][7].libre=1;
+    plateau[11][7].libre=1;
+}
+
+int main()
+{
+    ///Initialisation Allegro
+    initialistionAllegro();
+    ///Initialisation du Tableau de Frames
+    ///BITMAP * Mouvement[13];
+    ///Creation Buffer
+    BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
+
+    BITMAP * Terrain;
+    /*BITMAP * buffer2= create_bitmap(800,533);
+    if(!buffer2)
+    {
+        allegro_message("Pb Buffer 2 ");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }*/
+
+    float valeur_x=66.5,valeur_y=66.67;
+
+    //int touche=0;
+    //int scancode=0;
+
+    t_case Plateau[12][8];
+
+    initPlateau(Plateau);
+
+    Terrain = load_bitmap("Terrain.bmp",NULL);
+    if(!Terrain)
+    {
+        allegro_message("Pb pas d'image");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+    return 0;
+}END_OF_MAIN();
