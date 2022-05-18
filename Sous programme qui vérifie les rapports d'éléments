@@ -1,0 +1,44 @@
+int verifElement(t_perso tab[NBR_MAX_DE_JOUEURS], int jattaque, int jcible, int damage)
+{
+    if (tab[jattaque].element == 0 && tab[jcible].element == 1)
+    {
+        damage = damage*1.5;
+        printf("\nC'est super efficace !\n");
+    }
+    else if (tab[jattaque].element == 0 && tab[jcible].element == 3)
+    {
+        damage = damage/1.5;
+        printf("Ce n'est pas tres efficace...\n");
+    }
+    else if (tab[jattaque].element == 1 && tab[jcible].element == 0)
+    {
+        damage = damage/1.5;
+        printf("Ce n'est pas tres efficace...\n");
+    }
+    else if (tab[jattaque].element == 1 && tab[jcible].element == 2)
+    {
+        damage = damage*1.5;
+        printf("\nC'est super efficace !\n");
+    }
+    else if (tab[jattaque].element == 2 && tab[jcible].element == 1)
+    {
+        damage = damage/1.5;
+        printf("Ce n'est pas tres efficace...\n");
+    }
+    else if (tab[jattaque].element == 2 && tab[jcible].element == 3)
+    {
+        damage = damage*1.5;
+        printf("\nC'est super efficace !\n");
+    }
+    else if (tab[jattaque].element == 3 && tab[jcible].element == 0)
+    {
+        damage = damage*1.5;
+        printf("\nC'est super efficace !\n");
+    }
+    else if (tab[jattaque].element == 3 && tab[jcible].element == 2)
+    {
+        damage = damage/1.5;
+        printf("Ce n'est pas tres efficace...\n");
+    }
+    return damage;
+}
