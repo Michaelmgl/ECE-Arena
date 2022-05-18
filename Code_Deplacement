@@ -41,7 +41,7 @@ typedef struct cases{
 
 }t_case;
 
-void initPlateau(t_case plateau[12][8])//)
+void initPlateau(t_case plateau[13][9])//)
 {
     ///plateau = (t_case*) malloc(sizeof(t_case));
     //BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
@@ -50,16 +50,16 @@ void initPlateau(t_case plateau[12][8])//)
     float valeur_x=0,valeur_y=66.67;
     //t_case * plateau[12][8];
 
-    for (i=0; i<12; i++) //longueur
+    for (i=0; i<13; i++) //longueur
     {
         //plateau[i][j].x = plateau[i][j].x;
-        for (j=0; j<8; j++) //largeur
+        for (j=0; j<9; j++) //largeur
         {
             plateau[i][j].x = plateau[i][j].x + valeur_x;
             plateau[i][j].longueur = 5;
         }
         valeur_x= valeur_x + 66.5;
-        for (j=0; j<8; j++) //largeur
+        for (j=0; j<9; j++) //largeur
         {
             plateau[i][j].y = valeur_y;
             valeur_y = valeur_y + 66.67;
@@ -73,23 +73,25 @@ void initPlateau(t_case plateau[12][8])//)
     ///Blindage du a un bug
     plateau[3][7].x = 199.5;
     plateau[0][2].x = 0;
-    plateau[2][6].x = 133;
+    plateau[2][5].x = 133;
     plateau[3][0].x = 199.5;
-    plateau[4][0].x = 266;
+    plateau[5][0].x = 266;
+    plateau[10][1].x = 665;
     //plateau[0][0].x = 66.5;
     plateau[0][0].x = 0;
+    ///plateau[12][8].x;
 
     ///Initialisation des Cases remplis
-    plateau[6][0].libre=1;
     plateau[7][0].libre=1;
-    plateau[3][2].libre=1;
-    plateau[3][3].libre=1;
-    plateau[11][3].libre=1;
-    plateau[0][5].libre=1;
-    plateau[2][7].libre=1;
-    plateau[7][7].libre=1;
-    plateau[8][7].libre=1;
-    plateau[11][7].libre=1;
+    plateau[8][0].libre=1;
+    plateau[4][3].libre=1;
+    plateau[4][4].libre=1;
+    plateau[12][4].libre=1;
+    plateau[1][6].libre=1;
+    plateau[3][8].libre=1;
+    plateau[8][8].libre=1;
+    plateau[9][8].libre=1;
+    plateau[12][8].libre=0;
 }
 /*
 void Rectangles(t_case Plateau,int* j, int* i,int r, int b, int g)// BITMAP * buffer)
@@ -115,26 +117,10 @@ int main()
 {
     ///Initialisation Allegro
     initialistionAllegro();
-    ///Initialisation du Tableau de Frames
-    ///BITMAP * Mouvement[13];
-    ///Creation Buffer
     BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
 
     BITMAP * Terrain;
-    /*BITMAP * buffer2= create_bitmap(800,533);
-    if(!buffer2)
-    {
-        allegro_message("Pb Buffer 2 ");
-        allegro_exit();
-        exit(EXIT_FAILURE);
-    }*/
-
-    float valeur_x=66.5,valeur_y=66.67;
-
-    //int touche=0;
-    //int scancode=0;
-
-    t_case Plateau[12][8];
+    t_case Plateau[13][9];
 
     initPlateau(Plateau);
 
@@ -145,22 +131,25 @@ int main()
         allegro_exit();
         exit(EXIT_FAILURE);
     }
-    ///BITMAP * Case_Libre; //image case libre
+
+    float valeur_x=66.5;
+    float valeur_y=66.67;
+
+    /// BITMAP * Case_Libre; //image case libre
     /// BITMAP * Case_Remplis; // image case remplie (obstacle ou personnage)
 
     ///Permets de verifier si le tableau à bien été enregistré
     int i = 0;
     int j = 0;
 
-    for (i=0; i<12; i++) //longueur
+    for (i=0; i<13; i++) //longueur
     {
-        for (j=0; j<8; j++) //largeur
+        for (j=0; j<9; j++) //largeur
         {
             printf("La position x de la case %d x %d est %f et la position y est %f\n",i,j,Plateau[i][j].x,Plateau[i][j].y);
             printf("La case a pour liberte %d \n",Plateau[i][j].libre);
             printf("La case a pour largeur %d et longueur %d \n",Plateau[i][j].largeur,Plateau[i][j].longueur);
         }
-
     }
 
     ///Centre d'une case = position x/2 et position y/2
@@ -174,14 +163,13 @@ int main()
     {
 
     textprintf_ex(Terrain,font,0,0,makecol(255,0,255),makecol(0,0,255), "Coordonnées de la souris en ligne : %d et en colonne : %d ",mouse_x,mouse_y);
-    //clear_bitmap(Terrain);
 
-    //clear_bitmap(buffer2);
     clear_bitmap(buffer);
 
     //blit(Terrain,buffer,0,0,0,68,Terrain->w,Terrain->h);
 
         ///Position centrale
+        /*
     if (mouse_x>=Plateau[i][j].x-66 && mouse_x<=Plateau[i+1][j].x-60 && mouse_y>=Plateau[i-1][j].y-66 && mouse_y<=Plateau[i][j].x-66) //
     {//Clic Gauche
     printf("position centre \n");
@@ -189,28 +177,22 @@ int main()
     if (mouse_b & 1)
         {
         printf("Le bouton gauche est appuyée (mouvement 0)\n");
-        if (i == 12)
-        {
-        //i = 0;
-        }
-        else
-        {
-        //i = i - 1;
-        }
         //rest(1000);
         }
     }
+    */
     ///Position Droite//
-    else if (mouse_x>=Plateau[i][j].x&& mouse_y>=Plateau[i][j].y-60 && mouse_y<=Plateau[i][j+1].y-60 && mouse_x<=Plateau[i+1][j].x && Plateau[i+1][j].libre ==0)
+    if (mouse_x>=Plateau[i][j].x&& mouse_y>=Plateau[i][j].y-60 && mouse_y<=Plateau[i][j+1].y-60 && mouse_x<=Plateau[i+1][j].x && Plateau[i+1][j].libre == 0)
     {//Clic Gauche
     printf("Droite\n");
     //rest(1000);
     if (mouse_b & 1)
         {
         printf("Le bouton gauche est appuyée (mouvement droite)\n");
-        if (i == 12)
+        if (i == 13)
         {
-        i = 0;
+        printf("impossible vous devez faire autre chose");
+        i = 12;
         }
         else
         {
@@ -219,30 +201,17 @@ int main()
         rest(1000);
         }
     }
-        //Clic Droit
- /*   if (mouse_b & 1)
-        {
-         printf("Le bouton droit est appuye (mouvement Dessous)\n");
-        if (j == 8)
-         {
-          j = 0;
-         }
-         else
-         {
-         j = j + 1;
-         }
-        rest(1000);
-        } */
     ///Position Gauche
-    else if (mouse_x<=Plateau[i][j].x-66 && mouse_x>=Plateau[i-1][j].x-66 && mouse_y>=Plateau[i][j-1].y&& mouse_y<=Plateau[i][j].y&& Plateau[i-1][j].libre ==0) // //  )
+    else if (mouse_x<=Plateau[i][j].x-66 && mouse_x>=Plateau[i-1][j].x-66 && mouse_y>=Plateau[i][j-1].y&& mouse_y<=Plateau[i][j].y && Plateau[i-1][j].libre == 0) // //  )
     {//Clic Gauche
     printf("Gauche\n");
     //rest(1000);
     if (mouse_b & 1)
         {
         printf("Le bouton gauche est appuyée (mouvement gauche)\n");
-        if (i == 12)
+        if (i < 0)
         {
+        printf("impossible vous devez faire autre chose");
         i = 0;
         }
         else
@@ -261,8 +230,9 @@ int main()
     if (mouse_b & 1)
         {
         printf("Le bouton gauche est appuyée (mouvement haut)\n");
-        if (j == 8)
+        if (j == 0 )
         {
+        printf("impossible vous devez faire autre chose");
         j = 0;
         }
         else
@@ -274,16 +244,17 @@ int main()
     }
 
     ///Position Basse
-    else if (mouse_x<=Plateau[i][j].x && mouse_x>=Plateau[i][j].x-66 && mouse_y<=Plateau[i][j+1].y&& mouse_y>=Plateau[i][j].y && Plateau[i][j+1].libre ==0)
+    else if (mouse_x<=Plateau[i][j].x && mouse_x>=Plateau[i][j].x-66 && mouse_y<=Plateau[i][j+1].y && mouse_y>=Plateau[i][j-1].y && Plateau[i][j+1].libre ==0)//
     {//Clic Gauche) //
     printf("Bas\n");
     //rest(1000);
     if (mouse_b & 1)
         {
         printf("Le bouton gauche est appuyée (mouvement Bas)\n");
-        if (j == 12)
+        if (j == 8)
         {
-        j = 0;
+        printf("impossible vous devez faire autre chose");
+        j = 8;
         }
         else
         {
@@ -296,13 +267,6 @@ int main()
     {
       printf("hors position disponible\n");
     }
-
-
-
-
-
-
-
 
         blit(Terrain,buffer,0,0,0,68,Terrain->w,Terrain->h);
 
@@ -325,36 +289,11 @@ int main()
 
         //clear_bitmap(Terrain);
 
-
-
         blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
         //blit(buffer2,Terrain,0,0,0,0,Terrain->w,Terrain->h);
         //blit(Terrain,buffer,0,0,0,68,Terrain->w,Terrain->h);
     }
 
-        //Clic Droit
-/* if (keypressed())		// équivalent de kbhit() de conio.h
-    {
-        touche=readkey(); 		// équivalent de getch() de conio.h
-                                // récupérer le scancode sur le 2ème octet
-        scancode=touche>>8;
-        if (scancode==KEY_DOWN){
-            printf("Key Up (mouvement Haut)\n");
-        }
-            //i = i-1;
-            printf ("Key Down (mouvement Gauc
-        if (scancode==KEY_UP){he)\n" );
-            //j = j-1;
-        }
-    }*/
-   /* for (i=0; i<12; i++) //longueur
-    {
-     for(int y = 0; y <8; y++)
-        {
-        free(Plateau[i][y]);
-        Plateau[i][y] = NULL;
-        }
-    }
-    */
     return 0;
 }END_OF_MAIN();
+
