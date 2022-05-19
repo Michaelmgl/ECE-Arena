@@ -16,5 +16,6 @@ typedef struct Perso{
     int recharge;//correspond à la recharge de l'attaque ultime, il commencera à 0, et à chaque fois que le perso attaque, il s'incrémentera de 1, une fois à 5, il pourra utiliser son attaque ultime, une fois utilisée, cette variable retombe à 0
     int boostdef;///initié à 0, si égal à 1 alors les points de défense augmente de 100 et le restent pour 2 tours
     int boostatt;//initié à 0, si égal à 1, alors les points d'attaque et les points magie augmentent tout les deux de 100 pendant 2 tours
+    int boostmag;
     int jaugemagie;///différente selon les persos, elle sert à réguler l'utilisation des attaques de sorts, cett
 }t_perso;
