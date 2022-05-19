@@ -1,0 +1,278 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<allegro.h>
+
+
+int main()
+{
+    allegro_init();
+    set_color_depth(desktop_color_depth());
+    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,800,600,0,0))!=0)
+    {
+        allegro_message("Pb de mode graphique");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+    install_keyboard();
+    install_mouse();
+
+    //declaration de variables
+    BITMAP * danseuse;
+    BITMAP * DoubleB;
+    BITMAP * timer;
+
+    int i = 0;
+    int cpt = 0;
+    int x=0;
+    int y=0;
+    int s=0;
+    //initialisation allegro mis dans un sous-programme
+
+    install_keyboard();
+    install_mouse();//chargemenr de l'image
+    danseuse = load_bitmap("D0.bmp",NULL); //"posturebase" c'est juste le nom de mon sprite de base
+    DoubleB = create_bitmap(SCREEN_W, SCREEN_H);// ne plus écrire 800 et 600
+    masked_blit(danseuse, DoubleB, 0,0,x,y, danseuse->w, danseuse->h); //pour pouvoir déplacer le sprite en même temps que l'animation il va falloir jouer avec les 0
+    blit(DoubleB, screen, 0,0,0,0, DoubleB->w, DoubleB->h);            //présents dans ces deux lignes de codes à chaque fois, je suppose qu'il faudra alors les remplacer
+                                            //par les coordonnées de chaque perso, d'où la nécessité de d'abord mettre à jour les coordonnées
+    show_mouse(screen);
+
+    while(!key[KEY_ESC])                                               // avant de commencer à animer
+    {
+    clear_bitmap(DoubleB);
+
+            danseuse = load_bitmap("K0.bmp", NULL);
+            masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+   /// blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+    blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+    clear_bitmap(DoubleB);
+    if (key[KEY_RIGHT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    {
+        for (i=0;i<1;i++)
+            {
+            clear_bitmap(DoubleB);
+            danseuse = load_bitmap("K0.bmp", NULL);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisé avec blit(), masked_blit() étant la fonction qui enlève le magenta
+            rest(100);
+            danseuse = load_bitmap("K1.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+            danseuse = load_bitmap("K2.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+            danseuse = load_bitmap("K3.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x+33,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+            danseuse = load_bitmap("K2.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x+65,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+
+            clear_bitmap(DoubleB);
+            danseuse = load_bitmap("K0.bmp", NULL);
+            masked_blit(danseuse,DoubleB,0,0,x+65,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+
+            x = x + 65;
+            }
+    }
+    if (key[KEY_DOWN])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    {
+        for (s=0;s<1;s++)
+            {
+            clear_bitmap(DoubleB);
+            danseuse = load_bitmap("K0.bmp", NULL);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisé avec blit(), masked_blit() étant la fonction qui enlève le magenta
+            rest(100);
+            danseuse = load_bitmap("K1.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y+11,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+            danseuse = load_bitmap("K2.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y+22,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+            danseuse = load_bitmap("K3.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y+33,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+            danseuse = load_bitmap("K2.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y+65,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+
+            clear_bitmap(DoubleB);
+            danseuse = load_bitmap("K0.bmp", NULL);
+            masked_blit(danseuse,DoubleB,0,0,x,y+65,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+
+            y= y + 65;
+            }
+    }
+
+    if (key[KEY_UP])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    {
+        for (s=0;s<1;s++)
+            {
+            clear_bitmap(DoubleB);
+            danseuse = load_bitmap("K0.bmp", NULL);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisé avec blit(), masked_blit() étant la fonction qui enlève le magenta
+            rest(100);
+            danseuse = load_bitmap("K1.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y-11,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+            danseuse = load_bitmap("K2.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y-22,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+            danseuse = load_bitmap("K3.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y-33,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+            danseuse = load_bitmap("K2.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y-65,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+
+            clear_bitmap(DoubleB);
+            danseuse = load_bitmap("K0.bmp", NULL);
+            masked_blit(danseuse,DoubleB,0,0,x,y-65,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+
+            y= y-65;
+            }
+    }
+
+
+     if (key[KEY_DOWN])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    {
+        for (s=0;s<1;s++)
+            {
+            clear_bitmap(DoubleB);
+            danseuse = load_bitmap("K0.bmp", NULL);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisé avec blit(), masked_blit() étant la fonction qui enlève le magenta
+            rest(1000);
+            danseuse = load_bitmap("K1.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(1000);
+            danseuse = load_bitmap("K2.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(1000);
+            danseuse = load_bitmap("K3.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y+33,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(1000);
+            danseuse = load_bitmap("K4.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y+65,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(1000);
+
+            clear_bitmap(DoubleB);
+            danseuse = load_bitmap("K0.bmp", NULL);
+            masked_blit(danseuse,DoubleB,0,0,x,y+65,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(1000);
+
+            y= y + 65;
+            }
+    }
+
+    if (key[KEY_LEFT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    {
+        for (s=0;s<1;s++)
+            {
+            clear_bitmap(DoubleB);
+            danseuse = load_bitmap("K0.bmp", NULL);
+
+            masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisé avec blit(), masked_blit() étant la fonction qui enlève le magenta
+            rest(100);
+            danseuse = load_bitmap("K1r.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x-11,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+            danseuse = load_bitmap("K2r.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x-22,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+            danseuse = load_bitmap("K3r.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x-33,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+            danseuse = load_bitmap("K2r.bmp", NULL);
+            clear_bitmap(DoubleB);
+
+            masked_blit(danseuse,DoubleB,0,0,x-65,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+
+            clear_bitmap(DoubleB);
+            danseuse = load_bitmap("K0.bmp", NULL);
+            masked_blit(danseuse,DoubleB,0,0,x-65,y,danseuse->w,danseuse->h);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            rest(100);
+
+            x= x-65;
+            }
+    }
+
+    }
+    printf("FIN!\n");
+    return 0;
+}END_OF_MAIN();
