@@ -41,6 +41,32 @@ typedef struct cases{
 
 }t_case;
 
+void Affiche_Position(t_case Plateau[13][9],int i,int j, BITMAP * buffer)
+{
+    float valeur_x=66.5,valeur_y=66.67;
+
+    rect(buffer,mouse_x-33,mouse_y-33,mouse_x+33,mouse_y+33,makecol(0,0,255));
+
+    if(j > 0 && j<8 && i>0 && i<=12 )
+    {
+        ///Gauche
+        rectfill(buffer, Plateau[i-1][j].x-(valeur_x/2),Plateau[i-1][j].y-(valeur_y/2), (Plateau[i-1][j].longueur + Plateau[i-1][j].x )-(valeur_x/2), (Plateau[i-1][j].largeur+Plateau[i-1][j].y)-(valeur_y/2), makecol(0,0,255));
+
+        ///Dessous
+       rectfill(buffer, Plateau[i][j+1].x-(valeur_x/2),Plateau[i][j+1].y-(valeur_y/2), (Plateau[i][j+1].longueur +Plateau[i][j+1].x)-(valeur_x/2), (Plateau[i][j+1].largeur+Plateau[i][j+1].y)-(valeur_y/2), makecol(0,255,0));
+
+        ///Centre
+        rectfill(buffer, Plateau[i][j].x-(valeur_x/2),Plateau[i][j].y-(valeur_y/2), (Plateau[i][j].longueur+Plateau[i][j].x)-(valeur_x/2), (Plateau[i][j].largeur+Plateau[i][j].y)-(valeur_y/2), makecol(255,255,255));
+
+        ///Haut
+       rectfill(buffer, Plateau[i][j-1].x-(valeur_x/2),Plateau[i][j-1].y-(valeur_y/2), (Plateau[i][j-1].longueur + Plateau[i][j-1].x)-(valeur_x/2), (Plateau[i][j-1].largeur+Plateau[i][j-1].y)-(valeur_y/2), makecol(255,0,255));
+
+        ///Droite
+       rectfill(buffer, Plateau[i+1][j].x-(valeur_x/2),Plateau[i+1][j].y-(valeur_y/2), (Plateau[i+1][j].longueur + Plateau[i+1][j].x)-(valeur_x/2), (Plateau[i+1][j].largeur+Plateau[i+1][j].y)-(valeur_y/2), makecol(100,0,0));
+    }
+}
+
+
 void initPlateau(t_case plateau[13][9])//)
 {
     ///plateau = (t_case*) malloc(sizeof(t_case));
@@ -67,9 +93,8 @@ void initPlateau(t_case plateau[13][9])//)
             plateau[i][j].largeur = 5;
         }
         valeur_y=66.67;
-
-
     }
+
     ///Blindage du a un bug
     plateau[3][7].x = 199.5;
     plateau[0][2].x = 0;
@@ -78,41 +103,140 @@ void initPlateau(t_case plateau[13][9])//)
     plateau[5][0].x = 266;
     plateau[10][1].x = 665;
     //plateau[0][0].x = 66.5;
-    plateau[0][0].x = 0;
-    ///plateau[12][8].x;
 
     ///Initialisation des Cases remplis
-    plateau[7][0].libre=1;
-    plateau[8][0].libre=1;
+
+    for (j=0; j<9; j++) //largeur
+    {
+        plateau[0][j].libre = 1;
+        plateau[0][j].y = 0;
+    }
+    plateau[1][6].libre=1;
+    plateau[7][1].libre=1;
+    plateau[8][1].libre=1;
+    plateau[3][8].libre=1;
     plateau[4][3].libre=1;
     plateau[4][4].libre=1;
-    plateau[12][4].libre=1;
-    plateau[1][6].libre=1;
-    plateau[3][8].libre=1;
+    plateau[7][0].libre=1;
+    plateau[8][0].libre=1;
     plateau[8][8].libre=1;
     plateau[9][8].libre=1;
+    plateau[12][4].libre=1;
     plateau[12][8].libre=0;
 }
-/*
-void Rectangles(t_case Plateau,int* j, int* i,int r, int b, int g)// BITMAP * buffer)
+
+void Manipulation (t_case Plateau[13][9],int* a,int* b, BITMAP * buffer)
 {
-        BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
-        ///Dessus
-        rectfill(buffer, Plateau[i-1][j].x,Plateau[i-1][j].y, Plateau[i-1][j].longueur + Plateau[i-1][j].x , Plateau[i-1][j].largeur+Plateau[i-1][j].y, makecol(r,g,b));
+    float valeur_x=66.5;
+    float valeur_y=66.67;
 
-        ///Droite
-        rectfill(buffer, Plateau[i][j+1].x,Plateau[i][j+1].y, Plateau[i][j+1].longueur +Plateau[i][j+1].x, Plateau[i][j+1].largeur+Plateau[i][j+1].y, makecol(0,255,0));
+    int i = 0;
 
-        ///Centre
-        rectfill(buffer, Plateau[i][j].x,Plateau[i][j].y, Plateau[i][j].longueur +Plateau[i][j].x, Plateau[i][j].largeur+Plateau[i][j].y, makecol(255,255,255));
+    int j = 0;
 
-        ///Gauche
-        rectfill(buffer, Plateau[i][j-1].x,Plateau[i][j-1].y, Plateau[i][j-1].longueur + Plateau[i][j-1].x, Plateau[i][j-1].largeur+Plateau[i][j-1].y, makecol(255,0,255));
+    i = *a;
+    j = *b;
 
-        ///Dessous
-        rectfill(buffer, Plateau[i+1][j].x,Plateau[i+1][j].y, Plateau[i+1][j].longueur + Plateau[i+1][j].x, Plateau[i+1][j].largeur+Plateau[i+1][j].y, makecol(100,100,0));
+    ///Position centrale
+        /*
+    if (mouse_x>=Plateau[i][j].x-66 && mouse_x<=Plateau[i+1][j].x-60 && mouse_y>=Plateau[i-1][j].y-66 && mouse_y<=Plateau[i][j].x-66) //
+    {//Clic Gauche
+    printf("position centre \n");
+    //rest(1000);
+    if (mouse_b & 1)
+        {
+        printf("Le bouton gauche est appuyée (mouvement 0)\n");
+        //rest(1000);
+        }
+    }
+        */
+    ///Position Droite//
+    if (mouse_x>=Plateau[i][j].x && mouse_y>=Plateau[i][j].y-66 && mouse_y<=Plateau[i][j+1].y-66 && mouse_x<=Plateau[i+1][j].x && Plateau[i+1][j].libre == 0 )
+    {//Clic Gauche
+    printf("Droite\n");
+    //rest(1000);
+    if (mouse_b & 1)
+        {
+        printf("Le bouton gauche est appuyée (mouvement droite)\n");
+        if (i == 13)
+        {
+        printf("impossible vous devez faire autre chose");
+        i = 13;
+        }
+        else
+        {
+        *a = *a + 1;
+        }
+        rest(1000);
+        }
+    }
+    ///Position Gauche
+    else if (mouse_x<=Plateau[i][j].x-66 && mouse_x>=Plateau[i-1][j].x-66 && mouse_y>=Plateau[i][j-1].y&& mouse_y<=Plateau[i][j].y && Plateau[i-1][j].libre == 0) // //  )
+    {//Clic Gauche
+    printf("Gauche\n");
+    //rest(1000);
+    if (mouse_b & 1)
+        {
+        printf("Le bouton gauche est appuyée (mouvement gauche)\n");
+        if (i < 0)
+        {
+        printf("impossible vous devez faire autre chose");
+        i = 0;
+        }
+        else
+        {
+        *a = *a - 1;
+        }
+        rest(1000);
+        }
+    }
+  ///Position Haute
+
+    else if (mouse_x>=Plateau[i][j].x-66 && mouse_x<=Plateau[i][j].x && mouse_y<=Plateau[i][j-1].y && mouse_y>=Plateau[i][j-2].y&& Plateau[i][j-1].libre == 0)//
+    {//Clic Gauche
+    printf("Haut\n");
+    //rest(1000);
+    if (mouse_b & 1)
+        {
+        printf("Le bouton gauche est appuyée (mouvement haut)\n");
+        if (j - 1 == 0 )
+        {
+        printf("impossible vous devez faire autre chose");
+        j = 1;
+        }
+        else
+        {
+        *b = *b - 1;
+        }
+        rest(1000);
+        }
+    }
+    ///Position Basse
+    else if (mouse_x<=Plateau[i][j].x && mouse_x>=Plateau[i][j].x-66 && mouse_y<=Plateau[i][j+1].y && mouse_y>=Plateau[i][j].y && Plateau[i][j+1].libre == 0)//
+    {//Clic Gauche) //
+    printf("Bas\n");
+    //rest(1000);
+    if (mouse_b & 1)
+        {
+        printf("Le bouton gauche est appuyée (mouvement Bas)\n");
+        if (j +1 == 8 )
+        {
+        printf("impossible vous devez faire autre chose");
+        //j = 8;
+        }
+        else
+        {
+        *b = *b + 1;
+        }
+        rest(1000);
+        }
+    }
+    else
+    {
+      printf("hors position disponible\n");
+    }
 }
-*/
+
 int main()
 {
     ///Initialisation Allegro
@@ -156,144 +280,29 @@ int main()
 
     show_mouse(screen);
 
+    ///ATTENTION i > 0 , i et j ne sont jamais egal a 0/////
+
     i = 6;
     j = 4;///Personnage ce trouve a la case 6x4 donc i = 6 et J = 4
 
      while(!key[KEY_ESC])
     {
 
-    textprintf_ex(Terrain,font,0,0,makecol(255,0,255),makecol(0,0,255), "Coordonnées de la souris en ligne : %d et en colonne : %d ",mouse_x,mouse_y);
-
     clear_bitmap(buffer);
 
-    //blit(Terrain,buffer,0,0,0,68,Terrain->w,Terrain->h);
+    ///Affichage Terrain
 
-        ///Position centrale
-        /*
-    if (mouse_x>=Plateau[i][j].x-66 && mouse_x<=Plateau[i+1][j].x-60 && mouse_y>=Plateau[i-1][j].y-66 && mouse_y<=Plateau[i][j].x-66) //
-    {//Clic Gauche
-    printf("position centre \n");
-    //rest(1000);
-    if (mouse_b & 1)
-        {
-        printf("Le bouton gauche est appuyée (mouvement 0)\n");
-        //rest(1000);
-        }
-    }
-    */
-    ///Position Droite//
-    if (mouse_x>=Plateau[i][j].x&& mouse_y>=Plateau[i][j].y-60 && mouse_y<=Plateau[i][j+1].y-60 && mouse_x<=Plateau[i+1][j].x && Plateau[i+1][j].libre == 0)
-    {//Clic Gauche
-    printf("Droite\n");
-    //rest(1000);
-    if (mouse_b & 1)
-        {
-        printf("Le bouton gauche est appuyée (mouvement droite)\n");
-        if (i == 13)
-        {
-        printf("impossible vous devez faire autre chose");
-        i = 12;
-        }
-        else
-        {
-        i = i + 1;
-        }
-        rest(1000);
-        }
-    }
-    ///Position Gauche
-    else if (mouse_x<=Plateau[i][j].x-66 && mouse_x>=Plateau[i-1][j].x-66 && mouse_y>=Plateau[i][j-1].y&& mouse_y<=Plateau[i][j].y && Plateau[i-1][j].libre == 0) // //  )
-    {//Clic Gauche
-    printf("Gauche\n");
-    //rest(1000);
-    if (mouse_b & 1)
-        {
-        printf("Le bouton gauche est appuyée (mouvement gauche)\n");
-        if (i < 0)
-        {
-        printf("impossible vous devez faire autre chose");
-        i = 0;
-        }
-        else
-        {
-        i = i - 1;
-        }
-        rest(1000);
-        }
-    }
-  ///Position Haute
+    blit(Terrain,buffer,0,0,0,68,Terrain->w,Terrain->h);
 
-    else if (mouse_x>=Plateau[i][j].x-66 && mouse_x<=Plateau[i][j].x && mouse_y<=Plateau[i][j-1].y && mouse_y>=Plateau[i][j-2].y&& Plateau[i][j-1].libre ==0)//
-    {//Clic Gauche
-    printf("Haut\n");
-    //rest(1000);
-    if (mouse_b & 1)
-        {
-        printf("Le bouton gauche est appuyée (mouvement haut)\n");
-        if (j == 0 )
-        {
-        printf("impossible vous devez faire autre chose");
-        j = 0;
-        }
-        else
-        {
-        j = j - 1;
-        }
-        rest(1000);
-        }
-    }
+    Manipulation(Plateau,&i,&j, buffer);
 
-    ///Position Basse
-    else if (mouse_x<=Plateau[i][j].x && mouse_x>=Plateau[i][j].x-66 && mouse_y<=Plateau[i][j+1].y && mouse_y>=Plateau[i][j-1].y && Plateau[i][j+1].libre ==0)//
-    {//Clic Gauche) //
-    printf("Bas\n");
-    //rest(1000);
-    if (mouse_b & 1)
-        {
-        printf("Le bouton gauche est appuyée (mouvement Bas)\n");
-        if (j == 8)
-        {
-        printf("impossible vous devez faire autre chose");
-        j = 8;
-        }
-        else
-        {
-        j = j + 1;
-        }
-        rest(1000);
-        }
-    }
-    else
-    {
-      printf("hors position disponible\n");
-    }
+    Affiche_Position(Plateau,i,j, buffer);
 
-        blit(Terrain,buffer,0,0,0,68,Terrain->w,Terrain->h);
+    blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
 
-        ///Dessus
-        rectfill(buffer, Plateau[i-1][j].x-(valeur_x/2),Plateau[i-1][j].y-(valeur_y/2), (Plateau[i-1][j].longueur + Plateau[i-1][j].x )-(valeur_x/2), (Plateau[i-1][j].largeur+Plateau[i-1][j].y)-(valeur_y/2), makecol(0,0,255));
-
-        ///Droite
-        rectfill(buffer, Plateau[i][j+1].x-(valeur_x/2),Plateau[i][j+1].y-(valeur_y/2), (Plateau[i][j+1].longueur +Plateau[i][j+1].x)-(valeur_x/2), (Plateau[i][j+1].largeur+Plateau[i][j+1].y)-(valeur_y/2), makecol(0,255,0));
-
-        ///Centre
-        rectfill(buffer, Plateau[i][j].x-(valeur_x/2),Plateau[i][j].y-(valeur_y/2), (Plateau[i][j].longueur +Plateau[i][j].x)-(valeur_x)/2, (Plateau[i][j].largeur+Plateau[i][j].y)-(valeur_y/2), makecol(255,255,255));
-
-        ///Gauche
-        rectfill(buffer, Plateau[i][j-1].x-(valeur_x/2),Plateau[i][j-1].y-(valeur_y/2), (Plateau[i][j-1].longueur + Plateau[i][j-1].x)-(valeur_x/2), (Plateau[i][j-1].largeur+Plateau[i][j-1].y)-(valeur_y/2), makecol(255,0,255));
-
-        ///Dessous
-        rectfill(buffer, Plateau[i+1][j].x-(valeur_x/2),Plateau[i+1][j].y-(valeur_y/2), (Plateau[i+1][j].longueur + Plateau[i+1][j].x)-(valeur_x/2), (Plateau[i+1][j].largeur+Plateau[i+1][j].y)-(valeur_y/2), makecol(100,100,0));
-
-        ///Affichage Terrain
-
-        //clear_bitmap(Terrain);
-
-        blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-        //blit(buffer2,Terrain,0,0,0,0,Terrain->w,Terrain->h);
-        //blit(Terrain,buffer,0,0,0,68,Terrain->w,Terrain->h);
     }
 
     return 0;
 }END_OF_MAIN();
+
 
