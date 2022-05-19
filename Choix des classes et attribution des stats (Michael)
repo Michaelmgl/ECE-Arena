@@ -24,6 +24,7 @@ void choixDesClasses(t_perso tablo[NBR_MAX_DE_JOUEURS], int nbrjoueurs)
             tablo[i].boostdef = 0;
             tablo[i].boostatt = 0;
             tablo[i].boostmag = 0;
+            tablo[i].boostmouv = 0;
             tablo[i].jaugemagie = 800;
         }
         else if(tablo[i].element == 1)
@@ -40,6 +41,7 @@ void choixDesClasses(t_perso tablo[NBR_MAX_DE_JOUEURS], int nbrjoueurs)
             tablo[i].boostdef = 0;
             tablo[i].boostatt = 0;
             tablo[i].boostmag = 0;
+            tablo[i].boostmouv = 0;
             tablo[i].jaugemagie = 800;
         }
         else if(tablo[i].element == 2)
@@ -56,6 +58,7 @@ void choixDesClasses(t_perso tablo[NBR_MAX_DE_JOUEURS], int nbrjoueurs)
             tablo[i].boostdef = 0;
             tablo[i].boostatt = 0;
             tablo[i].boostmag = 0;
+            tablo[i].boostmouv = 0;
             tablo[i].jaugemagie = 1300;
         }
         else if (tablo[i].element == 3)
@@ -72,6 +75,7 @@ void choixDesClasses(t_perso tablo[NBR_MAX_DE_JOUEURS], int nbrjoueurs)
             tablo[i].boostdef = 0;
             tablo[i].boostatt =0;
             tablo[i].boostmag = 0;
+            tablo[i].boostmouv = 0;
             tablo[i].jaugemagie = 1200;
         }
         i= i+1;
