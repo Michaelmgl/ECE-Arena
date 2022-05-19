@@ -1,60 +1,121 @@
 typedef struct cases{
 
     //coordonnees de la case
-    int x;
-    int y;
+    float x;
+    float y;
 
-    //1 si occupe et 0 si libre
+    //Tailles d'une case
+    int longueur;
+    int largeur;
+
+    //1 si occupe/obstacle et 0 si libre
     int libre;
 
-    //pour ce qui se trouve sur la case
+    //pour ce qui se trouve sur la case utile ?
     BITMAP * image;
 
 }t_case;
 
-void init()
+
+
+void initPlateau(t_case plateau[13][9])//)
 {
+    ///plateau = (t_case*) malloc(sizeof(t_case));
     //BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
-    float valeur_x=0,valeur_y=68
-    t_case plateau[12][8];
-    for (int i=0; i<12; i++) //longueur
+    int i = 0;
+    int j = 0;
+    float valeur_x=0,valeur_y=66.67;
+    //t_case * plateau[12][8];
+
+    for (i=0; i<13; i++) //longueur
     {
-        plateau[i][j].x=valeur_x;
-        valeur_x+=66.5;
-        for (int j=0; j<8; j++) //largeur
+        //plateau[i][j].x = plateau[i][j].x;
+        for (j=0; j<9; j++) //largeur
         {
-            plateau[i][j].y=valeur_y;
-            valeur_y+=66.67;
-            
+            plateau[i][j].x = plateau[i][j].x + valeur_x;
+            plateau[i][j].longueur = 5;
         }
+        valeur_x= valeur_x + 66.5;
+        for (j=0; j<9; j++) //largeur
+        {
+            plateau[i][j].y = valeur_y;
+            valeur_y = valeur_y + 66.67;
+            plateau[i][j].libre = 0;
+            plateau[i][j].largeur = 5;
+        }
+        valeur_y=66.67;
     }
-    plateau[6][0].libre=1;
+
+    ///Blindage du a un bug
+    plateau[3][7].x = 199.5;
+    plateau[0][2].x = 0;
+    plateau[2][5].x = 133;
+    plateau[3][0].x = 199.5;
+    plateau[5][0].x = 266;
+    plateau[10][1].x = 665;
+    //plateau[0][0].x = 66.5;
+
+    ///Initialisation des Cases remplis
+
+    for (j=0; j<9; j++) //largeur
+    {
+        plateau[0][j].libre = 1;
+        plateau[0][j].y = 0;
+    }
+    plateau[1][6].libre=1;
+    plateau[7][1].libre=1;
+    plateau[8][1].libre=1;
+    plateau[3][8].libre=1;
+    plateau[4][3].libre=1;
+    plateau[4][4].libre=1;
     plateau[7][0].libre=1;
-    plateau[3][2].libre=1;
-    plateau[3][3].libre=1;
-    plateau[11][3].libre=1;
-    plateau[0][5].libre=1;
-    plateau[2][7].libre=1;
-    plateau[7][7].libre=1;
-    plateau[8][7].libre=1;
-    plateau[11][7].libre=1;
-  
-    
+    plateau[8][0].libre=1;
+    plateau[8][8].libre=1;
+    plateau[9][8].libre=1;
+    plateau[12][4].libre=1;
+    plateau[12][8].libre=0;
 }
 
 
 int main()
 {
-    BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
+    BITMAP * Terrain;
+    t_case Plateau[13][9];
 
-    t_case plateau[12][8];
-    for (int i=0; i<12; i++) //longueur
+    initPlateau(Plateau);
+
+    Terrain = load_bitmap("Terrain.bmp",NULL);
+    if(!Terrain)
     {
-        for (int j=0; j<8; j++) //largeur
+        allegro_message("Pb pas d'image");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+
+    float valeur_x=66.5;
+    float valeur_y=66.67;
+
+    /// BITMAP * Case_Libre; //image case libre
+    /// BITMAP * Case_Remplis; // image case remplie (obstacle ou personnage)
+
+    ///Permets de verifier si le tableau à bien été enregistré
+    int i = 0;
+    int j = 0;
+
+    for (i=0; i<13; i++) //longueur
+    {
+        for (j=0; j<9; j++) //largeur
         {
-            blit(plateau[i][j].image,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
+            printf("La position x de la case %d x %d est %f et la position y est %f\n",i,j,Plateau[i][j].x,Plateau[i][j].y);
+            printf("La case a pour liberte %d \n",Plateau[i][j].libre);
+            printf("La case a pour largeur %d et longueur %d \n",Plateau[i][j].largeur,Plateau[i][j].longueur);
         }
     }
+
+    ///Centre d'une case = position x/2 et position y/2
+
+    show_mouse(screen);
+    
 return 0;
 
-}
+}END_OF_MAIN();
