@@ -1,123 +1,47 @@
-typedef struct menu
+
+void menu_jeu(t_perso tab[NBR_MAX_JOUEURS])
 {
-    BITMAP * arriere_plan;
-    BITMAP * souris;
-    FONT * ecriture_titre;
-    FONT * ecriture_option;
-    int couleur;
-
-}t_menu;
-
-void initialistionAllegro()
-{
-    allegro_init();
-    set_color_depth(desktop_color_depth());
-    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_W,SCREEN_H,0,0))!=0)
-    {
-        allegro_message("Pb de mode graphique");
-        allegro_exit();
-        exit(EXIT_FAILURE);
-    }
-    install_keyboard();
-    install_mouse();
-}
-
-
-
-void menu_jeu()
-{
-    t_menu menu;
-
     //creation du decor de notre menu
-    menu.arriere_plan=load_bitmap("image/test.bmp",NULL);
-    menu.ecriture_option=load_font("fnt/pixel30.pcx",NULL,NULL);
-    menu.ecriture_titre=load_font("fnt/WEST.pcx",NULL,NULL);
-    menu.couleur=makecol(206, 192, 210);
-    menu.souris=load_bitmap("image/mouse_pointe.bmp",NULL);
-    //variable qui nous sert a acceder aux differentes commandes du menu
-    int choix = 0;
+    BITMAP * arriere_plan =load_bitmap("image/fond.bmp",NULL);
+    BITMAP * souris =load_bitmap("image/souris.bmp",NULL);
+    BITMAP * titre =load_bitmap("image/titreMenu.bmp",NULL);
 
     BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
-    clear_bitmap(buffer);
-    blit(menu.arriere_plan,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
 
-
-    while(choix<1 || choix>4)
+    while(!key[KEY_ESC])
     {
         clear_bitmap(buffer);
 
-        blit(menu.arriere_plan,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
+        blit(arriere_plan,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
 
+        masked_blit(titre,arriere_plan,0,0,0,0,800,600);
+        masked_blit(souris,buffer,0,0,mouse_x,mouse_y,SCREEN_W,SCREEN_H);
 
-
-        textout_ex(buffer,menu.ecriture_titre,"ECE Arena",125,100,menu.couleur,-1);
-        textout_ex(buffer,menu.ecriture_option,"Lancer une partie",125,250,menu.couleur,-1);
-        textout_ex(buffer,menu.ecriture_option,"Afficher les regles",125,325,menu.couleur,-1);
-        textout_ex(buffer,menu.ecriture_option,"Quitter le jeu",125,400,menu.couleur,-1);
-
-
-        masked_blit(menu.souris,buffer,0,0,mouse_x,mouse_y,SCREEN_W,SCREEN_H);
-
-        if( mouse_x>=125-text_length(menu.ecriture_option,"Lancer une partie") && mouse_x<=125+text_length(menu.ecriture_option,"Lancer une nouvelle partie")&& mouse_y>=300&& mouse_y<=300+text_height(menu.ecriture_option) )
+        if( mouse_x>=71 && mouse_x<=562 && mouse_y>=236&& mouse_y<=300 )
         {
             if(mouse_b&1)
             {
-                choix=1;
+                selectionPerso(tab);
             }
         }
 
-        if( mouse_x>=125-text_length(menu.ecriture_option,"Afficher les regles")/2 && mouse_x<=125+text_length(menu.ecriture_option,"Afficher les regles")/2 && mouse_y>=500 && mouse_y<=550+text_height(menu.ecriture_option) )
+        if( mouse_x>=81 && mouse_x<=281 && mouse_y>=200 && mouse_y<=401 )
         {
             if(mouse_b&1)
             {
-                choix=2;
+                regles();
             }
         }
 
-        if( mouse_x>=125-text_length(menu.ecriture_option,"Quitter le jeu") && mouse_x<=125+text_length(menu.ecriture_option,"Quitter le jeu") && mouse_y>=550 && mouse_y<=550+text_height(menu.ecriture_option) )
+        if( mouse_x>=78 && mouse_x<=450 && mouse_y>=425 && mouse_y<=496 )
         {
             if(mouse_b&1)
             {
-                choix=3;
+                exit(0);
             }
         }
 
         blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
 
     }
-
-    if(choix==1)
-    {
-        exit(0);
-    }
-    if(choix==2)
-    {
-        //exit(0);
-        textout_ex(menu.arriere_plan,menu.ecriture_titre,"test",125,100,menu.couleur,-1);
-
-    }
-    if(choix==3)
-    {
-        exit(0);
-
-    }
-    else
-    {
-        menu_jeu();
-    }
-
 }
-
-
-int main()
-{
-    initialistionAllegro();
-
-    menu_jeu();
-
-    allegro_exit();
-
-    return 0;
-
-}END_OF_MAIN()
-
