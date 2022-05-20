@@ -1,0 +1,33 @@
+
+void regles ()
+{
+    //creation du decor de notre menu
+    BITMAP * arriere_plan=load_bitmap("image/fond_regles.bmp",NULL);
+    BITMAP * souris=load_bitmap("image/souris.bmp",NULL);
+    BITMAP * regle =load_bitmap("image/regles.bmp",NULL);
+
+    BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
+
+    while(!key[KEY_ESC])
+    {
+        clear_bitmap(buffer);
+
+        blit(arriere_plan,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
+
+        masked_blit(regle,arriere_plan,0,0,0,0,800,600);
+        masked_blit(souris,buffer,0,0,mouse_x,mouse_y,SCREEN_W,SCREEN_H);
+
+        if( mouse_x>=385 && mouse_x<=780 && mouse_y>=508 && mouse_y<=550 )
+        {
+            if(mouse_b&1)
+            {
+                menu_jeu();
+            }
+        }
+        else
+        {
+          blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        }
+    }
+
+}
