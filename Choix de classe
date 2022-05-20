@@ -1,0 +1,138 @@
+void choixDeClasse(int nombre,t_perso tab[NBR_MAX_JOUEURS])
+{
+    //creation du decor de notre menu
+    BITMAP * arriere_plan=load_bitmap("image/fond_perso.bmp",NULL);
+
+    BITMAP * soldat=load_bitmap("image/fond_soldat.bmp",NULL);
+    BITMAP * danseuse=load_bitmap("image/fond_danseuse.bmp",NULL);
+    BITMAP * mage=load_bitmap("image/fond_mage.bmp",NULL);
+    BITMAP * brute=load_bitmap("image/fond_brute.bmp",NULL);
+    BITMAP * classe=load_bitmap("image/classe.bmp",NULL);
+    BITMAP * souris=load_bitmap("image/souris.bmp",NULL);
+
+    BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
+
+    int j=0;
+
+    while(j<nombre)
+    {
+            clear_bitmap(buffer);
+            blit(arriere_plan,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
+
+
+            blit(soldat,arriere_plan,0,0,10,300,200,150);
+            blit(danseuse,arriere_plan,0,0,190,300,150,150);
+            blit(mage,arriere_plan,0,0,350,300,150,150);
+            blit(brute,arriere_plan,0,0,510,300,150,150);
+
+            masked_blit(classe,arriere_plan,0,0,0,0,800,600);
+            masked_blit(souris,buffer,0,0,mouse_x,mouse_y,SCREEN_W,SCREEN_H);
+
+            if( mouse_x>=125 && mouse_x<=125 && mouse_y>=200 && mouse_y<=200 )
+            {
+                    if(mouse_b&1)
+                    {
+                        tab[j].element=1;
+                        tablo[i].ptsvie = 2500;
+                        tablo[i].ptsatt = 400;
+                        tablo[i].ptsdef = 220;
+                        tablo[i].ptsmagie = 430;
+                        tablo[i].ptsact = 2;
+                        tablo[i].ptsmouv = 3;
+                        tablo[i].attultime = 750;
+                        tablo[i].recharge = 0;
+                        tablo[i].boostdef = 0;
+                        tablo[i].boostatt = 0;
+                        tablo[i].boostmag = 0;
+                        tablo[i].boostmouv = 0;
+                        tablo[i].jaugemagie = 800;
+                        printf("joueur %d -> classe %d ",j,tab[j].element);
+                        j=j+1;
+                        rest(1000);
+                    }
+            }
+
+            else if( mouse_x>=125 && mouse_x<=125 && mouse_y>=275 && mouse_y<=275 )
+                {
+                    if(mouse_b&1)
+                    {
+                        tab[j].element=2;
+                        tablo[i].ptsvie = 2200;
+                        tablo[i].ptsatt = 290;
+                        tablo[i].ptsdef = 300;
+                        tablo[i].ptsmagie = 500;
+                        tablo[i].ptsact = 3;
+                        tablo[i].ptsmouv = 3;
+                        tablo[i].attultime = 800;
+                        tablo[i].recharge = 0;
+                        tablo[i].boostdef = 0;
+                        tablo[i].boostatt = 0;
+                        tablo[i].boostmag = 0;
+                        tablo[i].boostmouv = 0;
+                        tablo[i].jaugemagie = 1300;
+                        
+                        printf("joueur %d -> classe %d ",j,tab[j].element);
+                        j=j+1;
+                        rest(1000);
+                    }
+                }
+
+            else if( mouse_x>=125 && mouse_x<=125 && mouse_y>=350 && mouse_y<=350 )
+                {
+                    if(mouse_b&1)
+                    {
+                        tab[j].element=0;
+                        tablo[i].ptsvie = 2300;
+                        tablo[i].ptsatt = 380;
+                        tablo[i].ptsdef = 250;
+                        tablo[i].ptsmagie = 450;
+                        tablo[i].ptsact = 3;
+                        tablo[i].ptsmouv = 3;
+                        tablo[i].attultime = 700;
+                        tablo[i].recharge = 0;
+                        tablo[i].boostdef = 0;
+                        tablo[i].boostatt = 0;
+                        tablo[i].boostmag = 0;
+                        tablo[i].boostmouv = 0;
+                        tablo[i].jaugemagie = 800;
+                        printf("joueur %d -> classe %d ",j,tab[j].element);
+                        j=j+1;
+                        rest(1000);
+                    }
+                }
+
+            else if( mouse_x>=125 && mouse_x<=125 && mouse_y>=425 && mouse_y<=425 )
+                {
+                    if(mouse_b&1)
+                    {
+                        tab[j].element=3;
+                        tablo[i].ptsvie = 2000;
+                        tablo[i].ptsatt = 350;
+                        tablo[i].ptsdef = 290;
+                        tablo[i].ptsmagie = 480;
+                        tablo[i].ptsact = 4;
+                        tablo[i].ptsmouv = 3;
+                        tablo[i].attultime = 820;
+                        tablo[i].recharge = 0;
+                        tablo[i].boostdef = 0;
+                        tablo[i].boostatt =0;
+                        tablo[i].boostmag = 0;
+                        tablo[i].boostmouv = 0;
+                        tablo[i].jaugemagie = 1200;
+                        printf("joueur %d -> classe %d ",j,tab[j].element);
+                        j=j+1;
+                        rest(1000);
+                    }
+                }
+            else
+            {
+                blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            }
+
+
+    }
+    sauvegarde(tab,nombre);
+    //jeu();
+    rejouer_ecran(tab,nombre);//temporaire
+
+}
