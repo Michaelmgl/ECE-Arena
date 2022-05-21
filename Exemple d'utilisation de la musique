@@ -1,0 +1,11 @@
+install_sound(DIGI_AUTODETECT, MIDI_AUTODETECT, NULL);
+
+SAMPLE * musiqueMenu;
+SAMPLE * musiqueJeu;
+
+musiqueMenu = load_sample("MusiqueMenu.wav");
+musiqueJeu = load_sample("MusiqueJeu.wav");
+
+play_sample(musiqueMenu, 255, 128, 1000, 1);
+stop_sample(musiqueMenu);
+play_sample(musiqueJeu, 255, 128, 1000, 1); 
