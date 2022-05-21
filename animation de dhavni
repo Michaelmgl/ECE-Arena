@@ -1,0 +1,361 @@
+int main()
+{
+    allegro_init();
+    set_color_depth(desktop_color_depth());
+    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,800,600,0,0))!=0)
+    {
+        allegro_message("Pb de mode graphique");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+    install_keyboard();
+    install_mouse();
+
+    //declaration de variables
+    BITMAP * danseuse;
+
+    BITMAP * DoubleB;
+    BITMAP * timer;
+    SAMPLE * son;
+
+    int i = 0;
+    int cpt = 0;
+    int x=0;
+    int y=0;
+    int s=0;
+    //initialisation allegro mis dans un sous-programme
+
+    install_keyboard();
+    install_mouse();//chargemenr de l'image
+    danseuse = load_bitmap("d_eteint.bmp",NULL); //"posturebase" c'est juste le nom de mon sprite de base
+    DoubleB = create_bitmap(SCREEN_W, SCREEN_H);// ne plus écrire 800 et 600
+    masked_blit(danseuse, DoubleB, 0,0,65,540, danseuse->w, danseuse->h); //pour pouvoir déplacer le sprite en même temps que l'animation il va falloir jouer avec les 0
+    blit(DoubleB, screen, 0,0,0,0, DoubleB->w, DoubleB->h);            //présents dans ces deux lignes de codes à chaque fois, je suppose qu'il faudra alors les remplacer
+                                            //par les coordonnées de chaque perso, d'où la nécessité de d'abord mettre à jour les coordonnées
+    show_mouse(screen);
+
+    while(!key[KEY_ESC])
+    {
+    clear_bitmap(DoubleB);
+
+
+
+    if(mouse_x>=65 && mouse_x <=199 && mouse_y>=540 && mouse_y <=600)
+    {
+    if (mouse_b&1)
+    {
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DD1.bmp", NULL);
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DD2.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DD3.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+           clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DD4.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+    }
+    }
+
+    if(mouse_x>=200 && mouse_x <=334 && mouse_y>=540 && mouse_y <=600)
+    {
+    if (mouse_b&1)
+    {
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("HB1.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("HB2.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("HB3.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+                clear_bitmap(DoubleB);
+        danseuse = load_bitmap("HB4.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+                clear_bitmap(DoubleB);
+        danseuse = load_bitmap("HB5.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+                clear_bitmap(DoubleB);
+        danseuse = load_bitmap("HB6.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+                clear_bitmap(DoubleB);
+        danseuse = load_bitmap("HB7.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+                clear_bitmap(DoubleB);
+        danseuse = load_bitmap("HB8.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+
+
+
+
+
+
+        }
+
+    }
+
+    if(mouse_x>=335 && mouse_x <=469 && mouse_y>=540 && mouse_y <=600)
+    {
+    if (mouse_b&1)
+    {
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("P1.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("P2.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("P3.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("P4.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("P5.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("P6.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("P7.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+
+
+        }
+
+    }
+
+
+     if(mouse_x>=470 && mouse_x <=604 && mouse_y>=540 && mouse_y <=600)
+    {
+    if (mouse_b&1)
+    {
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DF1.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DF2.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DF3.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+         clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DF4.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+    }
+    }
+
+     if(mouse_x>=605 && mouse_x <=739 && mouse_y>=540 && mouse_y <=600)
+    {
+    if (mouse_b&1)
+    {
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DA1.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(1000);
+
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DA2.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DA3.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DA4.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DA5.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DA6.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DA5.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DA4.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+        clear_bitmap(DoubleB);
+        danseuse = load_bitmap("DA3.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+        clear_bitmap(DoubleB);
+         danseuse = load_bitmap("DA2.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+        clear_bitmap(DoubleB);
+         danseuse = load_bitmap("DA1.bmp", NULL);
+
+        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+
+    }
+
+    }
+
+
+
+    }
+    printf("FIN!\n");
+    return 0;
+}END_OF_MAIN();
