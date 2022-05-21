@@ -4,8 +4,9 @@ SAMPLE * musiqueMenu;
 SAMPLE * musiqueJeu;
 
 musiqueMenu = load_sample("MusiqueMenu.wav");
-musiqueJeu = load_sample("MusiqueJeu.wav");
+musiqueJeu = load_sample("MusiqueJeu.wav"); //ici on en fait un par musique, et on met le nom de la musique entre les guillemets
 
 play_sample(musiqueMenu, 255, 128, 1000, 1);
+//il vaut mieux mettre un rest(xxxx) ici pour qu'on puisse écouter la musique tant qu'on est pas encore passé sur un autre écran
 stop_sample(musiqueMenu);
 play_sample(musiqueJeu, 255, 128, 1000, 1); 
