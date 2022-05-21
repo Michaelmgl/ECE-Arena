@@ -47,12 +47,33 @@ void initPlateau(t_case plateau[13][9])//)
     }
 
     ///Blindage du a un bug
-    plateau[3][7].x = 199.5;
     plateau[0][2].x = 0;
+
+    plateau[1][7].x = 66.5;
+
+    plateau[2][0].x = 133;
+    plateau[2][2].x = 133;
     plateau[2][5].x = 133;
+
+    plateau[3][7].x = 199.5;
+    plateau[3][4].x = 199.5;
     plateau[3][0].x = 199.5;
+    plateau[3][5].x = 199.5;
+
     plateau[5][0].x = 266;
+    plateau[5][7].x = 332;
+    plateau[5][8].x = 332;
+
+    plateau[6][0].x = 399;
+    plateau[6][8].x = 399;
+
+    plateau[7][8].x = 465.5;
+
     plateau[10][1].x = 665;
+
+    plateau[11][0].x = 731;
+
+    plateau[12][5].x = 798;
     //plateau[0][0].x = 66.5;
 
     ///Initialisation des Cases remplis
@@ -60,6 +81,7 @@ void initPlateau(t_case plateau[13][9])//)
     for (j=0; j<9; j++) //largeur
     {
         plateau[0][j].libre = 1;
+        plateau[12][j].libre = 1;
         plateau[0][j].y = 0;
     }
     plateau[1][6].libre=1;
