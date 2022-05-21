@@ -17,6 +17,9 @@ typedef struct Perso{
     int boostdef;///initié à 0, si égal à 1 alors les points de défense augmente de 100 et le restent pour 2 tours
     int boostatt;//initié à 0, si égal à 1, alors les points d'attaque et les points magie augmentent tout les deux de 100 pendant 2 tours
     int boostmag;
+    int boostmouv;
+    int boostcrit;
+    int brulure;
     int jaugemagie;///différente selon les persos, elle sert à réguler l'utilisation des attaques de sorts, cett
     int numeroPassage
     int i;///Pour le bouger plus facilement dans le tableau 
