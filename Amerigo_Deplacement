@@ -1,0 +1,210 @@
+
+void Amerigo_base(int x ,int y ,BITMAP* DoubleB, BITMAP * danseuse)
+{
+    danseuse = load_bitmap("Y0.bmp", NULL);
+    if(!danseuse)
+    {
+        allegro_message("Problemo");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+    masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+    //blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+    //blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+}
+
+void Amerigo_haut(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
+{
+    int x =0;
+    int y =0;
+
+    x = Personnage.x;
+    y = Personnage.y;
+
+    BITMAP*Mouvement[6];
+
+    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("Y0U.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("Y1U.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("Y2U.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("Y3U.bmp", NULL);
+    BITMAP*danseuse6 = load_bitmap("Y4U.bmp", NULL);
+    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse5;
+
+    int incre = 0;
+    int i = 0;
+    for (i=0;i<1;i++)
+        {
+        for(int j=0;i<5;i++)
+            {
+            clear_bitmap(DoubleB);
+            //clear_bitmap(Terrain);
+
+            blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
+
+            draw_sprite(DoubleB,Mouvement[i],x,y-incre);
+
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            incre = incre+13;
+            rest(100);
+            }
+            rest(100);
+            incre = 0;
+        }
+        Personnage.y = Personnage.y-65;
+}
+  
+void Amerigo_droite(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
+{
+    int x =0;
+    int y =0;
+
+
+    x = Personnage.x;
+    y = Personnage.y;
+
+    BITMAP * danseuse;
+
+    BITMAP*Mouvement[5];
+
+    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("Y1R.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("Y2R.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("Y3R.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("Y4R.bmp", NULL);
+    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    int incre = 0;
+    int i = 0;
+    int j = 0;
+    for (i=0;i<1;i++)
+        {
+        for(j=0;j<5;j++)
+            {
+            clear_bitmap(DoubleB);
+            //clear_bitmap(Terrain);
+
+            blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
+
+            draw_sprite(DoubleB,Mouvement[j],x+incre,y);
+
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            incre = incre+13;
+            rest(100);
+            }
+            rest(100);
+            incre = 0;
+            }
+        Personnage.x = Personnage.x + 65;
+}
+
+
+void Amerigo_gauche(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
+{
+    int x =0;
+    int y =0;
+
+    x = Personnage.x;
+    y = Personnage.y;
+
+    BITMAP * danseuse;
+
+    BITMAP*Mouvement[6];
+
+    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("Y1L.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("Y2L.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("Y3L.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("Y4L.bmp", NULL);
+    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse5;
+
+    int incre = 0;
+    int i = 0;
+    for (i=0;i<1;i++)
+        {
+        for(int j=0;i<5;i++)
+            {
+            clear_bitmap(DoubleB);
+            //clear_bitmap(Terrain);
+
+            blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
+
+            draw_sprite(DoubleB,Mouvement[i],x-incre,y);
+
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            incre = incre+13;
+            rest(100);
+            }
+            rest(100);
+            incre = 0;
+        }
+        Personnage.x = Personnage.x-65;
+}
+
+void Amerigo_bas(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
+{
+    int x =0;
+    int y =0;
+
+    x = Personnage.x;
+    y = Personnage.y;
+
+    BITMAP * danseuse;
+
+    BITMAP*Mouvement[6];
+
+    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("Y1.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("Y2.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("Y3.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("Y4.bmp", NULL);
+    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse5;
+
+    int incre = 0;
+    int i = 0;
+    for (i=0;i<1;i++)
+        {
+        for(int j=0;i<5;i++)
+            {
+            clear_bitmap(DoubleB);
+            //clear_bitmap(Terrain);
+
+            blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
+
+            draw_sprite(DoubleB,Mouvement[i],x,y+incre);
+
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            incre = incre+13;
+            rest(100);
+            }
+            rest(100);
+            incre = 0;
+        }
+        Personnage.y = Personnage.y+65;
+}
