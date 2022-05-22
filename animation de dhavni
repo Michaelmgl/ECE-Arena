@@ -40,7 +40,7 @@ int main()
 
 
 
-    if(mouse_x>=65 && mouse_x <=199 && mouse_y>=540 && mouse_y <=600)
+    if(mouse_x>=65 && mouse_x <=199 && mouse_y>=540 && mouse_y <=600)       /// fan slap
     {
     if (mouse_b&1)
     {
@@ -76,7 +76,7 @@ int main()
     }
     }
 
-    if(mouse_x>=200 && mouse_x <=334 && mouse_y>=540 && mouse_y <=600)
+    if(mouse_x>=200 && mouse_x <=334 && mouse_y>=540 && mouse_y <=600)      ///heavenly breath
     {
     if (mouse_b&1)
     {
@@ -154,7 +154,7 @@ int main()
 
     }
 
-    if(mouse_x>=335 && mouse_x <=469 && mouse_y>=540 && mouse_y <=600)
+    if(mouse_x>=335 && mouse_x <=469 && mouse_y>=540 && mouse_y <=600)   /// Meditation
     {
     if (mouse_b&1)
     {
@@ -217,7 +217,7 @@ int main()
     }
 
 
-     if(mouse_x>=470 && mouse_x <=604 && mouse_y>=540 && mouse_y <=600)
+     if(mouse_x>=470 && mouse_x <=604 && mouse_y>=540 && mouse_y <=600)    /// Dangling feet
     {
     if (mouse_b&1)
     {
@@ -256,7 +256,7 @@ int main()
     }
     }
 
-     if(mouse_x>=605 && mouse_x <=739 && mouse_y>=540 && mouse_y <=600)
+     if(mouse_x>=605 && mouse_x <=739 && mouse_y>=540 && mouse_y <=600)   ///Dance till the End
     {
     if (mouse_b&1)
     {
