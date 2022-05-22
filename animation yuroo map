@@ -40,7 +40,7 @@ int main()
 
 
 
-    if(mouse_x>=65 && mouse_x <=199 && mouse_y>=540 && mouse_y <=600)
+    if(mouse_x>=65 && mouse_x <=199 && mouse_y>=540 && mouse_y <=600)   /// Rochy punch
     {
     if (mouse_b&1)
     {
@@ -95,7 +95,7 @@ int main()
     }
     }
 
-    if(mouse_x>=200 && mouse_x <=334 && mouse_y>=540 && mouse_y <=600)
+    if(mouse_x>=200 && mouse_x <=334 && mouse_y>=540 && mouse_y <=600)   /// Rock smash
     {
     if (mouse_b&1)
     {
@@ -151,7 +151,7 @@ int main()
 
     }
 
-    if(mouse_x>=335 && mouse_x <=469 && mouse_y>=540 && mouse_y <=600)
+    if(mouse_x>=335 && mouse_x <=469 && mouse_y>=540 && mouse_y <=600)  /// Defensive crust
     {
     if (mouse_b&1)
     {
@@ -192,7 +192,7 @@ int main()
     }
 
 
-     if(mouse_x>=470 && mouse_x <=604 && mouse_y>=540 && mouse_y <=600)
+     if(mouse_x>=470 && mouse_x <=604 && mouse_y>=540 && mouse_y <=600)   /// Will of tge Earth
     {
     if (mouse_b&1)
     {
@@ -239,7 +239,7 @@ int main()
     }
     }
 
-     if(mouse_x>=605 && mouse_x <=739 && mouse_y>=540 && mouse_y <=600)
+     if(mouse_x>=605 && mouse_x <=739 && mouse_y>=540 && mouse_y <=600)   /// Atlas Smash
     {
     if (mouse_b&1)
     {
