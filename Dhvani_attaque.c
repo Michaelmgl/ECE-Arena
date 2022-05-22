@@ -5,6 +5,9 @@
 ///Meilleurs disposition de code actuelle Pour Dvhani
 
 
+///Meilleurs disposition de code actuelle Pour Dvhani
+
+
 void initialistionAllegro()
 {
     allegro_init();
@@ -142,16 +145,6 @@ void Dhvani_HB(t_perso Personnage, BITMAP * DoubleB)
 
             draw_sprite(DoubleB,Mouvement[i],x,y);
             }
-        for(i=8;i>8;i--)
-            {
-            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-
-            rest(100);
-
-            clear_bitmap(DoubleB);
-
-            draw_sprite(DoubleB,Mouvement[i],x,y);
-            }
             rest(100);
             }
 }
@@ -211,24 +204,34 @@ void Dhvani_DF(t_perso Personnage, BITMAP * DoubleB)
     x = Personnage.x;
     y = Personnage.y;
 
-    BITMAP*Mouvement[4];
+    BITMAP*Mouvement[3];
 
     BITMAP*danseuse1 = load_bitmap("DF1.bmp", NULL);
     BITMAP*danseuse2 = load_bitmap("DF2.bmp", NULL);
     BITMAP*danseuse3 = load_bitmap("DF3.bmp", NULL);
-    BITMAP*danseuse4 = load_bitmap("DF4.bmp", NULL);
+    //BITMAP*danseuse4 = load_bitmap("DF4.bmp", NULL);
 
     Mouvement[0]= danseuse1;
     Mouvement[1]= danseuse2;
     Mouvement[2]= danseuse3;
-    Mouvement[3]= danseuse4;
+    //Mouvement[3]= danseuse4;
 
     int j = 0;
     int s = 0;
 
         for (s=0;s<1;s++)
             {
-            for(j=0;j<4;j++)
+            for(j=0;j<3;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+            rest(100);
+
+            clear_bitmap(DoubleB);
+
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            for(j=3;j>=0;j--)
             {
             blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
@@ -282,7 +285,17 @@ void Dhvani_DTTE(t_perso Personnage, BITMAP * DoubleB)
 
             draw_sprite(DoubleB,Mouvement[j],x,y);
             }
+            for(j=6;j>=0;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
             rest(100);
+
+            clear_bitmap(DoubleB);
+
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            rest(100);
+            }
             }
 }
 
@@ -302,7 +315,7 @@ int main()
     install_mouse();
 
     //declaration de variables
-    BITMAP * danseuse;
+    BITMAP * Mage;
     BITMAP * DoubleB;
     DoubleB =  create_bitmap(SCREEN_W,SCREEN_H);
 
@@ -322,8 +335,8 @@ int main()
     blit(DoubleB, screen, 0,0,0,0, DoubleB->w, DoubleB->h);            //présents dans ces deux lignes de codes à chaque fois, je suppose qu'il faudra alors les remplacer
    */
 
-    danseuse = load_bitmap("Y0.bmp", NULL);
-    if(!danseuse)
+    Mage = load_bitmap("Y0.bmp", NULL);
+    if(!Mage)
     {
         allegro_message("Problemo");
         allegro_exit();
@@ -331,28 +344,66 @@ int main()
     }                                 //par les coordonnées de chaque perso, d'où la nécessité de d'abord mettre à jour les coordonnées
     show_mouse(screen);
 
+    t_perso Amerigo;
+
+    Amerigo.x=500;
+    Amerigo.y=400;
+
     while(!key[KEY_ESC])                                               // avant de commencer à animer
     {
     //Yoru_base(x,y,DoubleB,Soldat);
 
     clear_bitmap(DoubleB);
 
-    if (key[KEY_RIGHT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=605 && mouse_x <=739 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-      //  Yoru_droite(&x,y,DoubleB,Soldat);
+            if (mouse_b&1)
+            {
+
+        Dhvani_DTTE(Amerigo,DoubleB);
+        }
     }
-    if (key[KEY_LEFT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=470 && mouse_x <=604 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-      //  Yoru_gauche(&x,y,DoubleB,Soldat);
+            if (mouse_b&1)
+                {
+      Dhvani_DF(Amerigo,DoubleB);
+      }
     }
-    if (key[KEY_UP])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=335 && mouse_x <=469 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-       // Yoru_haut(x,&y,DoubleB,Soldat);
+
+            if (mouse_b&1)
+
+                {
+     Dhvani_M(Amerigo,DoubleB);
+      }
     }
-    if (key[KEY_DOWN])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=65 && mouse_x <=199 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-       // Yoru_bas(x,&y,DoubleB,Soldat);
+
+            if (mouse_b&1)
+
+                {
+      Dhvani_FS(Amerigo,DoubleB);
+
+
+      }
     }
+
+     if(mouse_x>=200 && mouse_x <=334 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    {
+
+
+            if (mouse_b&1)
+
+                {
+      Dhvani_HB(Amerigo,DoubleB);
+
+
+      }
+    }
+
     }
 
     printf("FIN!\n");
