@@ -5,6 +5,10 @@
 ///Meilleurs disposition de code actuelle Pour Blast
 
 
+
+///Meilleurs disposition de code actuelle Pour Blast
+
+
 void initialistionAllegro()
 {
     allegro_init();
@@ -56,16 +60,23 @@ void Blast_AB(t_perso Personnage, BITMAP * DoubleB)
 
     BITMAP*danseuse1 = load_bitmap("B0.bmp", NULL);
     BITMAP*danseuse2 = load_bitmap("B1.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("B0.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("B1.bmp", NULL);
+
 
     Mouvement[0]= danseuse1;
     Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+
 
     int i = 0;
     int s = 0;
+    int j=0;
 
     for (s=0;s<1;s++)
             {
-            for(j=0;j<2;j++)
+            for(j=0;j<4;j++)
             {
             blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
@@ -75,17 +86,7 @@ void Blast_AB(t_perso Personnage, BITMAP * DoubleB)
 
             draw_sprite(DoubleB,Mouvement[j],x,y);
             }
-            for(j=2;j=>0;j++)
-            {
-            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
-            rest(100);
-
-            clear_bitmap(DoubleB);
-
-            draw_sprite(DoubleB,Mouvement[j],x,y);
-            }
-            rest(100);
 
             }
 }
@@ -125,17 +126,7 @@ void Blast_IE(t_perso Personnage, BITMAP * DoubleB)
 
             draw_sprite(DoubleB,Mouvement[j],x,y);
             }
-            for(j=4;j=>0;j++)
-            {
-            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
-            rest(100);
-
-            clear_bitmap(DoubleB);
-
-            draw_sprite(DoubleB,Mouvement[j],x,y);
-            }
-            rest(100);
         }
 }
 ///Doom
@@ -231,7 +222,7 @@ void Blast_B(t_perso Personnage, BITMAP * DoubleB)
     x = Personnage.x;
     y = Personnage.y;
 
-    BITMAP*Mouvement[9];
+    BITMAP*Mouvement[8];
 
     BITMAP*danseuse1 = load_bitmap("B0.bmp", NULL);
     BITMAP*danseuse2 = load_bitmap("B10.bmp", NULL);
@@ -241,7 +232,7 @@ void Blast_B(t_perso Personnage, BITMAP * DoubleB)
     BITMAP*danseuse6 = load_bitmap("B14.bmp", NULL);
     BITMAP*danseuse7 = load_bitmap("B15.bmp", NULL);
     BITMAP*danseuse8 = load_bitmap("B16.bmp", NULL);
-    BITMAP*danseuse9 = load_bitmap("B17.bmp", NULL);
+    //BITMAP*danseuse9 = load_bitmap("B17.bmp", NULL);
 
     Mouvement[0]= danseuse1;
     Mouvement[1]= danseuse2;
@@ -251,13 +242,13 @@ void Blast_B(t_perso Personnage, BITMAP * DoubleB)
     Mouvement[5]= danseuse6;
     Mouvement[6]= danseuse7;
     Mouvement[7]= danseuse8;
-    Mouvement[8]= danseuse9;
+    //Mouvement[8]= danseuse9;
 
-    int j =0
+    int j =0;
     int s = 0;
      for (s=0;s<1;s++)
             {
-           for(j=0;j<9;j++)
+           for(j=0;j<8;j++)
             {
             blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
@@ -299,6 +290,11 @@ int main()
     install_keyboard();
     install_mouse();
 
+    t_perso Blast;
+
+    Blast.x = 100;
+    Blast.y = 400;
+
 
    /*//chargement de l'image
     danseuse = load_bitmap("Y0.bmp",NULL); //"posturebase" c'est juste le nom de mon sprite de base
@@ -322,21 +318,43 @@ int main()
 
     clear_bitmap(DoubleB);
 
-    if (key[KEY_RIGHT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=65 && mouse_x <=199 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-     //   Yoru_droite(&x,y,DoubleB,Soldat);
+         if (mouse_b&1)
+         {
+              Blast_AB(Blast,DoubleB);
+         }
+
     }
-    if (key[KEY_LEFT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=200 && mouse_x <=334 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-       // Yoru_gauche(&x,y,DoubleB,Soldat);
+        if (mouse_b&1)
+         {
+              Blast_IE(Blast,DoubleB);
+         }
     }
-    if (key[KEY_UP])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=335 && mouse_x <=469 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-        //Yoru_haut(x,&y,DoubleB,Soldat);
+         if (mouse_b&1)
+         {
+              Blast_D(Blast,DoubleB);
+         }
     }
-    if (key[KEY_DOWN])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=470 && mouse_x <=604 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-        //Yoru_bas(x,&y,DoubleB,Soldat);
+      if (mouse_b&1)
+         {
+              Blast_BIH(Blast,DoubleB);
+         }
+    }
+
+
+        if (mouse_x>=605 && mouse_x <=739 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    {
+      if (mouse_b&1)
+         {
+              Blast_B(Blast,DoubleB);
+         }
     }
     }
 
