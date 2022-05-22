@@ -44,7 +44,7 @@ void Yoru_haut(int x,int *y, BITMAP * DoubleB,BITMAP * danseuse)
             danseuse = load_bitmap("Y0U.bmp", NULL);
 
             masked_blit(danseuse,DoubleB,0,0,x,*y,danseuse->w,danseuse->h);
-            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisé avec blit(), masked_blit() étant la fonction qui enlève le magenta
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisÃ© avec blit(), masked_blit() Ã©tant la fonction qui enlÃ¨ve le magenta
             rest(100);
             danseuse = load_bitmap("Y1U.bmp", NULL);
             clear_bitmap(DoubleB);
@@ -91,7 +91,7 @@ void Yoru_droite(int* x,int y,BITMAP * DoubleB,BITMAP * danseuse)
             danseuse = load_bitmap("Y0.bmp", NULL);
 
             masked_blit(danseuse,DoubleB,0,0,*x,y,danseuse->w,danseuse->h);
-            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisé avec blit(), masked_blit() étant la fonction qui enlève le magenta
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisÃ© avec blit(), masked_blit() Ã©tant la fonction qui enlÃ¨ve le magenta
             rest(100);
             danseuse = load_bitmap("Y1R.bmp", NULL);
             clear_bitmap(DoubleB);
@@ -139,7 +139,7 @@ void Yoru_gauche(int* x,int y,BITMAP* DoubleB,BITMAP* danseuse)
             danseuse = load_bitmap("Y0.bmp", NULL);
 
             masked_blit(danseuse,DoubleB,0,0,*x,y,danseuse->w,danseuse->h);
-            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisé avec blit(), masked_blit() étant la fonction qui enlève le magenta
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisÃ© avec blit(), masked_blit() Ã©tant la fonction qui enlÃ¨ve le magenta
             rest(100);
             danseuse = load_bitmap("Y1L.bmp", NULL);
             clear_bitmap(DoubleB);
@@ -188,7 +188,7 @@ void Yoru_bas(int x, int *y, BITMAP* DoubleB,BITMAP* danseuse)
 
 
             masked_blit(danseuse,DoubleB,0,0,x,*y,danseuse->w,danseuse->h);
-            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisé avec blit(), masked_blit() étant la fonction qui enlève le magenta
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);            //sera utilisÃ© avec blit(), masked_blit() Ã©tant la fonction qui enlÃ¨ve le magenta
             rest(100);
             danseuse = load_bitmap("Y1.bmp", NULL);
             clear_bitmap(DoubleB);
@@ -262,9 +262,9 @@ int main()
 
    /*//chargement de l'image
     danseuse = load_bitmap("Y0.bmp",NULL); //"posturebase" c'est juste le nom de mon sprite de base
-    DoubleB = create_bitmap(SCREEN_W, SCREEN_H);// ne plus écrire 800 et 600
-    masked_blit(danseuse, DoubleB, 0,0,x,y, danseuse->w, danseuse->h); //pour pouvoir déplacer le sprite en même temps que l'animation il va falloir jouer avec les 0
-    blit(DoubleB, screen, 0,0,0,0, DoubleB->w, DoubleB->h);            //présents dans ces deux lignes de codes à chaque fois, je suppose qu'il faudra alors les remplacer
+    DoubleB = create_bitmap(SCREEN_W, SCREEN_H);// ne plus Ã©crire 800 et 600
+    masked_blit(danseuse, DoubleB, 0,0,x,y, danseuse->w, danseuse->h); //pour pouvoir dÃ©placer le sprite en mÃªme temps que l'animation il va falloir jouer avec les 0
+    blit(DoubleB, screen, 0,0,0,0, DoubleB->w, DoubleB->h);            //prÃ©sents dans ces deux lignes de codes Ã  chaque fois, je suppose qu'il faudra alors les remplacer
    */
 
     Soldat = load_bitmap("Y0.bmp", NULL);
@@ -273,28 +273,28 @@ int main()
         allegro_message("Problemo");
         allegro_exit();
         exit(EXIT_FAILURE);
-    }                                 //par les coordonnées de chaque perso, d'où la nécessité de d'abord mettre à jour les coordonnées
+    }                                 //par les coordonnÃ©es de chaque perso, d'oÃ¹ la nÃ©cessitÃ© de d'abord mettre Ã  jour les coordonnÃ©es
     show_mouse(screen);
 
-    while(!key[KEY_ESC])                                               // avant de commencer à animer
+    while(!key[KEY_ESC])                                               // avant de commencer Ã  animer
     {
     Yoru_base(x,y,DoubleB,Soldat);
 
     clear_bitmap(DoubleB);
 
-    if (key[KEY_RIGHT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (key[KEY_RIGHT])  //la condtion de cette boucle est0 arbitraire, Ã©videmment on changera en fonction des besoins mais ce ne sera jamais cette condition spÃ©cifique en jeu
     {
         Yoru_droite(&x,y,DoubleB,Soldat);
     }
-    if (key[KEY_LEFT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (key[KEY_LEFT])  //la condtion de cette boucle est0 arbitraire, Ã©videmment on changera en fonction des besoins mais ce ne sera jamais cette condition spÃ©cifique en jeu
     {
         Yoru_gauche(&x,y,DoubleB,Soldat);
     }
-    if (key[KEY_UP])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (key[KEY_UP])  //la condtion de cette boucle est0 arbitraire, Ã©videmment on changera en fonction des besoins mais ce ne sera jamais cette condition spÃ©cifique en jeu
     {
         Yoru_haut(x,&y,DoubleB,Soldat);
     }
-    if (key[KEY_DOWN])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (key[KEY_DOWN])  //la condtion de cette boucle est0 arbitraire, Ã©videmment on changera en fonction des besoins mais ce ne sera jamais cette condition spÃ©cifique en jeu
     {
         Yoru_bas(x,&y,DoubleB,Soldat);
     }
