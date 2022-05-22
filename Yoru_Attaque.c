@@ -6,6 +6,10 @@
 ///Meilleurs disposition de code actuelle
 
 
+
+///Meilleurs disposition de code actuelle
+
+
 void initialistionAllegro()
 {
     allegro_init();
@@ -253,22 +257,22 @@ void Yoru_AS(t_perso Personnage, BITMAP * DoubleB)
     y = Personnage.y;
 
 
-    BITMAP*Mouvement[5];
+    BITMAP*Mouvement[13];
 
     BITMAP*danseuse1 = load_bitmap("j1.bmp", NULL);
     BITMAP*danseuse2 = load_bitmap("j2.bmp", NULL);
-    BITMAP*danseuse3 = load_bitmap("j3.bmp", NULL);
-    BITMAP*danseuse4 = load_bitmap("j4.bmp", NULL);
-    BITMAP*danseuse5 = load_bitmap("j5.bmp", NULL);
-    BITMAP*danseuse6 = load_bitmap("j6.bmp", NULL);
-    BITMAP*danseuse7 = load_bitmap("j7.bmp", NULL);
-    BITMAP*danseuse8 = load_bitmap("j8.bmp", NULL);
-    BITMAP*danseuse9 = load_bitmap("j9.bmp", NULL);
-    BITMAP*danseuse10 = load_bitmap("j10.bmp", NULL);
-    BITMAP*danseuse11 = load_bitmap("A11.bmp", NULL);
-    BITMAP*danseuse12 = load_bitmap("A12.bmp", NULL);
-    BITMAP*danseuse13 = load_bitmap("A13.bmp", NULL);
-    BITMAP*danseuse14 = load_bitmap("A14.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("j4.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("J5.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("J6.bmp", NULL);
+    BITMAP*danseuse6 = load_bitmap("j7.bmp", NULL);
+    BITMAP*danseuse7 = load_bitmap("j8.bmp", NULL);
+    BITMAP*danseuse8 = load_bitmap("j9.bmp", NULL);
+    BITMAP*danseuse9 = load_bitmap("j10.bmp", NULL);
+    BITMAP*danseuse10 = load_bitmap("j11.bmp", NULL);
+    BITMAP*danseuse11 = load_bitmap("j12.bmp", NULL);
+    BITMAP*danseuse12 = load_bitmap("j13.bmp", NULL);
+    BITMAP*danseuse13 = load_bitmap("J14.bmp", NULL);
+
 
 
     Mouvement[0]= danseuse1;
@@ -284,7 +288,7 @@ void Yoru_AS(t_perso Personnage, BITMAP * DoubleB)
     Mouvement[10]= danseuse11;
     Mouvement[11]= danseuse12;
     Mouvement[12]= danseuse13;
-    Mouvement[13]= danseuse14;
+
 
     int j = 0;
 
@@ -292,7 +296,7 @@ void Yoru_AS(t_perso Personnage, BITMAP * DoubleB)
 
      for (s=0;s<1;s++)
             {
-            for(j=0;j<14;j++)
+            for(j=0;j<13;j++)
             {
             blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
@@ -365,22 +369,43 @@ int main()
 
     Yoru_base(Yoru.x,Yoru.y,DoubleB,Soldat);
 
-    if (key[KEY_RIGHT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=65 && mouse_x <=199 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-        Yoru_RP(Yoru,DoubleB);//,screen
+        if (mouse_b&1)
+        {
+       Yoru_RP(Yoru,DoubleB);//,screen
+        }
+
     }
-    if (key[KEY_LEFT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=200 && mouse_x <=334 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
+        if (mouse_b&1)
+        {
         Yoru_RS(Yoru,DoubleB);
+        }
     }
-    if (key[KEY_UP])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=605 && mouse_x <=739 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-        Yoru_AS(Yoru,DoubleB);
+        if (mouse_b&1)
+        {
+        Yoru_AS(Yoru,DoubleB);}
     }
-    if (key[KEY_DOWN])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=470 && mouse_x <=604 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
+        if (mouse_b&1)
+        {
         Yoru_WOTE(Yoru,DoubleB);
+        }
     }
+
+    if (mouse_x>=335 && mouse_x <=469 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    {
+        if (mouse_b&1)
+        {
+        Yoru_DC(Yoru,DoubleB);
+        }
+    }
+
 
     blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
