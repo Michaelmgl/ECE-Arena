@@ -1,0 +1,68 @@
+
+void Timer(t_perso Personnage, BITMAP * DoubleB)
+{
+    int x =0;
+    int y =0;
+
+    x = Personnage.x;
+    y = Personnage.y;
+
+    BITMAP*Mouvement[2];
+
+    BITMAP*danseuse1 = load_bitmap("01.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("02.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("03.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("04.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("05.bmp", NULL);
+    BITMAP*danseuse6 = load_bitmap("06.bmp", NULL);
+    BITMAP*danseuse7 = load_bitmap("07.bmp", NULL);
+    BITMAP*danseuse8 = load_bitmap("08.bmp", NULL);
+    BITMAP*danseuse9 = load_bitmap("09.bmp", NULL);
+    BITMAP*danseuse10 = load_bitmap("10.bmp", NULL);
+    BITMAP*danseuse11 = load_bitmap("11.bmp", NULL);
+    BITMAP*danseuse12 = load_bitmap("12.bmp", NULL);
+    BITMAP*danseuse13 = load_bitmap("13.bmp", NULL);
+    BITMAP*danseuse14 = load_bitmap("14.bmp", NULL);
+    BITMAP*danseuse15 = load_bitmap("15.bmp", NULL);
+
+
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+     Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse6;
+    Mouvement[6]= danseuse7;
+    Mouvement[7]= danseuse8;
+     Mouvement[8]= danseuse9;
+    Mouvement[9]= danseuse10;
+    Mouvement[10]= danseuse11;
+    Mouvement[11]= danseuse12;
+     Mouvement[12]= danseuse13;
+    Mouvement[13]= danseuse14;
+    Mouvement[14]= danseuse15;
+
+
+
+    int i = 0;
+    int s = 0;
+    int j=0;
+
+    for (s=0;s<1;s++)
+            {
+            for(j=0;j<4;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+            rest(100);
+
+            clear_bitmap(DoubleB);
+
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+
+
+            }
+}
+}
