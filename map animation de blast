@@ -40,7 +40,7 @@ int main()
 
 
 
-    if(mouse_x>=65 && mouse_x <=199 && mouse_y>=540 && mouse_y <=600)
+    if(mouse_x>=65 && mouse_x <=199 && mouse_y>=540 && mouse_y <=600)  /// Axe blow
     {
     if (mouse_b&1)
     {
@@ -71,7 +71,7 @@ int main()
     }
     }
 
-    if(mouse_x>=200 && mouse_x <=334 && mouse_y>=540 && mouse_y <=600)
+    if(mouse_x>=200 && mouse_x <=334 && mouse_y>=540 && mouse_y <=600) /// Ice eyes 
     {
     if (mouse_b&1)
     {
@@ -127,7 +127,7 @@ int main()
 
     }
 
-    if(mouse_x>=335 && mouse_x <=469 && mouse_y>=540 && mouse_y <=600)
+    if(mouse_x>=335 && mouse_x <=469 && mouse_y>=540 && mouse_y <=600)   /// Doom
     {
     if (mouse_b&1)
     {
@@ -187,7 +187,7 @@ int main()
     }
 
 
-     if(mouse_x>=470 && mouse_x <=604 && mouse_y>=540 && mouse_y <=600)
+     if(mouse_x>=470 && mouse_x <=604 && mouse_y>=540 && mouse_y <=600)  /// Born in hell
     {
     if (mouse_b&1)
     {
@@ -234,7 +234,7 @@ int main()
     }
     }
 
-     if(mouse_x>=605 && mouse_x <=739 && mouse_y>=540 && mouse_y <=600)
+     if(mouse_x>=605 && mouse_x <=739 && mouse_y>=540 && mouse_y <=600)  /// Blizzard
     {
     if (mouse_b&1)
     {
