@@ -1,0 +1,560 @@
+///Attaques simples de chaque personnage///
+
+//Attaque simple de Blast aka la brute de l'eau//
+int AxeBlow(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    int coupCritique =0;
+    damage = tab[attaquant].ptsatt;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        if(tab[attaquant].boostcrit == 1)
+        {
+            coupCritique = rand()%6;
+            if (coupCritique == 3)
+            {
+                damage = damage * 1.2;
+            }
+        }
+        else if (tab[attaquant].boostcrit == 0)
+        {
+            coupCritique = rand()%12;
+            if (coupCritique == 6)
+            {
+            damage = damage * 1.2;
+            }
+            tab[cible].ptsvie = tab[cible].ptsvie - damage;
+        }
+        else
+        {
+            damage = 0;
+        }
+    }
+    return damage;
+}
+//Attaque simple de Yorou aka le soldat de la terre//
+int RockyPunch(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    int coupCritique = 0;
+    damage = tab[attaquant].ptsatt;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        if(tab[attaquant].boostcrit == 1)
+        {
+            coupCritique = rand()%6;
+            if (coupCritique == 3)
+            {
+                damage = damage * 1.2;
+            }
+        }
+        else if (tab[attaquant].boostcrit == 0)
+        {
+            coupCritique = rand()%12;
+            if (coupCritique == 6)
+            {
+            damage = damage * 1.2;
+            }
+            tab[cible].ptsvie = tab[cible].ptsvie - damage;
+        }
+        else
+        {
+            damage = 0;
+        }
+    }
+    return damage;
+}
+//Attaque simple de Amerigo aka le mage de feu//
+int StaffHit(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    int coupCritique = 0;
+    damage = tab[attaquant].ptsatt;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        if(tab[attaquant].boostcrit == 1)
+        {
+            coupCritique = rand()%6;
+            if (coupCritique == 3)
+            {
+                damage = damage * 1.2;
+            }
+        }
+        else if (tab[attaquant].boostcrit == 0)
+        {
+            coupCritique = rand()%12;
+            if (coupCritique == 6)
+            {
+            damage = damage * 1.2;
+            }
+            tab[cible].ptsvie = tab[cible].ptsvie - damage;
+        }
+        else
+        {
+            damage = 0;
+        }
+    }
+    return 0;
+}
+//Attaque simple de Dhvani aka la danseuse de l'air//
+int FanSlap(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    int coupCritique = 0;
+    damage = tab[attaquant].ptsatt;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        if(tab[attaquant].boostcrit == 1)
+        {
+            coupCritique = rand()%6;
+            if (coupCritique == 3)
+            {
+                damage = damage * 1.2;
+            }
+        }
+        else if (tab[attaquant].boostcrit == 0)
+        {
+            coupCritique = rand()%12;
+            if (coupCritique == 6)
+            {
+            damage = damage * 1.2;
+            }
+            tab[cible].ptsvie = tab[cible].ptsvie - damage;
+        }
+        else
+        {
+            damage = 0;
+        }
+    }
+    return damage;
+}
+
+
+///Attaques de sort///
+///Attaques de sort de Blast aka la brute de l'eau///
+//Doom//
+void Doom(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant)
+{
+    tab[attaquant].boostdef = tab[attaquant].boostdef + 300;
+    tab[attaquant].ptsdef = tab[attaquant].ptsdef + tab[attaquant].boostdef;
+    tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+    //le boost ne dure que pendant 1 tour (à coder)
+}
+
+//Born in hell//
+void BornInHell(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant)
+{
+    tab[attaquant].boostcrit = 1;
+    tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+    //le boost doit durer 3 tours
+}
+
+//Ice eyes
+int IceEyes(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    int coupCritique = 0;
+    damage = tab[attaquant].ptsmagie;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        if(tab[attaquant].boostcrit == 1)
+        {
+            coupCritique = rand()%6;
+            if (coupCritique == 3)
+            {
+                damage = damage * 1.2;
+            }
+        }
+        else if (tab[attaquant].boostcrit == 0)
+        {
+            coupCritique = rand()%12;
+            if (coupCritique == 6)
+            {
+            damage = damage * 1.2;
+            }
+            tab[cible].ptsvie = tab[cible].ptsvie - damage;
+        }
+    }
+    else
+    {
+        damage = 0;
+    }
+    tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+    return damage;
+
+}
+//Attaque ultime//
+//Blizzard//
+int Blizzard(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    int coupCritique = 0;
+    damage = 750;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        if(tab[attaquant].boostcrit == 1)
+        {
+            coupCritique = rand()%6;
+            if (coupCritique == 3)
+            {
+                damage = damage * 1.2;
+            }
+        }
+        else if (tab[attaquant].boostcrit == 0)
+        {
+            coupCritique = rand()%12;
+            if (coupCritique == 6)
+            {
+            damage = damage * 1.2;
+            }
+            tab[cible].ptsvie = tab[cible].ptsvie - damage;
+        }
+    }
+    else
+    {
+        damage = 0;
+    }
+    tab[cible].boostmouv = -1;
+    tab[cible].ptsmouv = tab[cible].ptsmouv - tab[cible].boostmouv;
+    tab[attaquant].recharge = 0;
+    return damage;
+}
+///attaques de sort de Yorou aka le soldatt de terre///
+//Rock Smash//
+int RockSmash(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    int coupCritique = 0;
+    damage = tab[attaquant].ptsmagie;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        if(tab[attaquant].boostcrit == 1)
+        {
+            coupCritique = rand()%6;
+            if (coupCritique == 3)
+            {
+                damage = damage * 1.2;
+            }
+        }
+        else if (tab[attaquant].boostcrit == 0)
+        {
+            coupCritique = rand()%12;
+            if (coupCritique == 6)
+            {
+            damage = damage * 1.2;
+            }
+            tab[cible].ptsvie = tab[cible].ptsvie - damage;
+        }
+    }
+    else
+    {
+        damage = 0;
+    }
+    tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+    return damage;
+}
+
+//Defensive Crust//
+void DefensiveCrust(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant)
+{
+    tab[attaquant].boostdef = 100;
+    tab[attaquant].ptsdef = tab[attaquant].ptsdef + tab[attaquant].boostdef;
+    tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+    //le boost est présent pour 2 tours
+}
+
+//Will of the earth//
+void WillOfTheEarth(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant)
+{
+    tab[attaquant].boostatt = 100;
+    tab[attaquant].ptsatt = tab[attaquant].ptsatt + tab[attaquant].boostatt;
+    tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+}
+
+//Attaque ultime
+//Atlas Smash//
+int AtlasSmash(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    int coupCritique = 0;
+    damage = 700;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        if(tab[attaquant].boostcrit == 1)
+        {
+            coupCritique = rand()%6;
+            if (coupCritique == 3)
+            {
+                damage = damage * 1.2;
+            }
+        }
+        else if (tab[attaquant].boostcrit == 0)
+        {
+            coupCritique = rand()%12;
+            if (coupCritique == 6)
+            {
+            damage = damage * 1.2;
+            }
+            tab[cible].ptsvie = tab[cible].ptsvie - damage;
+        }
+    }
+    else
+    {
+        damage = 0;
+    }
+    tab[attaquant].recharge = 0;
+    tab[cible].boostdef = 100;
+    tab[cible].ptsdef = tab[cible].ptsdef - tab[cible].boostdef;
+    return damage;
+}
+///Attaques de sort de Amerigo aka le mage de feu///
+//Burning Spray//
+int BurningSpray(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    int coupCritique = 0;
+    damage = tab[attaquant].ptsmagie;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        if(tab[attaquant].boostcrit == 1)
+        {
+            coupCritique = rand()%6;
+            if (coupCritique == 3)
+            {
+                damage = damage * 1.2;
+            }
+        }
+        else if (tab[attaquant].boostcrit == 0)
+        {
+            coupCritique = rand()%12;
+            if (coupCritique == 6)
+            {
+            damage = damage * 1.2;
+            }
+            tab[cible].ptsvie = tab[cible].ptsvie - damage;
+        }
+    }
+    else
+    {
+        damage = 0;
+    }
+    tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+    return damage;
+}
+
+//Fire Screw//
+void FireScrew(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible)
+{
+    int baisseDeStat = 0;
+    baisseDeStat = rand()%2;
+    if(baisseDeStat == 0)
+    {
+        tab[cible].boostdef = -200;
+        tab[cible].ptsdef = tab[cible].ptsdef + tab[cible].boostdef;
+        tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+    }
+    else if (baisseDeStat == 1)
+    {
+        tab[cible].boostatt = -200;
+        tab[cible].ptsatt = tab[cible].ptsatt + tab[cible].boostatt;
+        tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+    }
+    else if (baisseDeStat == 2)
+    {
+        tab[cible].boostmag = -200;
+        tab[cible].ptsmagie = tab[cible].ptsmagie + tab[cible].boostmag;
+        tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+    }
+}
+
+//Double flamethrower
+int DoubleFlamethrower(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    int coupCritique = 0;
+    int burnChance = 0;
+    damage = tab[attaquant].ptsmagie;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        if(tab[attaquant].boostcrit == 1)
+        {
+            coupCritique = rand()%6;
+            if (coupCritique == 3)
+            {
+                damage = damage * 1.2;
+            }
+        }
+        else if (tab[attaquant].boostcrit == 0)
+        {
+            coupCritique = rand()%12;
+            if (coupCritique == 6)
+            {
+            damage = damage * 1.2;
+            }
+            tab[cible].ptsvie = tab[cible].ptsvie - damage;
+        }
+    }
+    else
+    {
+        damage = 0;
+    }
+    burnChance = rand()%12;
+    if (burnChance == 6)
+    {
+        tab[cible].brulure = 1;
+    }
+    tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+    return damage;
+}
+//Attaque ultime
+//Devil burst
+int DevilBurst(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    int coupCritique = 0;
+    damage = 800;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        if(tab[attaquant].boostcrit == 1)
+        {
+            coupCritique = rand()%6;
+            if (coupCritique == 3)
+            {
+                damage = damage * 1.2;
+            }
+        }
+        else if (tab[attaquant].boostcrit == 0)
+        {
+            coupCritique = rand()%12;
+            if (coupCritique == 6)
+            {
+            damage = damage * 1.2;
+            }
+            tab[cible].ptsvie = tab[cible].ptsvie - damage;
+        }
+    }
+    else
+    {
+        damage = 0;
+    }
+    tab[attaquant].boostatt = 200;
+    tab[attaquant].ptsatt = tab[attaquant].ptsatt + tab[attaquant].boostatt;
+    tab[attaquant].recharge = 0;
+
+    return damage;
+}
+///Attaques de sort de Dhvani aka la danseuse de l'air///
+//Pre-Performance Meditation
+void PrePerformanceMeditation(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant)
+{
+    int defOuAtt = 0;
+    defOuAtt = rand()%1;
+    if (defOuAtt == 0)
+    {
+        tab[attaquant].boostdef = 200;
+    }
+    else if (defOuAtt == 1)
+    {
+        tab[attaquant].boostatt = 200;
+    }
+    tab[attaquant].ptsatt = tab[attaquant].ptsatt + tab[attaquant].boostatt;
+    tab[attaquant].ptsdef = tab[attaquant].ptsdef + tab[attaquant].boostdef;
+    tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+    //les boosts doivent durer 2 tours
+}
+
+//Dangling feet
+void DanglingFeet(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant)
+{
+    tab[attaquant].boostcrit = 1;
+    tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+    //le boost doit durer 5 tours
+}
+//Heavenly breath//
+int HeavenlyBreath(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    int coupCritique = 0;
+    damage = tab[attaquant].ptsmagie;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        if(tab[attaquant].boostcrit == 1)
+        {
+            coupCritique = rand()%6;
+            if (coupCritique == 3)
+            {
+                damage = damage * 1.2;
+            }
+        }
+        else if (tab[attaquant].boostcrit == 0)
+        {
+            coupCritique = rand()%12;
+            if (coupCritique == 6)
+            {
+            damage = damage * 1.2;
+            }
+            tab[cible].ptsvie = tab[cible].ptsvie - damage;
+        }
+    }
+    else
+    {
+        damage = 0;
+    }
+    tab[attaquant].jaugemagie = tab[attaquant].jaugemagie - tab[attaquant].ptsmagie;
+    tab[cible].boostdef = -200;
+    tab[cible].ptsdef = tab[cible].ptsdef + tab[cible].boostdef;
+    //le malus doit durer 2 tours
+    return damage;
+
+}
+
+//Attaque ultime
+//Dance till the end
+int DanceTillTheEnd(t_perso tab[NBR_MAX_DE_JOUEURS], int attaquant, int cible, int damage)
+{
+    int coupCritique = 0;
+    damage = 820;
+    damage = verifElement(tab, attaquant, cible, damage);
+    damage = damage - tab[cible].ptsdef;
+    if (damage > 0)
+    {
+        if(tab[attaquant].boostcrit == 1)
+        {
+            coupCritique = rand()%6;
+            if (coupCritique == 3)
+            {
+                damage = damage * 1.2;
+            }
+        }
+        else if (tab[attaquant].boostcrit == 0)
+        {
+            coupCritique = rand()%12;
+            if (coupCritique == 6)
+            {
+            damage = damage * 1.2;
+            }
+            tab[cible].ptsvie = tab[cible].ptsvie - damage;
+        }
+    }
+    else
+    {
+        damage = 0;
+    }
+    tab[attaquant].recharge = 0;
+    tab[attaquant].boostmouv = 1;
+    tab[attaquant].ptsmouv = tab[attaquant].ptsmouv + tab[attaquant].boostmouv;
+    //le boost ne dure que jusqu'au prochain tour inclus
+    return damage;
+}
