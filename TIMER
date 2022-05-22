@@ -1,13 +1,7 @@
 
-void Timer(t_perso Personnage, BITMAP * DoubleB)
+void Timer(BITMAP * DoubleB)
 {
-    int x =0;
-    int y =0;
-
-    x = Personnage.x;
-    y = Personnage.y;
-
-    BITMAP*Mouvement[2];
+    BITMAP*Mouvement[15];
 
     BITMAP*danseuse1 = load_bitmap("01.bmp", NULL);
     BITMAP*danseuse2 = load_bitmap("02.bmp", NULL);
@@ -51,7 +45,7 @@ void Timer(t_perso Personnage, BITMAP * DoubleB)
 
     for (s=0;s<1;s++)
             {
-            for(j=0;j<4;j++)
+            for(j=0;j<15;j++)
             {
             blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
@@ -60,8 +54,9 @@ void Timer(t_perso Personnage, BITMAP * DoubleB)
             clear_bitmap(DoubleB);
 
             draw_sprite(DoubleB,Mouvement[j],x,y);
+            
             }
-
+            rest(1000);
 
             }
 }
