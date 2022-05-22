@@ -43,301 +43,231 @@ typedef struct Perso{
     float y;
 }t_perso;
 
-void Blast_base(int x, int y, BITMAP* DoubleB,BITMAP * danseuse)
-{
-    danseuse = load_bitmap("D0.bmp", NULL);
-    if(!danseuse)
-    {
-        allegro_message("Problemo");
-        allegro_exit();
-        exit(EXIT_FAILURE);
-    }
-    masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-    //blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-    //blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-}
-
 ///Axe Blow
-void Blast_AB(t_perso Personnage, BITMAP * DoubleB,BITMAP * danseuse,BITMAP* Terrain)
+void Blast_AB(t_perso Personnage, BITMAP * DoubleB)
 {
     int x =0;
     int y =0;
 
     x = Personnage.x;
-    y = Personnage.y +55;
+    y = Personnage.y;
 
+    BITMAP*Mouvement[2];
+
+    BITMAP*danseuse1 = load_bitmap("B0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("B1.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+
+    int i = 0;
     int s = 0;
+
     for (s=0;s<1;s++)
             {
+            for(j=0;j<2;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B0.bmp", NULL);
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            rest(100);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B1.bmp", NULL);
+            clear_bitmap(DoubleB);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            for(j=2;j=>0;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
+            rest(100);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B0.bmp", NULL);
+            clear_bitmap(DoubleB);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100);
 
             }
 }
 
 ///Ice Eyes
-void Blast_IE(t_perso Personnage, BITMAP * DoubleB,BITMAP * danseuse,BITMAP* Terrain)
+void Blast_IE(t_perso Personnage, BITMAP * DoubleB)
 {
     int x =0;
     int y =0;
 
     x = Personnage.x;
-    y = Personnage.y +55;
+    y = Personnage.y;
+
+    BITMAP*Mouvement[4];
+
+    BITMAP*danseuse1 = load_bitmap("B0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("B4.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("B5.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("B6.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
 
      int i = 0;
+     int j = 0;
      for (i=0;i<1;i++)
         {
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B0.bmp", NULL);
+        for(j=0;j<4;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            rest(100);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B4.bmp", NULL);
+            clear_bitmap(DoubleB);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            for(j=4;j=>0;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
+            rest(100);
 
+            clear_bitmap(DoubleB);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B5.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-                clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B6.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-                clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B0.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100);
         }
 }
 ///Doom
-void Blast_D(t_perso Personnage, BITMAP * DoubleB,BITMAP * danseuse,BITMAP* Terrain)
+void Blast_D(t_perso Personnage, BITMAP * DoubleB)
 {
     int x =0;
     int y =0;
 
     x = Personnage.x;
-    y = Personnage.y +55;
+    y = Personnage.y;
 
+    BITMAP*Mouvement[6];
+
+    BITMAP*danseuse1 = load_bitmap("B0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("B28.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("B29.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("B30.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("B31.bmp", NULL);
+    BITMAP*danseuse6 = load_bitmap("B32.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse6;
 
     int s = 0;
+    int j = 0;
         for (s=0;s<1;s++)
             {
+           for(j=0;j<6;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+            rest(100);
+
             clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B0.bmp", NULL);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B28.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B29.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B30.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B31.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B32.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100);
             }
 }
 ///Born In Hell
-void Blast_BIH(t_perso Personnage, BITMAP * DoubleB,BITMAP * danseuse,BITMAP* Terrain)
+void Blast_BIH(t_perso Personnage, BITMAP * DoubleB)
 {
-    int x =0;
+     int x =0;
     int y =0;
 
     x = Personnage.x;
-    y = Personnage.y +55;
+    y = Personnage.y;
 
+    BITMAP*Mouvement[4];
+
+    BITMAP*danseuse1 = load_bitmap("B0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("B34.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("B35.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("B36.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+
+
+    int j = 0;
     int s = 0;
 
      for (s=0;s<1;s++)
             {
-         clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B0.bmp", NULL);
+         for(j=0;j<4;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            rest(100);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B34.bmp", NULL);
+            clear_bitmap(DoubleB);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B35.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(700);
-
-
-         clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B36.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(700);
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B0.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(700);
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100);
 
             }
 }
 
 ///Blizzard
-void Blast_B(t_perso Personnage, BITMAP * DoubleB,BITMAP * danseuse,BITMAP* Terrain)
+void Blast_B(t_perso Personnage, BITMAP * DoubleB)
 {
     int x =0;
     int y =0;
 
     x = Personnage.x;
-    y = Personnage.y +55;
+    y = Personnage.y;
 
+    BITMAP*Mouvement[9];
+
+    BITMAP*danseuse1 = load_bitmap("B0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("B10.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("B11.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("B12.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("B13.bmp", NULL);
+    BITMAP*danseuse6 = load_bitmap("B14.bmp", NULL);
+    BITMAP*danseuse7 = load_bitmap("B15.bmp", NULL);
+    BITMAP*danseuse8 = load_bitmap("B16.bmp", NULL);
+    BITMAP*danseuse9 = load_bitmap("B17.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse6;
+    Mouvement[6]= danseuse7;
+    Mouvement[7]= danseuse8;
+    Mouvement[8]= danseuse9;
+
+    int j =0
     int s = 0;
-
      for (s=0;s<1;s++)
             {
-          clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B0.bmp", NULL);
+           for(j=0;j<9;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(1000);
+            rest(100);
 
+            clear_bitmap(DoubleB);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B10.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B11.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B12.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B13.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B14.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B15.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B16.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("B17.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100);
             }
 }
 
