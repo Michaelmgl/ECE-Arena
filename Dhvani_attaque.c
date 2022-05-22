@@ -142,6 +142,16 @@ void Dhvani_HB(t_perso Personnage, BITMAP * DoubleB)
 
             draw_sprite(DoubleB,Mouvement[i],x,y);
             }
+        for(i=8;i>8;i--)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+            rest(100);
+
+            clear_bitmap(DoubleB);
+
+            draw_sprite(DoubleB,Mouvement[i],x,y);
+            }
             rest(100);
             }
 }
