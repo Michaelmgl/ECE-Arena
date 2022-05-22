@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <allegro.h>
 
+
 ///Meilleurs disposition de code actuelle
 
 
@@ -78,7 +79,7 @@ void Yoru_base(int x ,int y ,BITMAP* DoubleB, BITMAP * danseuse)
 }
 
 ///Rocky Punch
-void Yoru_RP(t_perso Personnage, BITMAP * DoubleB)///Litteralement la disposition a prendre pour chaque animation
+void Yoru_RP(t_perso Personnage, BITMAP * DoubleB)//BITMAP * danseuse,BITMAP* Terrain
 {
     int x =0;
     int y =0;
@@ -110,23 +111,17 @@ void Yoru_RP(t_perso Personnage, BITMAP * DoubleB)///Litteralement la dispositio
             {
             for(int i=0;i<5;i++)
             {
-             clear_bitmap(DoubleB);
-            //clear_bitmap(Terrain);
-
-            blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
-
-            draw_sprite(DoubleB,Mouvement[i],x,y);
-
             blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
             rest(100);
+
+            clear_bitmap(DoubleB);
+
+            draw_sprite(DoubleB,Mouvement[i],x,y);
             }
             rest(100);
             }
 }
-///Ex dans un SS
-//Yoru_droite(Personnage[attaquant],buffer,Terrain);
-
 
 ///Rock Smash
 void Yoru_RS(t_perso Personnage, BITMAP * DoubleB)
@@ -169,7 +164,7 @@ void Yoru_RS(t_perso Personnage, BITMAP * DoubleB)
 }
 
 ///Defensive Crust
-void Yoru_DC(t_perso Personnage,BITMAP * DoubleB,BITMAP* danseuse,BITMAP* Terrain)
+void Yoru_DC(t_perso Personnage, BITMAP * DoubleB)
 {
     int x =0;
     int y =0;
@@ -177,202 +172,137 @@ void Yoru_DC(t_perso Personnage,BITMAP * DoubleB,BITMAP* danseuse,BITMAP* Terrai
     x = Personnage.x;
     y = Personnage.y +55;
 
+
+    BITMAP*Mouvement[2];
+
+    BITMAP*danseuse1 = load_bitmap("Y60.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("Y61.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+
+    int j = 0;
     int i = 0;
     for (i=0;i<1;i++)
         {
+            for(j=0;j<2;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("Y0.bmp", NULL);
+            rest(100);
 
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            clear_bitmap(DoubleB);
 
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("Y60.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("Y61.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100);
 
         }
 }
 ///Will of the Earth
-void Yoru_WOTE(t_perso Personnage,BITMAP* DoubleB,BITMAP* danseuse,BITMAP* Terrain)
+void Yoru_WOTE(t_perso Personnage, BITMAP * DoubleB)
 {
     int x =0;
     int y =0;
 
     x = Personnage.x;
-    y = Personnage.y +55;
+    y = Personnage.y;
 
-        int s = 0;
+    BITMAP*Mouvement[5];
+
+    BITMAP*danseuse1 = load_bitmap("A10.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("A11.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("A12.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("A13.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("A14.bmp", NULL);
+
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+
+    int j = 0;
+    int s = 0;
+
         for (s=0;s<1;s++)
             {
-           clear_bitmap(DoubleB);
-        danseuse = load_bitmap("A10.bmp", NULL);
+           for(j=0;j<2;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            rest(100);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("A11.bmp", NULL);
+            clear_bitmap(DoubleB);
 
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("A12.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(700);
-
-
-         clear_bitmap(DoubleB);
-        danseuse = load_bitmap("A13.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(700);
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("A14.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(700);
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100);
 
             }
 }
 
 ///Atlas Smash
-void Yoru_AS(t_perso Personnage, BITMAP* DoubleB,BITMAP* danseuse,BITMAP* Terrain)
+void Yoru_AS(t_perso Personnage, BITMAP * DoubleB)
 {
     int x =0;
     int y =0;
 
     x = Personnage.x;
-    y = Personnage.y +55;
+    y = Personnage.y;
 
+
+    BITMAP*Mouvement[5];
+
+    BITMAP*danseuse1 = load_bitmap("j1.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("j2.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("j3.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("j4.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("j5.bmp", NULL);
+    BITMAP*danseuse6 = load_bitmap("j6.bmp", NULL);
+    BITMAP*danseuse7 = load_bitmap("j7.bmp", NULL);
+    BITMAP*danseuse8 = load_bitmap("j8.bmp", NULL);
+    BITMAP*danseuse9 = load_bitmap("j9.bmp", NULL);
+    BITMAP*danseuse10 = load_bitmap("j10.bmp", NULL);
+    BITMAP*danseuse11 = load_bitmap("A11.bmp", NULL);
+    BITMAP*danseuse12 = load_bitmap("A12.bmp", NULL);
+    BITMAP*danseuse13 = load_bitmap("A13.bmp", NULL);
+    BITMAP*danseuse14 = load_bitmap("A14.bmp", NULL);
+
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse6;
+    Mouvement[6]= danseuse7;
+    Mouvement[7]= danseuse8;
+    Mouvement[8]= danseuse9;
+    Mouvement[9]= danseuse10;
+    Mouvement[10]= danseuse11;
+    Mouvement[11]= danseuse12;
+    Mouvement[12]= danseuse13;
+    Mouvement[13]= danseuse14;
+
+    int j = 0;
 
     int s = 0;
 
      for (s=0;s<1;s++)
             {
+            for(j=0;j<14;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+            rest(100);
+
             clear_bitmap(DoubleB);
-        danseuse = load_bitmap("j1.bmp", NULL);
 
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(1000);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("j2.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("j4.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("j5.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("j6.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("j7.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("j8.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("j9.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-         clear_bitmap(DoubleB);
-        danseuse = load_bitmap("j10.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-         clear_bitmap(DoubleB);
-        danseuse = load_bitmap("j11.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-         clear_bitmap(DoubleB);
-        danseuse = load_bitmap("j12.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-         clear_bitmap(DoubleB);
-        danseuse = load_bitmap("j13.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-         clear_bitmap(DoubleB);
-        danseuse = load_bitmap("j14.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,0,0,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100);
             }
 }
 
@@ -445,11 +375,11 @@ int main()
     }
     if (key[KEY_UP])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-        //Yoru_haut(x,&y,DoubleB,Soldat);
+        Yoru_AS(Yoru,DoubleB);
     }
     if (key[KEY_DOWN])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-        //Yoru_bas(x,&y,DoubleB,Soldat);
+        Yoru_WOTE(Yoru,DoubleB);
     }
 
     blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
