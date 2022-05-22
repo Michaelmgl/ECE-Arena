@@ -20,22 +20,22 @@ void initialistionAllegro()
 }
 
 typedef struct Perso{
-    int element; //ira de 0 à 3 et permet de savoir quelle classe/perso le joueur a choisi (0 = terre ; 1 = eau ; 2 = feu ; 3 = air)
-    int ptsvie; /// correspond aux points de vie de chaque perso, ils seront différents selon les personnages
-    int ptsatt; // correspond aux points d'attaque de base, c'est le nombre de dégats de base que les persos
-    int ptsmagie; /// correspond aux dégâts magiques des attaques de sort, ce sont ces points là qui prennent en compte les éléments
-    int ptsdef; // correspond aux points de défense de chaque perso, ils seront différents selon les personnages (peut-être qu'ils seront altérables durant la partie)
-    int ptsact; /// correspond aux points d'actions de chaque personnage, si il est égal à 3, le personnage pourra faire jusqu'à trois actions durant son tour, ils seront différents selon le personnage
-    int ptsmouv; // correspond aux points de mouvements, il sera le même pour tous les personnages (à moins que ce soit trop déséquilibré...)
-    int attultime; /// correspond au nombre de dégâts de l'attaqye ultime de chaque personnage, elle diffère selon les personnages et prend en compte les éléments
-    int recharge;//correspond à la recharge de l'attaque ultime, il commencera à 0, et à chaque fois que le perso attaque, il s'incrémentera de 1, une fois à 5, il pourra utiliser son attaque ultime, une fois utilisée, cette variable retombe à 0
-    int boostdef;///initié à 0, si égal à 1 alors les points de défense augmente de 100 et le restent pour 2 tours
-    int boostatt;//initié à 0, si égal à 1, alors les points d'attaque et les points magie augmentent tout les deux de 100 pendant 2 tours
+    int element; //ira de 0 Ã  3 et permet de savoir quelle classe/perso le joueur a choisi (0 = terre ; 1 = eau ; 2 = feu ; 3 = air)
+    int ptsvie; /// correspond aux points de vie de chaque perso, ils seront diffÃ©rents selon les personnages
+    int ptsatt; // correspond aux points d'attaque de base, c'est le nombre de dÃ©gats de base que les persos
+    int ptsmagie; /// correspond aux dÃ©gÃ¢ts magiques des attaques de sort, ce sont ces points lÃ  qui prennent en compte les Ã©lÃ©ments
+    int ptsdef; // correspond aux points de dÃ©fense de chaque perso, ils seront diffÃ©rents selon les personnages (peut-Ãªtre qu'ils seront altÃ©rables durant la partie)
+    int ptsact; /// correspond aux points d'actions de chaque personnage, si il est Ã©gal Ã  3, le personnage pourra faire jusqu'Ã  trois actions durant son tour, ils seront diffÃ©rents selon le personnage
+    int ptsmouv; // correspond aux points de mouvements, il sera le mÃªme pour tous les personnages (Ã  moins que ce soit trop dÃ©sÃ©quilibrÃ©...)
+    int attultime; /// correspond au nombre de dÃ©gÃ¢ts de l'attaqye ultime de chaque personnage, elle diffÃ¨re selon les personnages et prend en compte les Ã©lÃ©ments
+    int recharge;//correspond Ã  la recharge de l'attaque ultime, il commencera Ã  0, et Ã  chaque fois que le perso attaque, il s'incrÃ©mentera de 1, une fois Ã  5, il pourra utiliser son attaque ultime, une fois utilisÃ©e, cette variable retombe Ã  0
+    int boostdef;///initiÃ© Ã  0, si Ã©gal Ã  1 alors les points de dÃ©fense augmente de 100 et le restent pour 2 tours
+    int boostatt;//initiÃ© Ã  0, si Ã©gal Ã  1, alors les points d'attaque et les points magie augmentent tout les deux de 100 pendant 2 tours
     int boostmag;
     int boostmouv;
     int boostcrit;
     int brulure;
-    int jaugemagie;///différente selon les persos, elle sert à réguler l'utilisation des attaques de sorts, cett
+    int jaugemagie;///diffÃ©rente selon les persos, elle sert Ã  rÃ©guler l'utilisation des attaques de sorts, cett
     int numeroPassage;
     int i;///Pour le bouger plus facilement dans le tableau
     int j;
@@ -418,9 +418,9 @@ int main()
 
    /*//chargement de l'image
     danseuse = load_bitmap("Y0.bmp",NULL); //"posturebase" c'est juste le nom de mon sprite de base
-    DoubleB = create_bitmap(SCREEN_W, SCREEN_H);// ne plus écrire 800 et 600
-    masked_blit(danseuse, DoubleB, 0,0,x,y, danseuse->w, danseuse->h); //pour pouvoir déplacer le sprite en même temps que l'animation il va falloir jouer avec les 0
-    blit(DoubleB, screen, 0,0,0,0, DoubleB->w, DoubleB->h);            //présents dans ces deux lignes de codes à chaque fois, je suppose qu'il faudra alors les remplacer
+    DoubleB = create_bitmap(SCREEN_W, SCREEN_H);// ne plus Ã©crire 800 et 600
+    masked_blit(danseuse, DoubleB, 0,0,x,y, danseuse->w, danseuse->h); //pour pouvoir dÃ©placer le sprite en mÃªme temps que l'animation il va falloir jouer avec les 0
+    blit(DoubleB, screen, 0,0,0,0, DoubleB->w, DoubleB->h);            //prÃ©sents dans ces deux lignes de codes Ã  chaque fois, je suppose qu'il faudra alors les remplacer
    */
 
     danseuse = load_bitmap("Y0.bmp", NULL);
@@ -429,28 +429,28 @@ int main()
         allegro_message("Problemo");
         allegro_exit();
         exit(EXIT_FAILURE);
-    }                                 //par les coordonnées de chaque perso, d'où la nécessité de d'abord mettre à jour les coordonnées
+    }                                 //par les coordonnÃ©es de chaque perso, d'oÃ¹ la nÃ©cessitÃ© de d'abord mettre Ã  jour les coordonnÃ©es
     show_mouse(screen);
 
-    while(!key[KEY_ESC])                                               // avant de commencer à animer
+    while(!key[KEY_ESC])                                               // avant de commencer Ã  animer
     {
     //Yoru_base(x,y,DoubleB,Soldat);
 
     clear_bitmap(DoubleB);
 
-    if (key[KEY_RIGHT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (key[KEY_RIGHT])  //la condtion de cette boucle est0 arbitraire, Ã©videmment on changera en fonction des besoins mais ce ne sera jamais cette condition spÃ©cifique en jeu
     {
       //  Yoru_droite(&x,y,DoubleB,Soldat);
     }
-    if (key[KEY_LEFT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (key[KEY_LEFT])  //la condtion de cette boucle est0 arbitraire, Ã©videmment on changera en fonction des besoins mais ce ne sera jamais cette condition spÃ©cifique en jeu
     {
       //  Yoru_gauche(&x,y,DoubleB,Soldat);
     }
-    if (key[KEY_UP])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (key[KEY_UP])  //la condtion de cette boucle est0 arbitraire, Ã©videmment on changera en fonction des besoins mais ce ne sera jamais cette condition spÃ©cifique en jeu
     {
        // Yoru_haut(x,&y,DoubleB,Soldat);
     }
-    if (key[KEY_DOWN])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (key[KEY_DOWN])  //la condtion de cette boucle est0 arbitraire, Ã©videmment on changera en fonction des besoins mais ce ne sera jamais cette condition spÃ©cifique en jeu
     {
        // Yoru_bas(x,&y,DoubleB,Soldat);
     }
