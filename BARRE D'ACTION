@@ -1,0 +1,174 @@
+//// CHANGER LES CONIDITONS CAR C EST ECRIT REST PPUR CHAUQUE SSPG  MAIS JE CROIS TU MET DIRECT DANS TON CODE
+
+
+
+
+
+
+
+
+/// barre de blast
+
+
+
+void Blast_action(t_perso Personnage, BITMAP * DoubleB)
+{
+    
+ BITMAP*Mouvement[3];
+
+   
+    BITMAP*danseuse3 = load_bitmap("vide.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("moitie.bmp", NULL);
+    BITMAP*danseuse1 = load_bitmap("rempli.bmp", NULL);
+    
+
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+  
+
+    //Mouvement[8]= danseuse9;
+
+    int j =0;
+    int s = 0;
+     for (s=0;s<1;s++)
+            {
+           for(j=0;j<3;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+         
+
+            clear_bitmap(DoubleB);
+
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+           
+            }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+///// barre d'Amerigo
+
+
+
+void AmerigoetYoru_action(t_perso Personnage, BITMAP * DoubleB)
+{
+    int x =0;
+    int y =0;
+
+    x = Personnage.x;
+    y = Personnage.y;
+ BITMAP*Mouvement[6];
+
+   
+    BITMAP*danseuse1 = load_bitmap("rempli.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("deux_tiers.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("un_tiers.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("vide.bmp", NULL);
+   
+
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+ 
+    //Mouvement[8]= danseuse9;
+
+    int j =0;
+    int s = 0;
+     for (s=0;s<1;s++)
+            {
+           for(j=0;j<4;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+            rest(100);/// a chnager
+
+            clear_bitmap(DoubleB);
+
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100);/ /a chnager
+            }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//// barre de dhvani
+
+
+
+
+
+
+
+
+
+
+
+void Dhvani_action(t_perso Personnage, BITMAP * DoubleB)
+{
+    
+    x = 0;
+    y = 0;
+    BITMAP*Mouvement[5];
+
+   
+    BITMAP*danseuse1 = load_bitmap("rempli.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("trois_quart.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("moitie.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("un_quart.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("vide.bmp", NULL);
+    
+
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+   
+
+    //Mouvement[8]= danseuse9;
+
+    int j =0;
+    int s = 0;
+     for (s=0;s<1;s++)
+            {
+           for(j=0;j<6;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+         
+            clear_bitmap(DoubleB);
+
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100); //////////SUREMENT A CHANGER
+            }
+}
+
+
+
