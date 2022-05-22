@@ -1,0 +1,232 @@
+/// barre de blast
+
+
+
+void Blast_barre(t_perso Personnage, BITMAP * DoubleB)
+{
+    int x =0;
+    int y =0;
+
+    x = Personnage.x;
+    y = Personnage.y;
+ BITMAP*Mouvement[6];
+
+   
+    BITMAP*danseuse1 = load_bitmap("B0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("B1.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("b2.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("b3.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("B4.bmp", NULL);
+    BITMAP*danseuse6 = load_bitmap("b5.bmp", NULL); ////// ou B5si l'image marche pas mais je suis pas sur
+
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse6;
+
+    //Mouvement[8]= danseuse9;
+
+    int j =0;
+    int s = 0;
+     for (s=0;s<1;s++)
+            {
+           for(j=0;j<6;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+            rest(100);
+
+            clear_bitmap(DoubleB);
+
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100);
+            }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+///// barre d'Amerigo
+
+
+
+void Amerigo_barre(t_perso Personnage, BITMAP * DoubleB)
+{
+    int x =0;
+    int y =0;
+
+    x = Personnage.x;
+    y = Personnage.y;
+ BITMAP*Mouvement[6];
+
+   
+    BITMAP*danseuse1 = load_bitmap("F1.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("F2.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("F3.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("F4.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("F5.bmp", NULL);
+    BITMAP*danseuse6 = load_bitmap("b5.bmp", NULL);
+
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse6;
+
+    //Mouvement[8]= danseuse9;
+
+    int j =0;
+    int s = 0;
+     for (s=0;s<1;s++)
+            {
+           for(j=0;j<6;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+            rest(100);
+
+            clear_bitmap(DoubleB);
+
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100);
+            }
+}
+
+
+
+
+
+
+
+
+////BARRE DE YORU
+
+void Yoru_barre(t_perso Personnage, BITMAP * DoubleB)
+{
+    int x =0;
+    int y =0;
+
+    x = Personnage.x;
+    y = Personnage.y;
+ BITMAP*Mouvement[6];
+
+   
+    BITMAP*danseuse1 = load_bitmap("V0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("V1.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("V2.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("V3.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("V4.bmp", NULL);
+    BITMAP*danseuse6 = load_bitmap("b5.bmp", NULL);
+
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse6;
+
+    //Mouvement[8]= danseuse9;
+
+    int j =0;
+    int s = 0;
+     for (s=0;s<1;s++)
+            {
+           for(j=0;j<6;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+            rest(100);
+
+            clear_bitmap(DoubleB);
+
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100);
+            }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//// barre de dhvani
+
+
+
+
+
+
+
+
+
+
+
+void Dhvani_barre(t_perso Personnage, BITMAP * DoubleB)
+{
+    int x =0;
+    int y =0;
+
+    x = Personnage.x;
+    y = Personnage.y;
+ BITMAP*Mouvement[6];
+
+   
+    BITMAP*danseuse1 = load_bitmap("A0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("A1.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("A2.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("A3.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("A4.bmp", NULL);
+    BITMAP*danseuse6 = load_bitmap("b5.bmp", NULL);
+
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse6;
+
+    //Mouvement[8]= danseuse9;
+
+    int j =0;
+    int s = 0;
+     for (s=0;s<1;s++)
+            {
+           for(j=0;j<6;j++)
+            {
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+            rest(100);
+
+            clear_bitmap(DoubleB);
+
+            draw_sprite(DoubleB,Mouvement[j],x,y);
+            }
+            rest(100);
+            }
+}
+
+
