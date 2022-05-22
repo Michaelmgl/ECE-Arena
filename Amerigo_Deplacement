@@ -1,7 +1,7 @@
 
 void Amerigo_base(int x ,int y ,BITMAP* DoubleB, BITMAP * danseuse)
 {
-    danseuse = load_bitmap("Y0.bmp", NULL);
+    danseuse = load_bitmap("L0.bmp", NULL);
     if(!danseuse)
     {
         allegro_message("Problemo");
@@ -21,28 +21,21 @@ void Amerigo_haut(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
     x = Personnage.x;
     y = Personnage.y;
 
-    BITMAP*Mouvement[6];
+    BITMAP*Mouvement[3];
 
-    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
-    BITMAP*danseuse2 = load_bitmap("Y0U.bmp", NULL);
-    BITMAP*danseuse3 = load_bitmap("Y1U.bmp", NULL);
-    BITMAP*danseuse4 = load_bitmap("Y2U.bmp", NULL);
-    BITMAP*danseuse5 = load_bitmap("Y3U.bmp", NULL);
-    BITMAP*danseuse6 = load_bitmap("Y4U.bmp", NULL);
-    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
+    BITMAP*danseuse1 = load_bitmap("L0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("L1.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("L2.bmp", NULL);
 
     Mouvement[0]= danseuse1;
     Mouvement[1]= danseuse2;
     Mouvement[2]= danseuse3;
-    Mouvement[3]= danseuse4;
-    Mouvement[4]= danseuse5;
-    Mouvement[5]= danseuse5;
 
     int incre = 0;
     int i = 0;
     for (i=0;i<1;i++)
         {
-        for(int j=0;i<5;i++)
+        for(int j=0;i<3;i++)
             {
             clear_bitmap(DoubleB);
             //clear_bitmap(Terrain);
@@ -72,26 +65,22 @@ void Amerigo_droite(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
 
     BITMAP * danseuse;
 
-    BITMAP*Mouvement[5];
+    BITMAP*Mouvement[3];
 
-    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
-    BITMAP*danseuse2 = load_bitmap("Y1R.bmp", NULL);
-    BITMAP*danseuse3 = load_bitmap("Y2R.bmp", NULL);
-    BITMAP*danseuse4 = load_bitmap("Y3R.bmp", NULL);
-    BITMAP*danseuse5 = load_bitmap("Y4R.bmp", NULL);
-    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
+    BITMAP*danseuse1 = load_bitmap("L0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("L1.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("L2.bmp", NULL);
 
     Mouvement[0]= danseuse1;
     Mouvement[1]= danseuse2;
     Mouvement[2]= danseuse3;
-    Mouvement[3]= danseuse4;
-    Mouvement[4]= danseuse5;
+
     int incre = 0;
     int i = 0;
     int j = 0;
     for (i=0;i<1;i++)
         {
-        for(j=0;j<5;j++)
+        for(j=0;j<3;j++)
             {
             clear_bitmap(DoubleB);
             //clear_bitmap(Terrain);
@@ -121,27 +110,21 @@ void Amerigo_gauche(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
 
     BITMAP * danseuse;
 
-    BITMAP*Mouvement[6];
+    BITMAP*Mouvement[3];
 
-    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
-    BITMAP*danseuse2 = load_bitmap("Y1L.bmp", NULL);
-    BITMAP*danseuse3 = load_bitmap("Y2L.bmp", NULL);
-    BITMAP*danseuse4 = load_bitmap("Y3L.bmp", NULL);
-    BITMAP*danseuse5 = load_bitmap("Y4L.bmp", NULL);
-    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
+    BITMAP*danseuse1 = load_bitmap("L0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("L1r.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("L2r.bmp", NULL);
 
     Mouvement[0]= danseuse1;
     Mouvement[1]= danseuse2;
     Mouvement[2]= danseuse3;
-    Mouvement[3]= danseuse4;
-    Mouvement[4]= danseuse5;
-    Mouvement[5]= danseuse5;
 
     int incre = 0;
     int i = 0;
     for (i=0;i<1;i++)
         {
-        for(int j=0;i<5;i++)
+        for(int j=0;i<3;i++)
             {
             clear_bitmap(DoubleB);
             //clear_bitmap(Terrain);
@@ -170,27 +153,21 @@ void Amerigo_bas(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
 
     BITMAP * danseuse;
 
-    BITMAP*Mouvement[6];
+    BITMAP*Mouvement[3];
 
-    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
-    BITMAP*danseuse2 = load_bitmap("Y1.bmp", NULL);
-    BITMAP*danseuse3 = load_bitmap("Y2.bmp", NULL);
-    BITMAP*danseuse4 = load_bitmap("Y3.bmp", NULL);
-    BITMAP*danseuse5 = load_bitmap("Y4.bmp", NULL);
-    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
+    BITMAP*danseuse1 = load_bitmap("L0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("L1.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("L2.bmp", NULL);
 
     Mouvement[0]= danseuse1;
     Mouvement[1]= danseuse2;
     Mouvement[2]= danseuse3;
-    Mouvement[3]= danseuse4;
-    Mouvement[4]= danseuse5;
-    Mouvement[5]= danseuse5;
 
     int incre = 0;
     int i = 0;
     for (i=0;i<1;i++)
         {
-        for(int j=0;i<5;i++)
+        for(int j=0;i<3;i++)
             {
             clear_bitmap(DoubleB);
             //clear_bitmap(Terrain);
