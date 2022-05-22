@@ -40,7 +40,7 @@ int main()
     clear_bitmap(DoubleB);
 
 
-
+    ///Burning Spray
     if(mouse_x>=200 && mouse_x <=334 && mouse_y>=540 && mouse_y <=600)
     {
     if (mouse_b&1)
@@ -85,7 +85,7 @@ int main()
     }
     }
 
-
+    ///Staff it 
     if(mouse_x>=65 && mouse_x <=199 && mouse_y>=540 && mouse_y <=600)
     {
     if (mouse_b&1)
@@ -126,7 +126,7 @@ int main()
         }
 
     }
-
+    /// Double Flamethrower
     if(mouse_x>=335 && mouse_x <=469 && mouse_y>=540 && mouse_y <=600)
     {
     if (mouse_b&1)
@@ -187,7 +187,7 @@ int main()
 
     }
 
-
+    ///Fire Screw
      if(mouse_x>=470 && mouse_x <=604 && mouse_y>=540 && mouse_y <=600)
     {
     if (mouse_b&1)
@@ -227,7 +227,7 @@ int main()
 
     }
     }
-
+    ///DevilBurst
      if(mouse_x>=605 && mouse_x <=739 && mouse_y>=540 && mouse_y <=600)
     {
     if (mouse_b&1)
