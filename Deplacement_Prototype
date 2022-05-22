@@ -1,0 +1,759 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <allegro.h>
+#define NBR_MAX_DE_JOUEURS 4
+
+void initialistionAllegro()
+{
+    allegro_init();
+    set_color_depth(desktop_color_depth());
+    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,800,600,0,0))!=0)
+    {
+        allegro_message("Pb de mode graphique");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+    install_keyboard();
+    install_mouse();
+}
+
+typedef struct cases{
+
+    //coordonnees de la case
+    float x;
+    float y;
+
+    //Tailles d'une case
+    int longueur;
+    int largeur;
+
+    //1 si occupe/obstacle et 0 si libre
+    int libre;
+
+    //pour ce qui se trouve sur la case utile ?
+    BITMAP * image;
+
+}t_case;
+
+
+void initPlateau(t_case plateau[13][9])
+{
+    ///plateau = (t_case*) malloc(sizeof(t_case));
+    //BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
+    int i = 0;
+    int j = 0;
+    float valeur_x=0,valeur_y=66.67;
+    //t_case * plateau[12][8];
+
+    for (i=0; i<13; i++) //longueur
+    {
+        //plateau[i][j].x = plateau[i][j].x;
+        for (j=0; j<9; j++) //largeur
+        {
+            plateau[i][j].x = plateau[i][j].x + valeur_x;
+            plateau[i][j].longueur = 5;
+        }
+        valeur_x= valeur_x + 66.5;
+        for (j=0; j<9; j++) //largeur
+        {
+            plateau[i][j].y = valeur_y;
+            valeur_y = valeur_y + 66.67;
+            plateau[i][j].libre = 0;
+            plateau[i][j].largeur = 5;
+        }
+        valeur_y=66.67;
+    }
+
+    ///Blindage du a un bug
+    plateau[0][2].x = 0;
+
+    plateau[1][7].x = 66.5;
+
+    plateau[2][0].x = 133;
+    plateau[2][2].x = 133;
+    plateau[2][5].x = 133;
+
+    plateau[3][7].x = 199.5;
+    plateau[3][4].x = 199.5;
+    plateau[3][0].x = 199.5;
+    plateau[3][5].x = 199.5;
+
+    plateau[5][0].x = 266;
+    plateau[5][7].x = 332;
+    plateau[5][8].x = 332;
+
+    plateau[6][0].x = 399;
+    plateau[6][8].x = 399;
+
+    plateau[7][8].x = 465.5;
+
+    plateau[9][7].x = 598.5;
+
+    plateau[10][1].x = 665;
+
+    plateau[11][0].x = 731;
+
+    plateau[12][5].x = 798;
+    //plateau[0][0].x = 66.5;
+
+    ///Initialisation des Cases remplis
+
+    for (j=0; j<9; j++) //largeur
+    {
+        plateau[0][j].libre = 1;
+        plateau[0][j].libre = 1;
+        plateau[0][j].y = 0;
+    }
+    for (j=0; j<13; j++) //largeur
+    {
+        plateau[j][8].libre = 1;
+    }
+
+    plateau[1][6].libre=1;
+    plateau[7][1].libre=1;
+    plateau[8][1].libre=1;
+    plateau[3][8].libre=1;
+    plateau[4][3].libre=1;
+    plateau[4][4].libre=1;
+    plateau[7][0].libre=1;
+    plateau[8][0].libre=1;
+    plateau[8][8].libre=1;
+    plateau[9][8].libre=1;
+    plateau[12][4].libre=1;
+    plateau[12][8].libre=0;
+}
+
+typedef struct Perso{
+    int element; //ira de 0 à 3 et permet de savoir quelle classe/perso le joueur a choisi (0 = terre ; 1 = eau ; 2 = feu ; 3 = air)
+    int ptsvie; /// correspond aux points de vie de chaque perso, ils seront différents selon les personnages
+    int ptsatt; // correspond aux points d'attaque de base, c'est le nombre de dégats de base que les persos
+    int ptsmagie; /// correspond aux dégâts magiques des attaques de sort, ce sont ces points là qui prennent en compte les éléments
+    int ptsdef; // correspond aux points de défense de chaque perso, ils seront différents selon les personnages (peut-être qu'ils seront altérables durant la partie)
+    int ptsact; /// correspond aux points d'actions de chaque personnage, si il est égal à 3, le personnage pourra faire jusqu'à trois actions durant son tour, ils seront différents selon le personnage
+    int ptsmouv; // correspond aux points de mouvements, il sera le même pour tous les personnages (à moins que ce soit trop déséquilibré...)
+    int attultime; /// correspond au nombre de dégâts de l'attaqye ultime de chaque personnage, elle diffère selon les personnages et prend en compte les éléments
+    int recharge;//correspond à la recharge de l'attaque ultime, il commencera à 0, et à chaque fois que le perso attaque, il s'incrémentera de 1, une fois à 5, il pourra utiliser son attaque ultime, une fois utilisée, cette variable retombe à 0
+    int boostdef;///initié à 0, si égal à 1 alors les points de défense augmente de 100 et le restent pour 2 tours
+    int boostatt;//initié à 0, si égal à 1, alors les points d'attaque et les points magie augmentent tout les deux de 100 pendant 2 tours
+    int boostmag;
+    int boostmouv;
+    int boostcrit;
+    int brulure;
+    int jaugemagie;///différente selon les persos, elle sert à réguler l'utilisation des attaques de sorts, cett
+    int numeroPassage;
+    int i;///Pour le bouger plus facilement dans le tableau
+    int j;
+    float x;///Pour bouger les sprites
+    float y;
+}t_perso;
+
+void Affiche_Position(t_case Plateau[13][9],t_perso Perso, BITMAP * buffer)
+{
+    float valeur_x=66.5,valeur_y=66.67;
+
+    rect(buffer,mouse_x-33,mouse_y-33,mouse_x+33,mouse_y+33,makecol(0,0,255));
+
+    if(Perso.j > 0 && Perso.j<8 && Perso.i>0 && Perso.i<12 )
+    {
+        ///Gauche
+        rectfill(buffer, Plateau[Perso.i-1][Perso.j].x-(valeur_x/2),Plateau[Perso.i-1][Perso.j].y-(valeur_y/2), (Plateau[Perso.i-1][Perso.j].longueur + Plateau[Perso.i-1][Perso.j].x )-(valeur_x/2), (Plateau[Perso.i-1][Perso.j].largeur+Plateau[Perso.i-1][Perso.j].y)-(valeur_y/2), makecol(0,0,255));
+
+        ///Dessous
+       rectfill(buffer, Plateau[Perso.i][Perso.j+1].x-(valeur_x/2),Plateau[Perso.i][Perso.j+1].y-(valeur_y/2), (Plateau[Perso.i][Perso.j+1].longueur +Plateau[Perso.i][Perso.j+1].x)-(valeur_x/2), (Plateau[Perso.i][Perso.j+1].largeur+Plateau[Perso.i][Perso.j+1].y)-(valeur_y/2), makecol(0,255,0));
+
+        ///Centre
+        //rectfill(buffer, Plateau[Perso.i][Perso.j].x-(valeur_x/2),Plateau[Perso.i][Perso.j].y-(valeur_y/2), (Plateau[Perso.i][Perso.j].longueur+Plateau[Perso.i][Perso.j].x)-(valeur_x/2), (Plateau[Perso.i][Perso.j].largeur+Plateau[Perso.i][Perso.j].y)-(valeur_y/2), makecol(255,255,255));
+
+        ///Haut
+       rectfill(buffer, Plateau[Perso.i][Perso.j-1].x-(valeur_x/2),Plateau[Perso.i][Perso.j-1].y-(valeur_y/2), (Plateau[Perso.i][Perso.j-1].longueur + Plateau[Perso.i][Perso.j-1].x)-(valeur_x/2), (Plateau[Perso.i][Perso.j-1].largeur+Plateau[Perso.i][Perso.j-1].y)-(valeur_y/2), makecol(255,0,255));
+
+        ///Droite
+       rectfill(buffer, Plateau[Perso.i+1][Perso.j].x-(valeur_x/2),Plateau[Perso.i+1][Perso.j].y-(valeur_y/2), (Plateau[Perso.i+1][Perso.j].longueur + Plateau[Perso.i+1][Perso.j].x)-(valeur_x/2), (Plateau[Perso.i+1][Perso.j].largeur+Plateau[Perso.i+1][Perso.j].y)-(valeur_y/2), makecol(100,0,0));
+    }
+}
+
+
+void Manipulation_E(t_case Plateau[13][9],t_perso Personnage[3], BITMAP* buffer,BITMAP* Perso,int attaquant,BITMAP* Terrain)///(struct Plateau, ligne,colonne,buffer,,Bitmap Element,xjoueur,yJoueur)
+{
+    float valeur_x=66.5;
+    float valeur_y=66.67;
+
+    ///Position centrale
+    /*
+    if (mouse_x>=Plateau[i][j].x-66 && mouse_x<=Plateau[i+1][j].x-60 && mouse_y>=Plateau[i-1][j].y-66 && mouse_y<=Plateau[i][j].x-66) //
+    {//Clic Gauche
+    printf("position centre \n");
+    //rest(1000);
+    if (mouse_b & 1)
+        {
+        printf("Le bouton gauche est appuyée (mouvement 0)\n");
+        //rest(1000);
+        }
+    }
+    */
+
+    Affiche_Position(Plateau,Personnage[attaquant],buffer);
+
+    ///Position Droite//
+    if (mouse_x>=Plateau[Personnage[attaquant].i][Personnage[attaquant].j].x && mouse_y>=Plateau[Personnage[attaquant].i][Personnage[attaquant].j].y-66 && mouse_y<=Plateau[Personnage[attaquant].i][Personnage[attaquant].j+1].y-66 && mouse_x<=Plateau[Personnage[attaquant].i+1][Personnage[attaquant].j].x && Plateau[Personnage[attaquant].i+1][Personnage[attaquant].j].libre == 0 )
+    {//Clic Gauche
+    printf("Droite\n");
+    //rest(1000);
+    if (mouse_b & 1)
+        {
+        printf("Le bouton gauche est appuyée (mouvement droite)\n");
+        if (Personnage[attaquant].i == 13)
+        {
+        Personnage[attaquant].i = 13;
+        }
+        else
+        {
+        Yoru_droite(Personnage[attaquant],buffer,Terrain);
+
+        Personnage[attaquant].x = Personnage[attaquant].x + 66;
+        Personnage[attaquant].i = Personnage[attaquant].i + 1;
+        clear_bitmap(buffer);
+        blit(Terrain,buffer,0,0,0,68,Terrain->w,Terrain->h);
+
+        }
+        rest(1000);
+        }
+    }
+   ///Position Gauche
+    else if (mouse_x<=Plateau[Personnage[attaquant].i][Personnage[attaquant].j].x-66 && mouse_x>=Plateau[Personnage[attaquant].i-1][Personnage[attaquant].j].x-66 && mouse_y>=Plateau[Personnage[attaquant].i][Personnage[attaquant].j-1].y&& mouse_y<=Plateau[Personnage[attaquant].i][Personnage[attaquant].j].y && Plateau[Personnage[attaquant].i-1][Personnage[attaquant].j].libre == 0) // //  )
+    {//Clic Gauche
+    printf("Gauche\n");
+    //rest(1000);
+    if (mouse_b & 1)
+        {
+        printf("Le bouton gauche est appuyée (mouvement gauche)\n");
+        if (Personnage[attaquant].i < 0)
+        {
+        printf("impossible vous devez faire autre chose");
+        Personnage[attaquant].i = 0;
+        }
+        else
+        {
+        Yoru_gauche(Personnage[attaquant],buffer,Terrain);
+
+        Personnage[attaquant].x = Personnage[attaquant].x - 66;
+        Personnage[attaquant].i = Personnage[attaquant].i - 1;
+        clear_bitmap(buffer);
+        blit(Terrain,buffer,0,0,0,68,Terrain->w,Terrain->h);
+        }
+        rest(1000);
+        }
+    }
+  ///Position Haute
+
+    else if (mouse_x>=Plateau[Personnage[attaquant].i][Personnage[attaquant].j].x-66 && mouse_x<=Plateau[Personnage[attaquant].i][Personnage[attaquant].j].x && mouse_y<=Plateau[Personnage[attaquant].i][Personnage[attaquant].j-1].y && mouse_y>=Plateau[Personnage[attaquant].i][Personnage[attaquant].j-2].y && Plateau[Personnage[attaquant].i][Personnage[attaquant].j-1].libre == 0)//
+    {//Clic Gauche
+    printf("Haut\n");
+    //rest(1000);
+    if (mouse_b & 1)
+        {
+        printf("Le bouton gauche est appuyée (mouvement haut)\n");
+        if (Personnage[attaquant].j - 1 == 0 )
+        {
+        printf("impossible vous devez faire autre chose");
+        Personnage[attaquant].j = 1;
+        }
+        else
+        {
+        Yoru_haut(Personnage[attaquant],buffer,Terrain);
+        Personnage[attaquant].y = Personnage[attaquant].y - 66;
+        Personnage[attaquant].j = Personnage[attaquant].j - 1;
+        clear_bitmap(buffer);
+        blit(Terrain,buffer,0,0,0,68,Terrain->w,Terrain->h);
+        }
+        rest(1000);
+        }
+    }
+    ///Position Basse
+    else if (mouse_x<=Plateau[Personnage[attaquant].i][Personnage[attaquant].j].x && mouse_x>=Plateau[Personnage[attaquant].i][Personnage[attaquant].j].x-66 && mouse_y<=Plateau[Personnage[attaquant].i][Personnage[attaquant].j+1].y && mouse_y>=Plateau[Personnage[attaquant].i][Personnage[attaquant].j].y && Plateau[Personnage[attaquant].i][Personnage[attaquant].j+1].libre == 0)//
+    {//Clic Gauche) //
+    printf("Bas\n");
+    //rest(1000);
+    if (mouse_b & 1)
+        {
+        printf("Le bouton gauche est appuyée (mouvement Bas)\n");
+        if (Personnage[attaquant].j - 1 == 13 )
+        {
+        printf("impossible vous devez faire autre chose");
+        Personnage[attaquant].j = 12;
+        }
+        else
+        {
+        Yoru_bas(Personnage[attaquant],buffer,Terrain);
+        Personnage[attaquant].y = Personnage[attaquant].y + 66;
+        Personnage[attaquant].j = Personnage[attaquant].j + 1;
+        clear_bitmap(buffer);
+        blit(Terrain,buffer,0,0,0,68,Terrain->w,Terrain->h);
+        }
+        rest(1000);
+        }
+    }
+    else
+    {
+      printf("hors position disponible\n");
+    }
+}
+
+void choixDesClasses(t_perso tablo[NBR_MAX_DE_JOUEURS], int nbrjoueurs)
+{
+    int i = 0;
+    while(i < nbrjoueurs)
+    {
+        printf("Joueur %d , veuillez choisir une classe\n", i+1);
+        scanf("%d", &tablo[i].element);
+        while(tablo[i].element > 3 || tablo[i].element < 0)
+        {
+            printf("Veuillez choisir un nombre correspondant à une classe\n");
+            scanf("%d", &tablo[i].element);
+        }
+        if (tablo[i].element == 0)
+        {
+            printf("Vous avez choisi le soldat de terre\n");
+            tablo[i].ptsvie = 2300;
+            tablo[i].ptsatt = 380;
+            tablo[i].ptsdef = 250;
+            tablo[i].ptsmagie = 450;
+            tablo[i].ptsact = 3;
+            tablo[i].ptsmouv = 3;
+            tablo[i].attultime = 700;
+            tablo[i].recharge = 0;
+            tablo[i].boostdef = 0;
+            tablo[i].boostatt = 0;
+            tablo[i].boostmag = 0;
+            tablo[i].boostmouv = 0;
+            tablo[i].jaugemagie = 800;
+        }
+        else if(tablo[i].element == 1)
+        {
+            printf("Vous avez choisi la brute de l'eau\n");
+            tablo[i].ptsvie = 2500;
+            tablo[i].ptsatt = 400;
+            tablo[i].ptsdef = 220;
+            tablo[i].ptsmagie = 430;
+            tablo[i].ptsact = 2;
+            tablo[i].ptsmouv = 3;
+            tablo[i].attultime = 750;
+            tablo[i].recharge = 0;
+            tablo[i].boostdef = 0;
+            tablo[i].boostatt = 0;
+            tablo[i].boostmag = 0;
+            tablo[i].boostmouv = 0;
+            tablo[i].jaugemagie = 800;
+        }
+        else if(tablo[i].element == 2)
+        {
+            printf("Vous avez choisi le mage de feu\n");
+            tablo[i].ptsvie = 2200;
+            tablo[i].ptsatt = 290;
+            tablo[i].ptsdef = 300;
+            tablo[i].ptsmagie = 500;
+            tablo[i].ptsact = 3;
+            tablo[i].ptsmouv = 3;
+            tablo[i].attultime = 800;
+            tablo[i].recharge = 0;
+            tablo[i].boostdef = 0;
+            tablo[i].boostatt = 0;
+            tablo[i].boostmag = 0;
+            tablo[i].boostmouv = 0;
+            tablo[i].jaugemagie = 1300;
+        }
+        else if (tablo[i].element == 3)
+        {
+            printf("Vous avez choisi la danseuse de l'air\n");
+            tablo[i].ptsvie = 2000;
+            tablo[i].ptsatt = 350;
+            tablo[i].ptsdef = 290;
+            tablo[i].ptsmagie = 480;
+            tablo[i].ptsact = 4;
+            tablo[i].ptsmouv = 3;
+            tablo[i].attultime = 820;
+            tablo[i].recharge = 0;
+            tablo[i].boostdef = 0;
+            tablo[i].boostatt =0;
+            tablo[i].boostmag = 0;
+            tablo[i].boostmouv = 0;
+            tablo[i].jaugemagie = 1200;
+        }
+        i= i+1;
+    }
+}
+
+void Yoru_base(int x ,int y ,BITMAP* DoubleB, BITMAP * danseuse)
+{
+    danseuse = load_bitmap("Y0.bmp", NULL);
+    if(!danseuse)
+    {
+        allegro_message("Problemo");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+    masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+    //blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+    //blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+}
+
+
+void Yoru_haut(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
+{
+    int x =0;
+    int y =0;
+
+    x = Personnage.x;
+    y = Personnage.y;
+
+    BITMAP*Mouvement[6];
+
+    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("Y0U.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("Y1U.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("Y2U.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("Y3U.bmp", NULL);
+    BITMAP*danseuse6 = load_bitmap("Y4U.bmp", NULL);
+    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse5;
+
+    int incre = 0;
+    int i = 0;
+    for (i=0;i<1;i++)
+        {
+        for(int j=0;i<5;i++)
+            {
+            clear_bitmap(DoubleB);
+            //clear_bitmap(Terrain);
+
+            blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
+
+            draw_sprite(DoubleB,Mouvement[i],x,y-incre);
+
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            incre = incre+13;
+            rest(100);
+            }
+            rest(100);
+            incre = 0;
+        }
+        Personnage.y = Personnage.y-65;
+}
+
+///Prototype qui marche
+/*void Yoru_droite(t_perso Personnage,BITMAP * DoubleB,BITMAP* danseuse,BITMAP* Terrain)
+{
+    int x =0;
+    int y =0;
+
+    BITMAP * Buffer_P = create_bitmap(SCREEN_W,SCREEN_H)
+
+    x = Personnage.x;
+    y = Personnage.y +50;
+
+    int i = 0;
+    for (i=0;i<1;i++)
+        {
+
+        //danseuse = load_bitmap("Y0.bmp", NULL);
+
+        //masked_blit(danseuse,Terrain,0,0,x,y,danseuse->w,danseuse->h);
+        //blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+               //sera utilisé avec blit(), masked_blit() étant la fonction qui enlève le magenta
+        //rest(100);
+        //blit(Terrain,screen,0,0,0,68,Terrain->w,Terrain->h);
+        danseuse = load_bitmap("Y1R.bmp", NULL);
+        clear_bitmap(Terrain);
+        blit(Terrain,screen,0,0,0,68,Terrain->w,Terrain->h);
+
+        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+
+        //clear_bitmap(DoubleB);
+
+        danseuse = load_bitmap("Y2R.bmp", NULL);
+        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+        rest(100);
+
+        //clear_bitmap(DoubleB);
+
+        danseuse = load_bitmap("Y3R.bmp", NULL);
+        masked_blit(danseuse,DoubleB,0,0,x+33,y,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+        rest(100);
+
+        //clear_bitmap(DoubleB);
+
+        danseuse = load_bitmap("Y4R.bmp", NULL);
+        masked_blit(danseuse,DoubleB,0,0,x+65,y,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+        rest(100);
+
+        danseuse = load_bitmap("Y0.bmp", NULL);
+        masked_blit(danseuse,DoubleB,0,0,x+65,y,danseuse->w,danseuse->h);
+        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+
+        //rest(100);
+
+        //clear_bitmap(DoubleB);
+
+        Personnage.x = Personnage.x + 65;
+        }
+    free(Buffer_P);
+}*/
+
+void Yoru_droite(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
+{
+    int x =0;
+    int y =0;
+
+
+    x = Personnage.x;
+    y = Personnage.y;
+
+    BITMAP * danseuse;
+
+    BITMAP*Mouvement[5];
+
+    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("Y1R.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("Y2R.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("Y3R.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("Y4R.bmp", NULL);
+    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    int incre = 0;
+    int i = 0;
+    int j = 0;
+    for (i=0;i<1;i++)
+        {
+        for(j=0;j<5;j++)
+            {
+            clear_bitmap(DoubleB);
+            //clear_bitmap(Terrain);
+
+            blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
+
+            draw_sprite(DoubleB,Mouvement[j],x+incre,y);
+
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            incre = incre+13;
+            rest(100);
+            }
+            rest(100);
+            incre = 0;
+            }
+        Personnage.x = Personnage.x + 65;
+}
+
+
+void Yoru_gauche(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
+{
+    int x =0;
+    int y =0;
+
+    x = Personnage.x;
+    y = Personnage.y;
+
+    BITMAP * danseuse;
+
+    BITMAP*Mouvement[6];
+
+    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("Y1L.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("Y2L.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("Y3L.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("Y4L.bmp", NULL);
+    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse5;
+
+    int incre = 0;
+    int i = 0;
+    for (i=0;i<1;i++)
+        {
+        for(int j=0;i<5;i++)
+            {
+            clear_bitmap(DoubleB);
+            //clear_bitmap(Terrain);
+
+            blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
+
+            draw_sprite(DoubleB,Mouvement[i],x-incre,y);
+
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            incre = incre+13;
+            rest(100);
+            }
+            rest(100);
+            incre = 0;
+        }
+        Personnage.x = Personnage.x-65;
+}
+
+void Yoru_bas(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
+{
+    int x =0;
+    int y =0;
+
+    x = Personnage.x;
+    y = Personnage.y;
+
+    BITMAP * danseuse;
+
+    BITMAP*Mouvement[6];
+
+    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("Y1.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("Y2.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("Y3.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("Y4.bmp", NULL);
+    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse5;
+
+    int incre = 0;
+    int i = 0;
+    for (i=0;i<1;i++)
+        {
+        for(int j=0;i<5;i++)
+            {
+            clear_bitmap(DoubleB);
+            //clear_bitmap(Terrain);
+
+            blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
+
+            draw_sprite(DoubleB,Mouvement[i],x,y+incre);
+
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            incre = incre+13;
+            rest(100);
+            }
+            rest(100);
+            incre = 0;
+        }
+        Personnage.y = Personnage.y+65;
+}
+
+
+
+int main()
+{
+    ///Initialisation Allegro
+    initialistionAllegro();
+    BITMAP * buffer = create_bitmap(SCREEN_W,SCREEN_H);
+    //BITMAP * buffer_Terrain = create_bitmap(SCREEN_W,SCREEN_H);
+    //BITMAP * DoubleB= buffer;
+    BITMAP * Soldat;
+    BITMAP * Terrain;
+
+    float valeur_x=66.5;
+    float valeur_y=66.67;
+
+    int NumeroPassage=0;
+
+    t_perso Tableau[3];
+
+    t_case Plateau[13][9];
+
+    initPlateau(Plateau);
+
+    choixDesClasses(Tableau,1);
+
+    rest(1000);
+
+    Terrain = load_bitmap("Terrain.bmp",NULL);
+    if(!Terrain)
+    {
+        allegro_message("Pb pas d'image Terrain");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+
+    Soldat = load_bitmap("Y0.bmp",NULL);
+    if(!Soldat)
+    {
+        allegro_message("Pb pas d'image Joueur");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+
+
+
+    /// BITMAP * Case_Libre; //image case libre
+    /// BITMAP * Case_Remplis; // image case remplie (obstacle ou personnage)
+
+    ///Permets de verifier si le tableau à bien été enregistré
+    int i = 0;
+    int j = 0;
+
+    for (i=0; i<13; i++) //longueur
+    {
+        for (j=0; j<9; j++) //largeur
+        {
+            printf("La position x de la case %d x %d est %f et la position y est %f\n",i,j,Plateau[i][j].x,Plateau[i][j].y);
+            printf("La case a pour liberte %d \n",Plateau[i][j].libre);
+            printf("La case a pour largeur %d et longueur %d \n",Plateau[i][j].largeur,Plateau[i][j].longueur);
+        }
+    }
+
+    ///Centre d'une case = position x/2 et position y/2
+
+    show_mouse(screen);
+
+    ///ATTENTION i > 0 , i et j ne sont jamais egal a 0/////
+
+    Tableau[0].x = Plateau[0][0].y-10;
+    Tableau[0].y = Plateau[1][0].x-16;
+
+    i = 1;
+    j = 1;///Personnage ce trouve a la case 6x4 donc i = 6 et J = 4
+
+    Tableau[0].i = i;
+    Tableau[0].j = j;
+
+    while(!key[KEY_ESC])
+    {
+        clear_bitmap(buffer);
+
+        //clear_bitmap(buffer);
+
+        blit(Terrain,buffer,0,0,0,68,Terrain->w,Terrain->h);
+
+        Yoru_base(Tableau[0].x,Tableau[0].y,buffer,Soldat);
+
+        Manipulation_E(Plateau,Tableau,buffer,Soldat,0,Terrain);
+
+        blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
+        //blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
+    }
+    return 0;
+    }END_OF_MAIN();
