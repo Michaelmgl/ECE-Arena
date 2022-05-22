@@ -1,7 +1,7 @@
 
 void Dhvani_base(int x ,int y ,BITMAP* DoubleB, BITMAP * danseuse)
 {
-    danseuse = load_bitmap("Y0.bmp", NULL);
+    danseuse = load_bitmap("K0.bmp", NULL);
     if(!danseuse)
     {
         allegro_message("Problemo");
@@ -21,22 +21,15 @@ void Dhvani_haut(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
     x = Personnage.x;
     y = Personnage.y;
 
-    BITMAP*Mouvement[6];
+    BITMAP*Mouvement[3];
 
-    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
-    BITMAP*danseuse2 = load_bitmap("Y0U.bmp", NULL);
-    BITMAP*danseuse3 = load_bitmap("Y1U.bmp", NULL);
-    BITMAP*danseuse4 = load_bitmap("Y2U.bmp", NULL);
-    BITMAP*danseuse5 = load_bitmap("Y3U.bmp", NULL);
-    BITMAP*danseuse6 = load_bitmap("Y4U.bmp", NULL);
-    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
-
+    BITMAP*danseuse1 = load_bitmap("K1.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("K2.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("K3.bmp", NULL);
+   
     Mouvement[0]= danseuse1;
     Mouvement[1]= danseuse2;
     Mouvement[2]= danseuse3;
-    Mouvement[3]= danseuse4;
-    Mouvement[4]= danseuse5;
-    Mouvement[5]= danseuse5;
 
     int incre = 0;
     int i = 0;
@@ -72,20 +65,15 @@ void Dhvani_droite(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
 
     BITMAP * danseuse;
 
-    BITMAP*Mouvement[5];
+    BITMAP*Mouvement[3];
 
-    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
-    BITMAP*danseuse2 = load_bitmap("Y1R.bmp", NULL);
-    BITMAP*danseuse3 = load_bitmap("Y2R.bmp", NULL);
-    BITMAP*danseuse4 = load_bitmap("Y3R.bmp", NULL);
-    BITMAP*danseuse5 = load_bitmap("Y4R.bmp", NULL);
-    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
-
+    BITMAP*danseuse1 = load_bitmap("K1.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("K2.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("K3.bmp", NULL);
+   
     Mouvement[0]= danseuse1;
     Mouvement[1]= danseuse2;
     Mouvement[2]= danseuse3;
-    Mouvement[3]= danseuse4;
-    Mouvement[4]= danseuse5;
     int incre = 0;
     int i = 0;
     int j = 0;
@@ -121,21 +109,15 @@ void Dhvani_gauche(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
 
     BITMAP * danseuse;
 
-    BITMAP*Mouvement[6];
+     BITMAP*Mouvement[3];
 
-    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
-    BITMAP*danseuse2 = load_bitmap("Y1L.bmp", NULL);
-    BITMAP*danseuse3 = load_bitmap("Y2L.bmp", NULL);
-    BITMAP*danseuse4 = load_bitmap("Y3L.bmp", NULL);
-    BITMAP*danseuse5 = load_bitmap("Y4L.bmp", NULL);
-    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
-
+    BITMAP*danseuse1 = load_bitmap("K1r.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("K2r.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("K3r.bmp", NULL);
+   
     Mouvement[0]= danseuse1;
     Mouvement[1]= danseuse2;
     Mouvement[2]= danseuse3;
-    Mouvement[3]= danseuse4;
-    Mouvement[4]= danseuse5;
-    Mouvement[5]= danseuse5;
 
     int incre = 0;
     int i = 0;
@@ -170,21 +152,15 @@ void Dhvani_bas(t_perso Personnage,BITMAP * DoubleB,BITMAP* Terrain)
 
     BITMAP * danseuse;
 
-    BITMAP*Mouvement[6];
+     BITMAP*Mouvement[3];
 
-    BITMAP*danseuse1 = load_bitmap("Y0U.bmp", NULL);
-    BITMAP*danseuse2 = load_bitmap("Y1.bmp", NULL);
-    BITMAP*danseuse3 = load_bitmap("Y2.bmp", NULL);
-    BITMAP*danseuse4 = load_bitmap("Y3.bmp", NULL);
-    BITMAP*danseuse5 = load_bitmap("Y4.bmp", NULL);
-    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
-
+    BITMAP*danseuse1 = load_bitmap("K1.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("K2.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("K3.bmp", NULL);
+    
     Mouvement[0]= danseuse1;
     Mouvement[1]= danseuse2;
     Mouvement[2]= danseuse3;
-    Mouvement[3]= danseuse4;
-    Mouvement[4]= danseuse5;
-    Mouvement[5]= danseuse5;
 
     int incre = 0;
     int i = 0;
