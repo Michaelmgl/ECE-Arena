@@ -18,7 +18,7 @@ typedef struct cases{
 
 
 
-void initPlateau(t_case plateau[13][9])//)
+void initPlateau(t_case plateau[13][9])
 {
     ///plateau = (t_case*) malloc(sizeof(t_case));
     //BITMAP * buffer= create_bitmap(SCREEN_W,SCREEN_H);
@@ -81,9 +81,14 @@ void initPlateau(t_case plateau[13][9])//)
     for (j=0; j<9; j++) //largeur
     {
         plateau[0][j].libre = 1;
-        plateau[12][j].libre = 1;
+        plateau[0][j].libre = 1;
         plateau[0][j].y = 0;
     }
+    for (j=0; j<13; j++) //largeur
+    {
+        plateau[j][8].libre = 1;
+    }
+
     plateau[1][6].libre=1;
     plateau[7][1].libre=1;
     plateau[8][1].libre=1;
