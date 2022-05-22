@@ -63,148 +63,117 @@ void Amerigo_base(int x ,int y ,BITMAP* DoubleB, BITMAP * danseuse)
 }
 
 ///Devil Burst
-void Amerigo_DV(t_perso Personnage, BITMAP * DoubleB,BITMAP * danseuse,BITMAP* Terrain)
+void Amerigo_DV(t_perso Personnage, BITMAP * DoubleB)
 {
     int x =0;
     int y =0;
 
     x = Personnage.x;
-    y = Personnage.y +55;
+    y = Personnage.y;
+
+
+
+     BITMAP*Mouvement[10];
+
+    BITMAP*danseuse1 = load_bitmap("W0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("W1.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("W2.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("w3.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("W4.bmp", NULL);
+    BITMAP*danseuse6 = load_bitmap("W5.bmp", NULL);
+    BITMAP*danseuse7 = load_bitmap("W7.bmp", NULL);
+    BITMAP*danseuse8 = load_bitmap("W8.bmp", NULL);
+    BITMAP*danseuse9 = load_bitmap("W9.bmp", NULL);
+    BITMAP*danseuse10 = load_bitmap("W10.bmp", NULL);
+    //BITMAP*danseuse6 = load_bitmap("Y95.bmp", NULL);
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
+    Mouvement[5]= danseuse6;
+    Mouvement[6]= danseuse7;
+    Mouvement[7]= danseuse8;
+    Mouvement[8]= danseuse9;
+    Mouvement[9]= danseuse10;
+
+    //Mouvement[5]= danseuse6;
+
+    int i=0;
+
 
     int s = 0;
     for (s=0;s<1;s++)
-    {
-            clear_bitmap(DoubleB);
-        danseuse = load_bitmap("W0.bmp", NULL);
+            {
+            for(int i=0;i<10;i++)
+            {
+             clear_bitmap(DoubleB);
+            //clear_bitmap(Terrain);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(1000);
+            //blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
 
+            draw_sprite(DoubleB,Mouvement[i],x,y);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("W1.bmp", NULL);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("W2.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("W3.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("W4.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("W5.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("W7.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("W8.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-         clear_bitmap(DoubleB);
-        danseuse = load_bitmap("W9.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-         clear_bitmap(DoubleB);
-        danseuse = load_bitmap("W10.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
+            rest(100);
             }
+            rest(100);
+            }
+
+
+
 }
 
 ///Fire Screw
-void Amerigo_FS(t_perso Personnage, BITMAP * DoubleB,BITMAP * danseuse,BITMAP* Terrain)
+void Amerigo_FS(t_perso Personnage, BITMAP * DoubleB)
 {
     int x =0;
     int y =0;
 
     x = Personnage.x;
-    y = Personnage.y +55;
+    y = Personnage.y;
+
+
+      BITMAP*Mouvement[4];
+
+    BITMAP*danseuse1 = load_bitmap("Q1.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("Q2.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("Q3.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("Q4.bmp", NULL);
+
+
+    Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
 
      int i = 0;
      for (i=0;i<1;i++)
         {
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("Q1.bmp", NULL);
+            for(int s=0;s<5;s++)
+            {
+             clear_bitmap(DoubleB);
+            //clear_bitmap(Terrain);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            //blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("Q2.bmp", NULL);
+            draw_sprite(DoubleB,Mouvement[s],x,y);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
+            rest(100);
+            }
+            rest(100);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("Q3.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(200);
-
-
-         clear_bitmap(DoubleB);
-        danseuse = load_bitmap("Q4.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(200);
 
         }
 }
 ///Double Flamethrower
-void Amerigo_DF(t_perso Personnage, BITMAP * DoubleB,BITMAP * danseuse,BITMAP* Terrain)
+
+void Amerigo_DF(t_perso Personnage, BITMAP * DoubleB)
 {
     int x =0;
     int y =0;
@@ -212,53 +181,45 @@ void Amerigo_DF(t_perso Personnage, BITMAP * DoubleB,BITMAP * danseuse,BITMAP* T
     x = Personnage.x;
     y = Personnage.y +55;
 
+
+    BITMAP*Mouvement[5];
+
+    BITMAP*danseuse1 = load_bitmap("H0.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("H1.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("H2.bmp", NULL);
+    BITMAP*danseuse4 = load_bitmap("H3.bmp", NULL);
+    BITMAP*danseuse5 = load_bitmap("H4.bmp", NULL);
+
+
+     Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+    Mouvement[3]= danseuse4;
+    Mouvement[4]= danseuse5;
 
     int s = 0;
         for (s=0;s<1;s++)
             {
+            for(int y=0;y<6;y++)
+            {
+             clear_bitmap(DoubleB);
+            //clear_bitmap(Terrain);
 
-            clear_bitmap(DoubleB);
-        danseuse = load_bitmap("H0.bmp", NULL);
+            //blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            draw_sprite(DoubleB,Mouvement[y],x,y);
 
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("H1.bmp", NULL);
+            rest(100);
+            }
+            rest(100);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("H2.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-         clear_bitmap(DoubleB);
-        danseuse = load_bitmap("H3.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
-
-
-         clear_bitmap(DoubleB);
-        danseuse = load_bitmap("H4.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
 
             }
 }
 ///Staff hit
-void Amerigo_SH(t_perso Personnage, BITMAP * DoubleB,BITMAP * danseuse,BITMAP* Terrain)
+void Amerigo_SH(t_perso Personnage, BITMAP * DoubleB)
 {
     int x =0;
     int y =0;
@@ -266,37 +227,40 @@ void Amerigo_SH(t_perso Personnage, BITMAP * DoubleB,BITMAP * danseuse,BITMAP* T
     x = Personnage.x;
     y = Personnage.y +55;
 
+
+    BITMAP*Mouvement[3];
+
+    BITMAP*danseuse1 = load_bitmap("I1.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("I2.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("I3.bmp", NULL);
     int s = 0;
+
+  Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+
 
      for (s=0;s<1;s++)
             {
-           clear_bitmap(DoubleB);
-        danseuse = load_bitmap("I1.bmp", NULL);
+            for(int y=0;y<4;y++)
+            {
+             clear_bitmap(DoubleB);
+            //clear_bitmap(Terrain);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            //blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("I2.bmp", NULL);
+            draw_sprite(DoubleB,Mouvement[y],x,y);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(400);
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
-
-
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("I3.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(400);
+            rest(100);
+            }
+            rest(100);
             }
 }
 
 ///Burning Spray
-void Amerigo_BS(t_perso Personnage, BITMAP * DoubleB,BITMAP * danseuse,BITMAP* Terrain)
+void Amerigo_BS(t_perso Personnage, BITMAP * DoubleB)
 {
     int x =0;
     int y =0;
@@ -304,30 +268,35 @@ void Amerigo_BS(t_perso Personnage, BITMAP * DoubleB,BITMAP * danseuse,BITMAP* T
     x = Personnage.x;
     y = Personnage.y +55;
 
+
+     BITMAP*Mouvement[3];
+
+    BITMAP*danseuse1 = load_bitmap("Z13.bmp", NULL);
+    BITMAP*danseuse2 = load_bitmap("Z14.bmp", NULL);
+    BITMAP*danseuse3 = load_bitmap("Z15.bmp", NULL);
     int s = 0;
+
+     Mouvement[0]= danseuse1;
+    Mouvement[1]= danseuse2;
+    Mouvement[2]= danseuse3;
+
 
      for (s=0;s<1;s++)
             {
-           clear_bitmap(DoubleB);
-        danseuse = load_bitmap("Z13.bmp", NULL);
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+               for(int y=0;y<4;y++)
+            {
+             clear_bitmap(DoubleB);
+            //clear_bitmap(Terrain);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("Z14.bmp", NULL);
+            //blit(Terrain,DoubleB,0,0,0,68,Terrain->w,Terrain->h);
 
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            draw_sprite(DoubleB,Mouvement[y],x,y);
 
+            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
 
-        clear_bitmap(DoubleB);
-        danseuse = load_bitmap("Z15.bmp", NULL);
-
-        masked_blit(danseuse,DoubleB,0,0,x,y,danseuse->w,danseuse->h);
-        blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
-        rest(100);
+            rest(100);
+            }
+            rest(100);
             }
 }
 
@@ -376,28 +345,66 @@ int main()
     }                                 //par les coordonnées de chaque perso, d'où la nécessité de d'abord mettre à jour les coordonnées
     show_mouse(screen);
 
+    t_perso Amerigo;
+
+    Amerigo.x=500;
+    Amerigo.y=400;
+
     while(!key[KEY_ESC])                                               // avant de commencer à animer
     {
     //Yoru_base(x,y,DoubleB,Soldat);
 
     clear_bitmap(DoubleB);
 
-    if (key[KEY_RIGHT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=605 && mouse_x <=739 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-      //  Yoru_droite(&x,y,DoubleB,Soldat);
+            if (mouse_b&1)
+            {
+
+        Amerigo_DV(Amerigo,DoubleB);
+        }
     }
-    if (key[KEY_LEFT])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=470 && mouse_x <=604 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-      //  Yoru_gauche(&x,y,DoubleB,Soldat);
+            if (mouse_b&1)
+                {
+      Amerigo_FS(Amerigo,DoubleB);
+      }
     }
-    if (key[KEY_UP])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=335 && mouse_x <=469 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-      //  Yoru_haut(x,&y,DoubleB,Soldat);
+
+            if (mouse_b&1)
+
+                {
+      Amerigo_DF(Amerigo,DoubleB);
+      }
     }
-    if (key[KEY_DOWN])  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    if (mouse_x>=65 && mouse_x <=199 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
     {
-      //  Yoru_bas(x,&y,DoubleB,Soldat);
+
+            if (mouse_b&1)
+
+                {
+      Amerigo_SH(Amerigo,DoubleB);
+
+
+      }
     }
+
+     if(mouse_x>=200 && mouse_x <=334 && mouse_y>=540 && mouse_y <=600)  //la condtion de cette boucle est0 arbitraire, évidemment on changera en fonction des besoins mais ce ne sera jamais cette condition spécifique en jeu
+    {
+
+
+            if (mouse_b&1)
+
+                {
+      Amerigo_BS(Amerigo,DoubleB);
+
+
+      }
+    }
+
     }
 
     printf("FIN!\n");
