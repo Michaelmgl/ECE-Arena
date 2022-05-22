@@ -1,0 +1,334 @@
+int main()
+{
+    srand(time(NULL));
+    int nombreDeJoueurs = 0;
+    int i = 0;
+    int joueurQuiAttaque, joueurCible;
+    int degats = 0;
+    int choixDaction = 0;
+    int tours = 0;
+    int choixDeLattaque = 0; //ne sera pas nécessaire dans le projet final puisque utile que sur le clavier
+    t_perso joueurs[NBR_MAX_DE_JOUEURS];
+    t_perso cimetiere[NBR_MAX_DE_JOUEURS];
+    initialistionAllegro();
+
+    install_sound(DIGI_AUTODETECT, MIDI_AUTODETECT, NULL);
+
+    //SAMPLE * musiqueMenu;
+    SAMPLE * musiqueCombat;
+    //musiqueMenu = load_sample("musiquemenudef.wav");
+    musiqueCombat = load_sample("vraimusiquedecombat.wav");
+    //play_sample(musiqueMenu, 255, 512, 1000, 1);
+    play_sample(musiqueCombat, 255, 512, 1000, 1);
+    //rest(7000);
+    //stop_sample(musiqueMenu);
+    //play_sample(musiqueJeu, 255, 128, 1000, 1);
+    nombreDeJoueurs = choixNbrJoueurs(nombreDeJoueurs);
+    choixDesClasses(joueurs, nombreDeJoueurs);
+    printf("Le joueur 2 a une attaque de %d\n", joueurs[1].ptsatt);//ces printf sont là que pour les tests
+    printf("Le joueur qui commencera en premier sera le joueur %d\n", i+1);//ces printf sont là que pour les tests
+    joueurQuiAttaque = rand()%nombreDeJoueurs;
+    for (i = 0; i<nombreDeJoueurs+1; i++)
+    {
+        tours = tours + 1;
+        printf("Tour %d\n", tours);
+        for(int k = 0; k<nombreDeJoueurs; k++)
+        {
+            if (joueurs[k].brulure != 0)
+            {
+                joueurs[k].ptsvie = joueurs[k].ptsvie - 100;
+                joueurs[k].brulure = joueurs[k].brulure - 1;
+            }
+            else if (joueurs[k].brulure == 0 || joueurs[k].brulure < 0)
+            {
+                joueurs[k].brulure = 0;
+            }
+            /*if(joueurs[k].ptsvie == 0 || joueurs[k].ptsvie < 0)
+            {
+                cimetiere[k] =
+            }*/
+
+        }
+        if(i == nombreDeJoueurs)
+        {
+            i = 0;
+        }
+        joueurQuiAttaque = i;
+        printf("Joueur %d, que voulez vous faire ?\n", joueurQuiAttaque+1);//ces printf sont là que pour les tests
+        printf("1 pour attaquer\n2 pour passer son tour\n");//ces printf sont là que pour les tests
+        scanf("%d", &choixDaction);
+        if (choixDaction == 1)
+        {
+            printf("Choisir l'attaque :\n");
+            //terre
+            if(joueurs[joueurQuiAttaque].element == 0)
+            {
+                printf("1. Rocky Punch\n");
+                printf("2. Rock Smash\n");
+                printf("3. Defensive Crust\n");
+                printf("4. Will of the Earth\n");
+                if (joueurs[joueurQuiAttaque].recharge == 5)
+                {
+                    printf("5. Atlas Smash\n");
+                }
+                scanf("%d", &choixDeLattaque);
+                while (joueurs[joueurQuiAttaque].jaugemagie < joueurs[joueurQuiAttaque].ptsmagie && choixDeLattaque != 1)
+                        {
+                            printf("Vous n'avez pas assez de points de magie, choisissez une autre attaque\n");
+                            printf("1. Rocky Punch\n");
+                            printf("2. Rock Smash\n");
+                            printf("3. Defensive Crust\n");
+                            printf("4. Will of the Earth\n");
+                            if (joueurs[joueurQuiAttaque].recharge == 5)
+                            {
+                                printf("5. Atlas Smash\n");
+                            }
+                            scanf("%d", &choixDeLattaque);
+                        }
+                switch(choixDeLattaque)
+                {
+                    case 1 :
+                    {
+                        printf("Et qui voulez_vous attaquer ?\n");
+                        scanf("%d", &joueurCible);
+                        degats = RockyPunch(joueurs, joueurQuiAttaque, joueurCible, degats);///l'animation se lance juste après
+                        printf("Les points de vie du joueur %d sont tombes a %d\n", joueurCible+1, joueurs[joueurCible].ptsvie);//ces printf sont là que pour les tests
+                        break;
+                    }
+                    case 2 :
+                    {
+                        printf("Et qui voulez_vous attaquer ?\n");
+                        scanf("%d", &joueurCible);
+                        degats = RockSmash(joueurs, joueurQuiAttaque, joueurCible, degats);///l'animation se lance juste après
+                        printf("Les points de vie du joueur %d sont tombes a %d\n", joueurCible+1, joueurs[joueurCible].ptsvie);//ces printf sont là que pour les tests
+                        break;
+                    }
+                    case 3 :
+                    {
+                        DefensiveCrust(joueurs, joueurQuiAttaque);///l'animation se lance juste après
+                        printf("La defense du personnage est maintenant a %d\n", joueurs[joueurQuiAttaque].ptsdef);//ces printf sont là que pour les tests
+                        break;
+                    }
+                    case 4 :
+                    {
+                        WillOfTheEarth(joueurs, joueurQuiAttaque);///l'animation se lance juste après
+                        printf("L'attaque de votre personnage est maintenant a %d\n", joueurs[joueurQuiAttaque].ptsatt);//ces printf sont là que pour les tests
+                        break;
+                    }
+                    case 5 :
+                    {
+                        printf("Et qui voulez_vous attaquer ?\n");
+                        scanf("%d", &joueurCible);
+                        degats = AtlasSmash(joueurs, joueurQuiAttaque, joueurCible, degats);///l'animation se lance juste après
+                        printf("Les points de vie du joueur %d sont tombes à %d\n", joueurCible+1, joueurs[joueurCible].ptsvie);//ces printf sont là que pour les tests
+                        printf("Et sa defense est maintenant a %d\n", joueurs[joueurCible].ptsdef);//ces printf sont là que pour les tests
+                        break;
+                    }
+                }
+            }
+                //eau
+            else if(joueurs[joueurQuiAttaque].element == 1)
+                {
+                printf("1. Axe Blow\n");
+                printf("2. Doom\n");
+                printf("3. Born In Hell\n");
+                printf("4. Ice Eyes\n");
+                if (joueurs[joueurQuiAttaque].recharge == 5)
+                {
+                    printf("5. Blizzard\n");
+                }
+                scanf("%d", &choixDeLattaque);
+                while (joueurs[joueurQuiAttaque].jaugemagie < joueurs[joueurQuiAttaque].ptsmagie && choixDeLattaque != 1)
+                        {
+                            printf("Vous n'avez pas assez de points de magie, choisissez une autre attaque\n");
+                            printf("1. Axe Blow\n");
+                            printf("2. Doom\n");
+                            printf("3. Born In Hell\n");
+                            printf("4. Ice Eyes\n");
+                            if (joueurs[joueurQuiAttaque].recharge == 5)
+                            {
+                                printf("5. Blizzard\n");
+                            }
+                            scanf("%d", &choixDeLattaque);
+                        }
+                switch(choixDeLattaque)
+                {
+                    case 1 :
+                    {
+                        printf("Et qui voulez_vous attaquer ?\n");
+                        scanf("%d", &joueurCible);
+                        degats = AxeBlow(joueurs, joueurQuiAttaque, joueurCible, degats);///l'animation se lance juste après
+                        printf("Les points de vie du joueur %d sont tombes a %d\n", joueurCible+1, joueurs[joueurCible].ptsvie);//ces printf sont là que pour les tests
+                        break;
+                    }
+                    case 2 :
+                    {
+                        Doom(joueurs, joueurQuiAttaque);///l'animation se lance juste après
+                        printf("La defense du personnage est passee a %d\n", joueurs[joueurQuiAttaque].ptsdef);//ces printf sont là que pour les tests
+                        break;
+                    }
+                    case 3 :
+                    {
+                        BornInHell(joueurs, joueurQuiAttaque);///l'animation se lance juste après
+                        printf("Vous avez plus de chance de faire des coups critiques\n");//ces printf sont là que pour les tests
+                        break;
+                    }
+                    case 4 :
+                    {
+                        printf("Et qui voulez_vous attaquer ?\n");
+                        scanf("%d", &joueurCible);
+                        degats = IceEyes(joueurs, joueurQuiAttaque, joueurCible, degats);///l'animation se lance juste après
+                        printf("Les points de vie du joueur %d sont tombes a %d\n", joueurCible+1, joueurs[joueurCible].ptsvie);//ces printf sont là que pour les tests
+                        break;
+                    }
+                    case 5 :
+                    {
+                        printf("Et qui voulez_vous attaquer ?\n");
+                        scanf("%d", &joueurCible);
+                        degats = Blizzard(joueurs, joueurQuiAttaque, joueurCible, degats);///l'animation se lance juste après
+                        printf("Les points de vie du joueur %d sont tombes à %d\n", joueurCible+1, joueurs[joueurCible].ptsvie);//ces printf sont là que pour les tests
+                        printf("Et ses points de mouvements sont maintenant a %d\n", joueurs[joueurCible].ptsmouv);//ces printf sont là que pour les tests
+                        break;
+                    }
+                }
+                }
+                //air
+                else if(joueurs[joueurQuiAttaque].element == 3)
+                {
+                printf("1. Fan Slap\n");
+                printf("2. Heavenly Breath\n");
+                printf("3. Pre Performance Meditation\n");
+                printf("4. Dangling Feet\n");
+                if (joueurs[joueurQuiAttaque].recharge == 5)
+                {
+                    printf("5. Dance till the End\n");
+                }
+                scanf("%d", &choixDeLattaque);
+                while (joueurs[joueurQuiAttaque].jaugemagie < joueurs[joueurQuiAttaque].ptsmagie && choixDeLattaque != 1)
+                        {
+                            printf("1. Fan Slap\n");
+                            printf("2. Heavenly Breath\n");
+                            printf("3. Pre Performance Meditation\n");
+                            printf("4. Dangling Feet\n");
+                            if (joueurs[joueurQuiAttaque].recharge == 5)
+                            {
+                                printf("5. Dance till the End\n");
+                            }
+                            scanf("%d", &choixDeLattaque);
+                        }
+                switch(choixDeLattaque)
+                {
+                    case 1 :
+                    {
+                        printf("Et qui voulez_vous attaquer ?\n");
+                        scanf("%d", &joueurCible);
+                        degats = FanSlap(joueurs, joueurQuiAttaque, joueurCible, degats);///l'animation se lance juste après
+                        printf("Les points de vie du joueur %d sont tombes a %d\n", joueurCible+1, joueurs[joueurCible].ptsvie);//ces printf sont là que pour les tests
+                        break;
+                    }
+                    case 2 :
+                    {
+                        printf("Et qui voulez_vous attaquer ?\n");
+                        scanf("%d", &joueurCible);
+                        degats = HeavenlyBreath(joueurs, joueurQuiAttaque, joueurCible, degats);///l'animation se lance juste après
+                        printf("Les points de vie du joueur %d sont tombes a %d\n", joueurCible+1, joueurs[joueurCible].ptsvie);//ces printf sont là que pour les tests
+                        printf("Les points de magie du joueur %d sont tombes a %d\n", joueurCible+1, joueurs[joueurCible].ptsmagie);//ces printf sont là que pour les tests
+                        break;
+                    }
+                    case 3 :
+                    {
+                        PrePerformanceMeditation(joueurs, joueurQuiAttaque);///l'animation se lance juste après
+                        break;
+                    }
+                    case 4 :
+                    {
+                        DanglingFeet(joueurs, joueurQuiAttaque);///l'animation se lance juste après
+                        printf("Vous ferez plus de coups critiques.\n");
+                        break;
+                    }
+                    case 5 :
+                    {
+                        printf("Et qui voulez_vous attaquer ?\n");
+                        scanf("%d", &joueurCible);
+                        degats = DanceTillTheEnd(joueurs, joueurQuiAttaque, joueurCible, degats);///l'animation se lance juste après
+                        printf("Les points de vie du joueur %d sont tombes à %d\n", joueurCible+1, joueurs[joueurCible].ptsvie);//ces printf sont là que pour les tests
+                        printf("Les points de mouvement de votre personnage sont maintenant a %d\n", joueurs[joueurQuiAttaque].ptsmouv);//ces printf sont là que pour les tests
+                        break;
+                    }
+                }
+                }
+                else if(joueurs[joueurQuiAttaque].element == 2)
+                {
+                printf("1. Staff Hit\n");
+                printf("2. Burning Spray\n");
+                printf("3. Double Flamethrower\n");
+                printf("4. Fire Screw\n");
+                if (joueurs[joueurQuiAttaque].recharge == 5)
+                {
+                    printf("5. Devil Burst\n");
+                }
+                scanf("%d", &choixDeLattaque);
+                while (joueurs[joueurQuiAttaque].jaugemagie < joueurs[joueurQuiAttaque].ptsmagie && choixDeLattaque != 1)
+                        {
+                            printf("1. Staff Hit\n");
+                            printf("2. Burning Spray\n");
+                            printf("3. Double Flamethrower\n");
+                            printf("4. Fire Screw\n");
+                            if (joueurs[joueurQuiAttaque].recharge == 5)
+                            {
+                                printf("5. Devil Burst\n");
+                            }
+                            scanf("%d", &choixDeLattaque);
+                        }
+                switch(choixDeLattaque)
+                {
+                    case 1 :
+                    {
+                        printf("Et qui voulez_vous attaquer ?\n");
+                        scanf("%d", &joueurCible);
+                        degats = StaffHit(joueurs, joueurQuiAttaque, joueurCible, degats);///l'animation se lance juste après
+                        printf("Les points de vie du joueur %d sont tombes a %d\n", joueurCible+1, joueurs[joueurCible].ptsvie);//ces printf sont là que pour les tests
+                        break;
+                    }
+                    case 2 :
+                    {
+                        printf("Et qui voulez_vous attaquer ?\n");
+                        scanf("%d", &joueurCible);
+                        degats = BurningSpray(joueurs, joueurQuiAttaque, joueurCible, degats);///l'animation se lance juste après
+                        printf("Les points de vie du joueur %d sont tombes a %d\n", joueurCible+1, joueurs[joueurCible].ptsvie);//ces printf sont là que pour les tests
+                        break;
+                    }
+                    case 3 :
+                    {
+                        printf("Et qui voulez_vous attaquer ?\n");
+                        scanf("%d", &joueurCible);
+                        degats = DoubleFlamethrower(joueurs, joueurQuiAttaque, joueurCible, degats);///l'animation se lance juste après
+                        printf("Les points de vie du joueur %d sont tombes a %d\n", joueurCible+1, joueurs[joueurCible].ptsvie);//ces printf sont là que pour les tests
+                        if (joueurs[joueurCible].brulure == 1)
+                        {
+                            printf("Le joueur %d a ete brule\n", joueurCible+1);//ces printf sont là que pour les tests
+                        }
+                        break;
+                    }
+                    case 4 :
+                    {
+                        FireScrew(joueurs, joueurQuiAttaque, joueurCible);///l'animation se lance juste après
+                        printf("Les points de vie du joueur %d sont tombes a %d\n", joueurCible+1, joueurs[joueurCible].ptsvie);//ces printf sont là que pour les tests
+                        break;
+                    }
+                    case 5 :
+                    {
+                        printf("Et qui voulez_vous attaquer ?\n");
+                        scanf("%d", &joueurCible);
+                        degats = DevilBurst(joueurs, joueurQuiAttaque, joueurCible, degats); ///l'animation doit se lancer juste après ça
+                        printf("Les points de vie du joueur %d sont tombes à %d\n", joueurCible+1, joueurs[joueurCible].ptsvie); //ces printf sont là que pour les tests
+                        printf("L'attaque du joueur %d est maintenant a %d\n", joueurQuiAttaque, joueurs[joueurQuiAttaque].ptsatt);
+                        break;
+                    }
+                }
+                }
+                }
+            }
+
+    return 0;
+}END_OF_MAIN();
