@@ -1,9 +1,14 @@
-////MARCHE MAIS LA POSITION N EST PAS LA BONNE ET AUSSI ON VOIT L4ANIMATION DES IMAGES ET C ST PAS CLEAN 
 
-void timer(t_perso Personnage, BITMAP * DoubleB)
+void timer(t_perso Personnage,BITMAP * DoubleB)
+
+
 {
-    int x =0;
-    int y =0;
+
+
+
+
+    int x;
+    int y;
 
     x = Personnage.x;
     y = Personnage.y;
@@ -62,11 +67,17 @@ void timer(t_perso Personnage, BITMAP * DoubleB)
 
             draw_sprite(DoubleB,Mouvement[j],x,y);
 
-            blit(DoubleB,screen,0,0,0,0,DoubleB->w,DoubleB->h);
+            blit(DoubleB,screen,0,0,200,130,DoubleB->w,DoubleB->h);
             }
             //rest(100);
         }
 }
+
+
+
+
+
+
 
 
 
